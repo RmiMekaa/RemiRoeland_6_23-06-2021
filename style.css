@@ -1,0 +1,130 @@
+body {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1600px;
+  margin: auto;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+html {
+  font-family: "DM sans";
+  font-weight: 400;
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 2rem auto 8rem auto;
+}
+
+#logo {
+  width: 170px;
+  max-height: 100%;
+  margin-right: 1rem;
+}
+
+nav {
+  padding: 0.75rem;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 0.5rem;
+  max-width: 50%;
+}
+
+.tag {
+  font-size: 12px;
+  line-height: 12px;
+  height: fit-content;
+  margin-right: 0.5rem;
+  color: #901c11;
+  border: 0.5px solid #bababa;
+  border-radius: 2rem;
+  padding: 0.2rem 0.6rem;
+}
+.tag:hover {
+  color: white;
+  border-color: #901c11;
+  background-color: #901c11;
+}
+
+h1 {
+  color: #901c11;
+  white-space: nowrap;
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 500px) {
+  h1 {
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 1200px) {
+  nav {
+    order: 3;
+    max-width: inherit;
+    width: 100%;
+    justify-content: flex-start;
+    padding-left: 0;
+  }
+}
+.photographers {
+  margin: 0rem 5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 4rem;
+}
+.photographers__profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.photographers__profile__thumb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.photographers__profile__thumb img {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+.photographers__profile__thumb h2 {
+  margin-top: 1rem;
+  font-size: 2.25rem;
+  color: #D3573C;
+}
+.photographers__profile__location {
+  color: #901c11;
+  font-size: 0.8rem;
+}
+.photographers__profile__description {
+  margin-top: 0.25rem;
+  font-size: 0.6rem;
+}
+.photographers__profile__price {
+  margin-top: 0.25rem;
+  color: #525252;
+  font-size: 0.6rem;
+}
+.photographers__profile__tags {
+  margin-top: 1rem;
+  display: flex;
+}
+
+/*# sourceMappingURL=style.css.map */
