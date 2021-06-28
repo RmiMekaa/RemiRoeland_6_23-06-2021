@@ -1,26 +1,30 @@
-header {
+.header {
     display: flex;
-    flex-wrap: wrap;
     row-gap: 1rem;
     justify-content: space-between;
-    align-items: center;
-    width: 90%;
-    margin: 2rem auto 8rem auto;
-}
-
-#logo {
-    width: 170px;
-    max-height: 100%;
-    margin-right: 1rem;
-}
-
-nav {
-    padding: 0.75rem;
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-    row-gap: 0.5rem;
-    max-width: 50%;
+    align-items: top;
+    width: 100%;
+    padding-top: 2rem;
+    &__logo {
+        width: 170px;
+        max-height: 100%;
+        margin-right: 1rem;
+    }
+    &__nav {
+        padding: 0.75rem;
+        justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 0.5rem;
+    }
+    &__heading {
+        position: relative;
+        top: 0.4rem;
+        color: $primary-color;
+        white-space: nowrap;
+        font-size: 1.5rem;
+        width: fit-content;
+    }    
 }
 
 .tag {
@@ -39,23 +43,28 @@ nav {
     }
 }
 
-h1 {
-    color: $primary-color;
-    white-space: nowrap;
-    font-size: 1.5rem;
-}
+
+
 
 @media screen and (max-width: 500px) {
-    h1 {
+    .header__logo {
+        width: 120px;
+    }
+    .header__heading {
+        position: inherit;
         font-size: 1rem;
+        align-self: center;
     }
 }
-@media screen and (max-width: 1200px) {
-    nav {
-        order: 3;
-        max-width: inherit;
-        width: 100%;
-        justify-content: flex-start;
-        padding-left: 0;
+@media screen and (max-width: 768px) {
+    .header {
+        flex-wrap: wrap;
+        &__nav {
+            order: 3;
+            max-width: inherit;
+            width: 100%;
+            justify-content: center;
+            padding-left: 0;
+        }
     }
 }

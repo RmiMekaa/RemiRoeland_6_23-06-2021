@@ -1,45 +1,61 @@
 .photographers {
-    margin: 0rem 5rem;
+    margin-top: 6rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
     row-gap: 4rem;
-    &__profile {
+    width: 100%;
+}
+
+.photographer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &__thumb {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        &__thumb {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            & img {
-                border-radius: 50%;
-                width: 200px;
-                height: 200px;
-                object-fit: cover;
-            }
-            & h2 {
-                margin-top: 1rem;
-                font-size: 2.25rem;
-                color: $secondary-color;
-            }
-        }
-        &__location {
-            color: $primary-color;
-            font-size: 0.8rem;
-        }
-        &__description {
-            margin-top: 0.25rem;
-            font-size: 0.6rem;
-        }
-        &__price {
-            margin-top: 0.25rem;
-            color: $dark-grey;
-            font-size: 0.6rem;
-        }
-        &__tags {
-            margin-top: 1rem;
-            display: flex;
-        }
+    }
+    &__pp {
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+    }
+    &__name {
+        margin-top: 1rem;
+        font-size: 2.25rem;
+        color: $secondary-color;
+    }
+    &__location {
+        color: $primary-color;
+        font-size: 0.8rem;
+    }
+    &__description {
+        margin-top: 0.25rem;
+        font-size: 0.6rem;
+    }
+    &__price {
+        margin-top: 0.25rem;
+        color: $dark-grey;
+        font-size: 0.6rem;
+    }
+    &__tags {
+        margin-top: 1rem;
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .photographers {
+        margin-top: 4rem;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .photographers {
+        grid-template-columns: 1fr;
     }
 }

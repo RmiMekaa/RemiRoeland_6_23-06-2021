@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,39 +12,38 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <a href="index.html"><img id="logo" src="ressources/logo.png" alt="fishEye logo"></a>
-        <nav>
-            <a class="tag" href="">#Portrait</a>
-            <a class="tag" href="">#Art</a>
-            <a class="tag" href="">#Fashion</a>
-            <a class="tag" href="">#Architecture</a>
-            <a class="tag" href="">#Travel</a>
-            <a class="tag" href="">#Sport</a>
-            <a class="tag" href="">#Animals</a>
-            <a class="tag" href="">#Events</a>
+    <header class="header">
+        <a href="index.html"><img class="header__logo" src="ressources/logo.png" alt="fishEye logo"></a>
+        <nav class="header__nav">
+            <a class="tag" href="">#portrait</a>
+            <a class="tag" href="">#art</a>
+            <a class="tag" href="">#fashion</a>
+            <a class="tag" href="">#architecture</a>
+            <a class="tag" href="">#travel</a>
+            <a class="tag" href="">#sport</a>
+            <a class="tag" href="">#animals</a>
+            <a class="tag" href="">#events</a>
         </nav>
-        <h1>Nos photographes</h1>
+        <h1 class="header__heading">Nos photographes</h1>
     </header>
     <main>
         <section class="photographers">
-            <article class="photographers__profile">
-                <a class="photographers__profile__thumb" href="">
-                    <img src="/ressources/Sample Photos/Mimi/Portrait_Nora.jpg" alt="photographer picture">
-                    <h2>Mimi Keel</h2>
+            <article class="photographer">
+                <a class="photographer__thumb" href="photographer-page.html">
+                    <img class="photographer__pp" src="/ressources/Sample Photos/Mimi/Portrait_Nora.jpg" alt="photographer picture">
+                    <h2 class="photographer__name">Mimi Keel</h2>
                 </a>
-                <h3 class="photographers__profile__location">London, UK</h3>
-                <span class="photographers__profile__description">Voir le beau dans le quotidien</span>
-                <span class="photographers__profile__price">400€/jour</span>
-                <div class="photographers__profile__tags">
-                    <a class="tag" href="">#Portrait</a>
-                    <a class="tag" href="">#Events</a>
-                    <a class="tag" href="">#Travel</a>
-                    <a class="tag" href="">#Animals</a>        
+                <h3 class="photographer__location">London, UK</h3>
+                <span class="photographer__description">Voir le beau dans le quotidien</span>
+                <span class="photographer__price">400€/jour</span>
+                <div class="photographer__tags">
+                    <a class="tag" href="">#portrait</a>
+                    <a class="tag" href="">#events</a>
+                    <a class="tag" href="">#travel</a>
+                    <a class="tag" href="">#animals</a>        
                 </div>
             </article>
         </section>
-
     </main>
 </body>
 </html>
