@@ -7,6 +7,10 @@ body {
   padding: 0 4rem;
 }
 
+main {
+  width: 100%;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -96,11 +100,13 @@ html {
 }
 .photographers {
   margin-top: 6rem;
+  margin-bottom: 10rem;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 320px);
   grid-template-rows: auto;
+  justify-content: space-around;
   row-gap: 4rem;
-  width: 100%;
+  max-width: 100%;
 }
 
 .photographer {
@@ -121,7 +127,10 @@ html {
   object-fit: cover;
 }
 .photographer__name {
+  line-height: 2.25rem;
+  text-align: center;
   margin-top: 1rem;
+  margin-bottom: 0.5rem;
   font-size: 2.25rem;
   color: #D3573C;
 }
@@ -146,7 +155,8 @@ html {
 @media screen and (max-width: 1000px) {
   .photographers {
     margin-top: 4rem;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 320px);
+    justify-content: space-evenly;
   }
 }
 @media screen and (max-width: 600px) {
@@ -154,16 +164,20 @@ html {
     grid-template-columns: 1fr;
   }
 }
+.screen-reader {
+  display: none;
+}
+
 .profile__header {
   margin-top: 3rem;
   position: relative;
   background-color: #fafafa;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   padding: 3rem;
 }
 .profile__header .photographer__name {
+  text-align: left;
   margin-top: 0;
   font-size: 4rem;
   line-height: 4rem;
@@ -320,12 +334,9 @@ figcaption h2 {
 figcaption span {
   font-weight: bold;
 }
-figcaption span::after {
+figcaption .like-icon {
+  margin-left: 0.4rem;
   cursor: pointer;
-  margin-left: 0.5rem;
-  font-family: "Font Awesome 5 Free";
-  font-weight: bold;
-  content: "";
 }
 
 @media screen and (max-width: 1000px) {
@@ -355,10 +366,10 @@ figcaption span::after {
   bottom: 0;
   right: 10rem;
 }
-.total-likes .likes {
+.total-likes .totalLikesNbr {
   margin-right: 5rem;
 }
-.total-likes .likes::after {
+.total-likes .totalLikesNbr::after {
   font-family: "Font Awesome 5 Free";
   margin-left: 0.5rem;
   content: "";
@@ -368,6 +379,129 @@ figcaption span::after {
   .total-likes {
     display: none;
   }
+}
+#contactForm {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  display: none;
+  flex-direction: column;
+  background-color: #e18d7a;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  z-index: 2000;
+}
+#contactForm h1 {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+#contactForm label {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+#contactForm input {
+  font-size: 1.5rem;
+  height: 3.25rem;
+  margin-bottom: 0.75rem;
+  border: none;
+  padding: 0 0.5rem;
+  border-radius: 0.25rem;
+  max-width: 100%;
+  outline: none;
+}
+#contactForm textarea {
+  font-family: "DM sans";
+  font-size: 1.25rem;
+  height: 11.5rem;
+  outline: none;
+  padding: 0.5rem;
+  max-width: calc(100% - 1rem);
+}
+#contactForm .submit-btn {
+  margin: 1rem auto;
+  height: 2rem;
+  color: white;
+  background-color: #901c11;
+  border: none;
+  padding: 0.25rem 5rem;
+  border-radius: 0.25rem;
+  width: fit-content;
+  cursor: pointer;
+}
+
+#modalClose {
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  top: 1.5rem;
+  right: 1rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+#modalClose img {
+  width: 1rem;
+  height: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  #contactForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 670px;
+    height: fit-content;
+  }
+  #contactForm h1 {
+    font-size: 3rem;
+  }
+  #contactForm label {
+    font-size: 1.75rem;
+  }
+  #contactForm input {
+    font-size: 1.5rem;
+    height: 3.25rem;
+  }
+  #contactForm textarea {
+    font-size: 1.25rem;
+    height: 9.5rem;
+  }
+  #contactForm .submit-btn {
+    margin: 1rem 0;
+    padding: 0 3rem;
+    height: 4rem;
+    font-size: 1rem;
+  }
+
+  #modalClose {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    top: 1.5rem;
+    right: 1rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  #modalClose img {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+.modal-bg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #c4c4c4;
+  opacity: 0.4;
+  z-index: 1000;
 }
 
 /*# sourceMappingURL=style.css.map */

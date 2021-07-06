@@ -14,7 +14,7 @@
 </head>
 <body>
     <header class="header">
-        <a href="index.html"><img class="header__logo" src="ressources/logo.png" alt="fishEye logo"></a>
+        <a href="index.html"><img class="header__logo" src="ressources/logo.png" alt="FishEye Home page"></a>
     </header>
     <main>
         <div class="profile__header">
@@ -26,11 +26,11 @@
                     <a class="tag" href="">#portrait</a>
                     <a class="tag" href="">#events</a>
                     <a class="tag" href="">#travel</a>
-                    <a class="tag" href="">#animals</a>        
+                    <a class="tag" href="">#animals</a>
                 </div>
-                <a href="" class="button">Contactez-moi</a>
+                <a href="" class="button" id="contact-btn">Contactez-moi</a>
             </section>
-            <img class="photographer__pp" src="/ressources/Sample Photos/Mimi/Thumbs/Portrait_Nora.jpg" alt="photographer picture">
+            <img class="photographer__pp" src="/ressources/Sample Photos/Photographers ID Photos/MimiKeel.jpg" alt="photographer picture">
         </div>
         <div class="sort-by">
             <label for="sort-by">Trier par</label>
@@ -45,49 +45,86 @@
                 <img src="ressources/Sample Photos/Mimi/Thumbs/Animals_Rainbow.jpg" alt="" onclick="">
                 <figcaption>
                     <h2>Titre</h2>
-                    <span>12</span>
+                    <span class="likesNbr"><i class="like-icon fas fa-heart"></i></span>
                 </figcaption>
             </figure>
             <figure>
                 <img src="ressources/Sample Photos/Mimi/Thumbs/Travel_Lonesome.jpg" alt="" onclick="">
                 <figcaption>
                     <h2>Titre</h2>
-                    <span>12</span>
+                    <span class="likesNbr"><i class="like-icon fas fa-heart"></i></span>
                 </figcaption>
             </figure>
             <figure>
                 <img src="ressources/Sample Photos/Mimi/Thumbs/Event_SeasideWedding.jpg" alt="" onclick="">
                 <figcaption>
                     <h2>Titre</h2>
-                    <span>12</span>
+                    <span class="likesNbr"><i class="like-icon fas fa-heart"></i></span>
                 </figcaption>
             </figure>
             <figure>
                 <img src="ressources/Sample Photos/Mimi/Thumbs/Portrait_Background.jpg" alt="" onclick="">
                 <figcaption>
                     <h2>Titre</h2>
-                    <span>12</span>
+                    <span class="likesNbr"><i class="like-icon fas fa-heart"></i></span>
                 </figcaption>
             </figure>
             <figure>
                 <img src="/ressources/Sample Photos/Mimi/Thumbs/Event_PintoWedding.jpg" alt="" onclick="">
                 <figcaption>
                     <h2>Titre</h2>
-                    <span>12</span>
+                    <span class="likesNbr"><i class="like-icon fas fa-heart"></i></span>
                 </figcaption>
             </figure>
             <figure>
                 <img src="ressources/Sample Photos/Mimi/Thumbs/Portrait_Wednesday.jpg" alt="" onclick="">
                 <figcaption>
                     <h2>Titre</h2>
-                    <span>12</span>
+                    <span class="likesNbr"><i class="like-icon fas fa-heart"></i></span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="ressources/Sample Photos/Mimi/Thumbs/Travel_HillsideColor.jpg" alt="" onclick="">
+                <figcaption>
+                    <h2>Titre</h2>
+                    <span class="likesNbr"><i class="like-icon fas fa-heart"></i></span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="ressources/Sample Photos/Mimi/Thumbs/Portrait_Nora.jpg" alt="" onclick="">
+                <figcaption>
+                    <h2>Titre</h2>
+                    <span class="likesNbr"><i class="like-icon fas fa-heart"></i></span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="ressources/Sample Photos/Mimi/Thumbs/Event_BenevidesWedding.jpg" alt="" onclick="">
+                <figcaption>
+                    <h2>Titre</h2>
+                    <span class="likesNbr"><i class="like-icon fas fa-heart"></i></span>
                 </figcaption>
             </figure>
         </section>
         <aside class="total-likes">
-            <span class="likes">72</span>
+            <span id="totalLikesNbr" class="totalLikesNbr"></span>
             <span class="price">400€ / jour</span>
         </aside>
+        <form id="contactForm">
+            <h1>Contactez-moi </br><span></span></h1>
+            <label for="firstname">Prénom</label>
+            <input type="text" name="firstname" aria-label="Champ du prénom">
+            <label for="lastname">Nom</label>
+            <input type="text" name="lastname">
+            <label for="email">Email</label>
+            <input type="mail" name="email">
+            <label for="messagee">Votre message</label>
+            <textarea name="message"></textarea>
+            <button class="submit-btn" type="submit">Envoyer</button>
+            <button id="modalClose"><img src="ressources/close-icon.png"></button>
+        </form>
     </main>
+    <script type="text/javascript" src="Javascript/photographer_page.js"></script>
+    <script type="text/javascript" src="Javascript/data.js"></script>
+    <script type="text/javascript" src="Javascript/main.js"></script>
 </body>
 </html>
