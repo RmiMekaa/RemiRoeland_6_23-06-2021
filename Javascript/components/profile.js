@@ -1,4 +1,4 @@
-class Profile {
+export class Profile {
 
     /**
     * la représentation du profil dans le DOM
@@ -61,14 +61,10 @@ class Profile {
         for (const [key, value] of Object.entries(infos)) {
             this[key] = value;
         }
-        this.render();
+        // this.render();
     }
 
     render() {
-        this.profile.innerHTML = this.template();
-    }
-
-    template() {
         return `
         <a class="photographer__thumb" href="photographer-page.html" aria-label:"${this.name}">
             <img class="photographer__pp" src="ressources/Sample Photos/Photographers ID Photos/thumbs/${this.portrait}" alt="${this.name}">
@@ -92,7 +88,3 @@ class Profile {
     }
 }
 
-for (let i = 0; i < data.photographers.length; i++) {
-    console.log(i,);
-    new Profile(document.querySelector(".photographers"), data.photographers[i]);
- }

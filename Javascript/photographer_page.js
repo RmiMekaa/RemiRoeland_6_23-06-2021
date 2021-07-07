@@ -87,8 +87,8 @@ class Photographer_page {
     }
 }
 
-function createProfileHeader(i) {
-  new Photographer_page(document.querySelector("main"), data.photographers[i]);
-}
-
-createProfileHeader(0);
+//function createProfileHeader(i) {
+//  new Photographer_page(document.querySelector("main"), data.photographers[i]);
+//}
+//
+//createProfileHeader(0);
