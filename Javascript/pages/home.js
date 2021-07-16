@@ -1,28 +1,45 @@
-/* global dataManager */
+/* CONSTRUIT LA PAGE */
 
-import { Profile } from "../components/profile";
+import { Profile } from "../components/profile.js";
 
 export class Home{
 
-    /**
-     * [constructor description]
-     *
-     * @param   {Array}  [tags]  la liste des filtres
-     *
-     * @constructor
-     */
-    constructor(tags=null){
-        this.tags = tags;
-    }
+  /**
+   * @type {Array.<String>} la liste des tags à afficher
+   */
+  tags = [];
 
-    async html(){
-        const data = await dataManager.getData();
-        let html="";
-        let profile;
-        for (let i = 0; i < data.photographers.length; i++) {
-            console.log(i);
-            profile = new Profile(data.photographers[i]);
-            html += profile.render();
-         }
+  /**
+   * [constructor description]
+   *
+   * @param   {Array.<photographerFromJson>}  data  les éléments à insérer dans la page
+   *
+   * @constructor
+   */
+  constructor(data) {
+    this.data = data;
+  }
+
+  /**
+  * génère le html de la page
+  *
+  * @return  {String}  le HTML de la page
+  */
+  html() {
+    document.querySelector("main").classList.add("photographers");
+    let html = "";
+    let profile;
+    for (let i = 0; i < this.data.length; i++) {
+      console.log(i);
+      profile = new Profile(this.data[i]);
+      html += profile.html();
     }
+    return html;
+  }
+
+  filterBytag(tag){
+    const index = this.tags.indexOf(tag); 
+    if ( index > 0) this.tags.splice(index, 1); //remove tag from list 
+    console.log(this.tags);
+  }
 }
