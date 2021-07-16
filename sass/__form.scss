@@ -1,5 +1,5 @@
 #contactForm {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -30,6 +30,7 @@
         outline: none;
     }
     & textarea {
+        border-radius: 0.25rem;
         font-family: "DM sans";
         font-size: 1.25rem;
         height: 11.5rem;
@@ -67,7 +68,7 @@
 
 @media screen and (min-width: 768px) {
     #contactForm {
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
