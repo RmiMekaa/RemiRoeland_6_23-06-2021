@@ -16,7 +16,7 @@ export class PhotographerPage {
   /* @type {String} */
   portrait;
   /* @type {Number} */
-  price
+  price;
   /* @type {String} */
   tagline;
   /**
@@ -35,6 +35,7 @@ export class PhotographerPage {
     console.log(data);
     this.data = data;
   }
+
 
   /**
   * génère le html de la page
@@ -101,7 +102,7 @@ export class PhotographerPage {
   createLikesCounter() {
     return `<aside class="total-likes">
                 <span id="totalLikesNbr" class="totalLikesNbr"></span>
-                <span class="price">400€ / jour</span>
+                <span class="price">${this.data.photographer.price}€ / jour</span>
             </aside>
             `;
   }
@@ -113,7 +114,7 @@ export class PhotographerPage {
   */
   createForm() {
     return ` <form id="contactForm">
-              <h1>Contactez-moi </br><span>${this.name}</span></h1>
+              <h1>Contactez-moi </br><span>${this.data.photographer.name}</span></h1>
               <label for="firstname"></label>
               <input type="text" name="firstname" aria-label="Champ du prénom">
               <label for="lastname">Nom</label>
@@ -128,9 +129,60 @@ export class PhotographerPage {
           `;
   }
 
+  /**
+   * Incrémente ou décrémente le compteur de like du média
+   * @param   {HTMLElement}  element  l'icône like du média
+   */
+  updateLike(element) {
+    let likes = element.previousElementSibling;
+    parseInt(likes.textContent);
+    if (likes.classList.contains("liked")) {
+      likes.textContent--
+      likes.classList.remove("liked");
+    } else {
+      likes.textContent++
+      likes.classList.add("liked");
+    }
+  }
+
+  /**
+   * Additionne les likes des photos
+   *
+   * @return  {Number}  Retourne le résultat
+   */
+  sumOfLikes() {
+    const likesNbr = document.getElementsByClassName("likesNbr");
+    const totalLikesNbr = document.getElementById("totalLikesNbr");
+
+    let sum = 0;
+    for (let i = 0; i < likesNbr.length; i++) {
+      sum += parseInt(likesNbr[i].textContent);
+    }
+
+    console.log(sum);
+
+    totalLikesNbr.innerHTML = sum;
+  }
+
+
+
+
   filterBytag(tag) {
     const index = this.tags.indexOf(tag);
     if (index > 0) this.tags.splice(index, 1); //remove tag from list 
     console.log(this.tags);
   }
+
+  sortByPopularity() {
+    //for (let i = 0; i < this.data.likes.length; i++) {
+    this.data.medias.sort(function (a, b) {
+      return a.likes - b.likes;
+    })
+    console.log(this.data);
+  }
+
+
+
 }
+
+
