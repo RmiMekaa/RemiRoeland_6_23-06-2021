@@ -22,14 +22,13 @@ export class DataManager {
   /**
    * recupère les données 
    *
-   * @return  {Promise}  [return description]
+   * @return  {Promise} 
    */
   async getData() {
-    const response = await fetch(this.src + "/data.json"); //on aurait pu faire un import direct mais c'est l'occasion de mettre en place un fetch
+    const response = await fetch(this.src + "/data.json");
     this.data = await response.json();
     return true;
   }
-
 
   /**
    * permet d'obtenir la liste des photographes
@@ -48,7 +47,6 @@ export class DataManager {
    * @return  {photographerPageData}                    [return description]
    */
   getPhotographer(photographerId) {
-    //TODO : filtrer les données et retourner celles nécessaires
 
     const answer = {
       photographer:null,
@@ -66,7 +64,14 @@ export class DataManager {
       if (this.data.media[i].photographerId === photographerId) {
         answer.media.push(this.data.media[i]);
       }
+      // Tri les médias par popularité
+      this.data.media.sort(function compare(a, b){
+        if (a.likes > b.likes) {return -1;}
+        if (a.likes < b.likes) {return 1;}
+        return 0;
+      })  
     }
+    console.log(answer);
     return answer;
   }
 }

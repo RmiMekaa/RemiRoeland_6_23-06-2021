@@ -3,6 +3,7 @@ import { PhotographerPage } from "./pages/photographerPage.js";
 import { Home } from "./pages/home.js";
 import { Page404 } from "./pages/page404.js";
 import { DataManager } from "./dataManager.js";
+import { ShowMedia } from "./pages/showMedia.js";
 
 export class PageManager {
 
@@ -13,7 +14,7 @@ export class PageManager {
   domTarget;
   /**
    * la page actuelle
-   * @type { Home | Page404 | PhotographerPage }
+   * @type { Home | Page404 | PhotographerPage | ShowMedia }
    */
   page;
 
@@ -28,17 +29,19 @@ export class PageManager {
   constructor(domTarget, url) {
     this.domTarget = domTarget;
     this.dataManager = new DataManager(url);
+    this.photographerPage = new PhotographerPage();
+    this.showMedias = new ShowMedia();
     this.init();
   }
 
   async init() {
     await this.dataManager.getData();
     let page = window.location.search.slice(1).split("/");
-    console.log(page)
 
     if(page[0] ===  "index.html" || page[0] === "") page[0] = "home";
     this.showPage(page[0], page[1]);
-  }
+  } 
+
 
   /**
    * [showPage description]
@@ -49,18 +52,27 @@ export class PageManager {
    * @return  {void}                afficher la page dans le domTarget
    */
   showPage(pageToShow, data) {
+    let photographerId = parseInt(data);
     switch (pageToShow) {
       case "home":
         this.page = new Home(this.dataManager.getPhotographersList());
         break;
       case "photographer":
-        const idPhotographer = parseInt(data);
-        this.page = new PhotographerPage(this.dataManager.getPhotographer(idPhotographer));
+        this.page = new PhotographerPage(this.dataManager.getPhotographer(photographerId));
+        break;
+      case "showmedia":
+        let actualMedia = 0;
+        this.page = new ShowMedia(photographerId, this.dataManager.getPhotographer(photographerId).media, actualMedia);
         break;
       default:
         this.page = new Page404();
         break;
     }
+    this.domTarget.innerHTML = this.page.html();
+    window.page = this.page;
+  }
+
+  forceUpdate(){
     this.domTarget.innerHTML = this.page.html();
   }
 

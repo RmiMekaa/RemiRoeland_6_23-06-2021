@@ -51,10 +51,10 @@ export class Photographer {
             <h1 class="photographer__name">${this.name}</h1>
             <span class="photographer__location">${this.city}, ${this.country}</span>
             <span class="photographer__description">${this.tagline}</span>
-            <div class="photographer__tags"> 
+            <ul class="photographer__tags"> 
             ${this.tagList()}              
-            </div>
-            <a href="" class="button">Contactez-moi</a>
+            </ul>
+            <a href="" class="button" id="contact-btn" onclick="page.openForm()" aria-label="Accédez au formulaire de contact">Contactez-moi</a>
         </section>
         <img class="photographer__pp" src="ressources/Sample Photos/Photographers ID Photos/Thumbs/${this.portrait}" alt="photographer picture">
       </div>
@@ -64,9 +64,7 @@ export class Photographer {
     tagList() {
       let list = "";
       for (let i = 0; i < this.tags.length; i++) {
-        console.log("this.tags[i]:", this.tags[i]);
-  
-        list += `<a class="tag" href="#${this.tags[i]}">#${this.tags[i]}</a>`;
+        list += `<li class="tag" onclick="page.filterByTag(this)">#${this.tags[i]}</li>`;
       }
       return list;
     }

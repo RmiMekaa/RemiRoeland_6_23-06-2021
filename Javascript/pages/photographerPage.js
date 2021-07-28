@@ -1,3 +1,4 @@
+
 /* CONSTRUIT LA PAGE DU PHOTOGRAPHE */
 
 import { Photographer } from "../components/photographer.js";
@@ -32,10 +33,8 @@ export class PhotographerPage {
    * @constructor
    */
   constructor(data) {
-    console.log(data);
     this.data = data;
   }
-
 
   /**
   * génère le html de la page
@@ -43,21 +42,18 @@ export class PhotographerPage {
   * @return  {String}  le HTML de la page
   */
   html() {
-    this.editHeader();
     const photographer = new Photographer(this.data.photographer);
-    let html = photographer.html() + this.createSortBy() + this.createMedias() + this.createLikesCounter() + this.createForm();
+    let html = this.createHeader() + '<main>' + photographer.html() + this.createSortBy() + this.createMedias() + this.createLikesCounter() + this.createForm() + '</main>';
     return html;
   }
 
   /**
   * Modifie le header
   */
-  editHeader() {
-    let header = document.querySelector(".header");
-    let tags = document.querySelector(".header__nav");
-    let heading = document.querySelector(".header__heading")
-    header.removeChild(tags);
-    header.removeChild(heading);
+  createHeader() {
+    return `<header class="header">
+              <a href="index.html"><img class="header__logo" src="ressources/logo.png" alt="FishEye Home page"></a>
+            </header>`;
   }
 
   /**
@@ -67,11 +63,10 @@ export class PhotographerPage {
   */
   createMedias() {
     this.media = {};
-    const photographer = new Photographer(this.data.photographer);
     let html = '<div class="gallery">';
     for (let i = 0; i < this.data.media.length; i++) {
-      this.media["media" + this.data.media[i].id] = new Media(this.data.media[i]);
-      html += this.media["media" + this.data.media[i].id].html();
+      this.media["media" + this.data.media[i]] = new Media(this.data.media[i]);
+      html += this.media["media" + this.data.media[i]].html();  
     }
     return html += '</div>';
   }
@@ -82,16 +77,14 @@ export class PhotographerPage {
    * @return  {String}  le HTML du bouton pour filtrer
    */
   createSortBy() {
-    return `
-    <div class="sort-by">
-      <label for="sort-by">Trier par</label>
-      <select name="sort-by">
-          <option value="popularity">Popularité</option>
-          <option value="date">Date</option>
-          <option value="name">Titre</option>
-      </select>
-    </div>
-    `;
+    return `<div class="sort-by">
+              <label for="sort-by">Trier par</label>
+              <select name="sort-by" id="sort-by" onchange="page.sortBy(this)">
+                  <option value="popularity" id="opt1">Popularité</option>
+                  <option value="date" id="opt2">Date</option>
+                  <option value="name" id="opt3">Titre</option>
+              </select>
+            </div>`;
   }
 
   /**
@@ -101,10 +94,9 @@ export class PhotographerPage {
   */
   createLikesCounter() {
     return `<aside class="total-likes">
-                <span id="totalLikesNbr" class="totalLikesNbr"></span>
+                <span id="totalLikesNbr" class="totalLikesNbr">${this.getTotal()}</span>
                 <span class="price">${this.data.photographer.price}€ / jour</span>
-            </aside>
-            `;
+            </aside>`;
   }
 
   /**
@@ -113,9 +105,9 @@ export class PhotographerPage {
   * @return  {String}  le HTML du formulaire
   */
   createForm() {
-    return ` <form id="contactForm">
+    return `<form id="contactForm">
               <h1>Contactez-moi </br><span>${this.data.photographer.name}</span></h1>
-              <label for="firstname"></label>
+              <label for="firstname">Prénom</label>
               <input type="text" name="firstname" aria-label="Champ du prénom">
               <label for="lastname">Nom</label>
               <input type="text" name="lastname">
@@ -124,64 +116,151 @@ export class PhotographerPage {
               <label for="messagee">Votre message</label>
               <textarea name="message"></textarea>
               <button class="submit-btn" type="submit">Envoyer</button>
-              <button id="modalClose"><img src="ressources/close-icon.png"></button>
-            </form>
-          `;
+              <button id="modalClose" onclick="page.closeForm()"><img src="ressources/close-icon.png"></button>
+            </form>`;
   }
+
+  /*----- LIKES -----*/
 
   /**
    * Incrémente ou décrémente le compteur de like du média
    * @param   {HTMLElement}  element  l'icône like du média
    */
   updateLike(element) {
-    let likes = element.previousElementSibling;
-    parseInt(likes.textContent);
-    if (likes.classList.contains("liked")) {
-      likes.textContent--
-      likes.classList.remove("liked");
-    } else {
-      likes.textContent++
-      likes.classList.add("liked");
+    const idMedia = parseInt(element.dataset.id);
+    for( let i = this.data.media.length-1; i>=0; i--){
+      if (this.data.media[i].id === idMedia){
+        const el = this.data.media[i];
+        if (el.liked) {
+          el.likes--;
+          delete el.liked;
+        }
+        else {
+          el.likes++;
+          el.liked = true;
+        }
+        window.pageManager.forceUpdate();
+        return;
+      }
     }
   }
 
   /**
-   * Additionne les likes des photos
+   * Calcule le total des likes
    *
-   * @return  {Number}  Retourne le résultat
+   * @return  {number}  la somme des likes
    */
-  sumOfLikes() {
-    const likesNbr = document.getElementsByClassName("likesNbr");
-    const totalLikesNbr = document.getElementById("totalLikesNbr");
+   getTotal(){
+      let total = 0;
+      this.data.media.forEach(element => {
+        total += element.likes;
+      });
+      return total;
+  }
+  
 
-    let sum = 0;
-    for (let i = 0; i < likesNbr.length; i++) {
-      sum += parseInt(likesNbr[i].textContent);
-    }
+  /*----- FORMULAIRE -----*/
 
-    console.log(sum);
-
-    totalLikesNbr.innerHTML = sum;
+  /**
+ * Ouvre le formulaire
+ *
+ * @return  {Void}
+ */
+  openForm() {
+    event.preventDefault();
+    let contactForm = document.getElementById("contactForm");
+    contactForm.style.display = "flex";
+    //Création du background ↓
+    let modalBg = document.createElement("div");
+    modalBg.classList.add("modal-bg");
+    modalBg.style.position = "fixed";
+    document.body.insertBefore(modalBg, document.body.firstChild);
+  }
+  
+  /**
+  * Ferme le formulaire
+  * @return  {Void} 
+  */
+  closeForm() {
+    event.preventDefault();
+    contactForm.style.display = "none";
+    //Suppression du background ↓
+    let element = document.getElementsByClassName("modal-bg");
+    document.body.removeChild(element[0]);  
   }
 
+  /*----- FILTRER CONTENU -----*/
 
+  filterByTag(element){
+    event.preventDefault;
+    let tag = element.textContent.substring(1);
+    console.log(tag);
+    let arr = this.data.media.filter(function(media) {
+     return media.tags == tag;
+    })
+    console.log(arr);
+  }
 
+  //filterBytag(tag) {
+  //  console.log("hello");
+  //  const index = this.tags.indexOf(tag);
+  //  if (index > 0) this.tags.splice(index, 1); //remove tag from list 
+  //  console.log(this.tags);
+  //}
 
-  filterBytag(tag) {
-    const index = this.tags.indexOf(tag);
-    if (index > 0) this.tags.splice(index, 1); //remove tag from list 
-    console.log(this.tags);
+  /*----- SortBy -----*/
+
+  sortBy(element) {
+    switch(element.value){
+      case "popularity" : this.sortByPopularity(); break;
+      case "date"       : this.sortByDate();       break;
+      case "name"       : this.sortByName();       break;
+      default           : return;
+    }
+    window.pageManager.forceUpdate();
   }
 
   sortByPopularity() {
-    //for (let i = 0; i < this.data.likes.length; i++) {
-    this.data.medias.sort(function (a, b) {
-      return a.likes - b.likes;
+    this.data.media.sort(function compare(a, b){
+      if (a.likes > b.likes) {return -1;}
+      if (a.likes < b.likes) {return 1;}
+      return 0;
     })
-    console.log(this.data);
   }
 
+  sortByDate() {
+    this.data.media.sort(function compare(a, b){
+      if (a.id < b.id) {return -1;}
+      if (a.id > b.id) {return 1;}
+      return 0;
+    })
+  }
 
+  sortByName() {
+    this.data.media.sort(function compare(a, b){
+      if (a.title < b.title) {return -1;}
+      if (a.title > b.title) {return 1;}
+      return 0;
+    })
+  }
+
+  /**
+   * Récupère l'index du media cliqué
+   *
+   * @param   {number}  id  l'identifiant du media
+   *
+   * @return  {number}      l'index du media
+   */
+  getIndexOfMedia(id) {
+    let index;
+    for(var i = 0; i < this.data.media.length; i ++) {
+      if(this.data.media[i]["id"] === id) {
+          index = i;
+      }
+    }
+    console.log(index);
+  return index; 
+  }
 
 }
 

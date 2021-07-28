@@ -71,9 +71,9 @@ export class Profile {
         <h3 class="photographer__location">${this.city}, ${this.country}</h3>
         <span class="photographer__description">${this.tagline}</span>
         <span class="photographer__price">${this.price}€ / jour </span>
-        <div class="photographer__tags">
+        <ul class="photographer__tags">
             ${this.tagList()}
-        </div>
+        </ul>
         </article>
         `;
   }
@@ -83,7 +83,7 @@ export class Profile {
     for (let i = 0; i < this.tags.length; i++) {
       console.log("this.tags[i]:", this.tags[i]);
 
-      list += `<a class="tag" href="#${this.tags[i]}">#${this.tags[i]}</a>`;
+      list += `<li class="tag" onclick="page.filterByTag(this)">#${this.tags[i]}</li>`;
     }
     return list;
   }

@@ -1,5 +1,5 @@
-import { DataManager } from "./dataManager";
-import { PageManager } from "./pageManager";
+/* global page */
 
-const dataManager = new DataManager("http://localhost:5500");
-const pageManager = new PageManager(document.querySelector("main"));
+import { PageManager } from "./pageManager.js";
+
+window.pageManager = new PageManager(document.querySelector("body"), "http://localhost:5500");
