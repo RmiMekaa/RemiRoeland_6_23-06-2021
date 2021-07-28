@@ -43,12 +43,17 @@ html {
   max-height: 100%;
   margin-right: 1rem;
 }
-.header__nav {
+.header__nav ul {
+  margin: 0;
+  list-style: none;
   padding: 0.75rem;
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
   row-gap: 0.5rem;
+}
+.header__nav li {
+  cursor: pointer;
 }
 .header__heading {
   position: relative;
@@ -148,6 +153,7 @@ html {
   font-size: 0.6rem;
 }
 .photographer__tags {
+  list-style: none;
   margin-top: 1rem;
   display: flex;
 }
@@ -199,6 +205,7 @@ html {
   min-height: 100px;
 }
 .profile__header .tag {
+  cursor: pointer;
   font-size: 0.8rem;
   padding: 0.3rem;
 }
@@ -245,6 +252,7 @@ html {
     height: 170px;
   }
   .profile__header .photographer__tags {
+    list-style: none;
     padding: 0;
   }
   .profile__header .tag {
@@ -311,13 +319,18 @@ figcaption {
 }
 figcaption h2 {
   font-weight: 400;
+  flex-grow: 2;
 }
 figcaption span {
+  font-family: "DM sans";
   font-weight: bold;
 }
 figcaption .like-icon {
   margin-left: 0.4rem;
   cursor: pointer;
+}
+figcaption .like-icon:active {
+  transform: scale(1.2);
 }
 
 @media screen and (min-width: 768px) {
@@ -340,6 +353,9 @@ figcaption .like-icon {
 }
 /*------------------------------------------------------Total----------------------------------------------*/
 .total-likes {
+  display: flex;
+  width: 260px;
+  justify-content: space-between;
   font-size: 1.2rem;
   font-weight: bold;
   background-color: #DB8876;
@@ -347,7 +363,7 @@ figcaption .like-icon {
   padding: 1rem 1.5rem;
   position: fixed;
   bottom: 0;
-  right: 10rem;
+  right: 8rem;
 }
 .total-likes .totalLikesNbr {
   margin-right: 5rem;
@@ -358,7 +374,7 @@ figcaption .like-icon {
   content: "";
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
   .total-likes {
     display: none;
   }
@@ -486,6 +502,68 @@ figcaption .like-icon {
   background-color: #c4c4c4;
   opacity: 0.4;
   z-index: 1000;
+}
+
+#carousel {
+  position: relative;
+  max-width: 75%;
+  height: 80vh;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+#medias {
+  height: 80vh;
+}
+
+#medias .item {
+  max-width: 100%;
+  height: 100%;
+  display: none;
+  text-align: center;
+}
+#medias .item .media {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+#medias .item.active {
+  display: block;
+}
+
+.carousel__next, .carousel__prev, .carousel__close {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+}
+
+.carousel__next, .carousel__prev {
+  background: url(./ressources/Arrow.svg) center center no-repeat;
+  background-size: contain;
+}
+
+.carousel__next {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: rotate(180deg);
+}
+
+.carousel__prev {
+  position: absolute;
+  top: 50%;
+  transform: translateX(-100%);
+}
+
+.carousel__close {
+  background: url(./ressources/close-carousel.png) center center no-repeat;
+  position: absolute;
+  top: 65px;
+  right: 0;
 }
 
 /*# sourceMappingURL=style.css.map */
