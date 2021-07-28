@@ -56,7 +56,7 @@ export class Photographer {
             </ul>
             <a href="" class="button" id="contact-btn" onclick="page.openForm()" aria-label="Accédez au formulaire de contact">Contactez-moi</a>
         </section>
-        <img class="photographer__pp" src="ressources/Sample Photos/Photographers ID Photos/Thumbs/${this.portrait}" alt="photographer picture">
+        <img class="photographer__pp" src="ressources/Sample Photos/Photographers ID Photos/thumbs/${this.portrait}" alt="photographer picture">
       </div>
       `;
     }
