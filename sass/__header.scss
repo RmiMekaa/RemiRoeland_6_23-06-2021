@@ -11,12 +11,19 @@
         margin-right: 1rem;
     }
     &__nav {
-        padding: 0.75rem;
-        justify-content: center;
-        display: flex;
-        flex-wrap: wrap;
-        row-gap: 0.5rem;
-    }
+        & ul {
+            margin: 0;
+            list-style: none;
+            padding: 0.75rem;
+            justify-content: center;
+            display: flex;
+            flex-wrap: wrap;
+            row-gap: 0.5rem;
+        }
+        & li {
+            cursor: pointer;
+        }
+    }   
     &__heading {
         position: relative;
         top: 0.4rem;
