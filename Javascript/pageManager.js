@@ -1,4 +1,4 @@
-/* CONTRÔLE QUELLE PAGE DOIT ÊTRE AFFICHÉE */
+/* CONTRÔLE QUELLE PAGE DOIT ÊTRE AFFICHÉE VIA L'URL */
 import { PhotographerPage } from "./pages/photographerPage.js";
 import { Home } from "./pages/home.js";
 import { Page404 } from "./pages/page404.js";

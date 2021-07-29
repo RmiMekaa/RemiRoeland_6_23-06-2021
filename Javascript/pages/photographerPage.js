@@ -191,22 +191,22 @@ export class PhotographerPage {
 
   /*----- FILTRER CONTENU -----*/
 
+  /**
+   * Filtre les médias par tags
+   *
+   * @param   {HTMLElement}  element  L'élément contenant le tag
+   *
+   * @return  {Array}  Un nouveau tableau avec les objets contenant le tag
+   */
   filterByTag(element){
     event.preventDefault;
     let tag = element.textContent.substring(1);
     console.log(tag);
-    let arr = this.data.media.filter(function(media) {
+    let newArr = this.data.media.filter(function(media) {
      return media.tags == tag;
     })
-    console.log(arr);
+    console.log(newArr);
   }
-
-  //filterBytag(tag) {
-  //  console.log("hello");
-  //  const index = this.tags.indexOf(tag);
-  //  if (index > 0) this.tags.splice(index, 1); //remove tag from list 
-  //  console.log(this.tags);
-  //}
 
   /*----- SortBy -----*/
 

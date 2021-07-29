@@ -11,7 +11,7 @@ export class ShowMedia {
   }
 
   html() {
-    let html = this.createCarousel();
+    let html = this.createSlider();
     return html;
   }
 
@@ -20,7 +20,7 @@ export class ShowMedia {
    *
    * @return  {String}  HTML
    */
-  createCarousel() {
+  createSlider() {
     this.media = {};
     let html = '<div id="carousel" class="carousel"><div id="medias">';
     for (let i = 0; i < this.medias.length; i++) {

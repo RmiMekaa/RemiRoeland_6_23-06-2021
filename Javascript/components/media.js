@@ -47,24 +47,24 @@ export class Media {
 
   htmlVideo() {
     return `<figure class="item">
-                <video class="media" controls onclick="window.location.href='?showmedia/${this.photographerId}/${this.video}'">
+                <video class="media" controls onclick="window.location.href='?showmedia/${this.photographerId}/${this.video}'" tabindex="0">
                     <source src="ressources/Sample Photos/${this.photographerId}/${this.video}" type=video/mp4>
                 </video>
                 <figcaption>
                    <h2>${this.title}</h2>
                    <span class="likesNbr">${this.likes}</span>
-                   <i class="like-icon fas fa-heart"  data-id="${this.id}" onclick="page.updateLike(this)"></i>
+                   <button class="like-icon fas fa-heart"  data-id="${this.id}" onclick="page.updateLike(this)"></button>
               </figcaption>
             </figure>`;
   }
 
   htmlPicture() {
     return `<figure class="item">
-                <img class="media" src="ressources/Sample Photos/${this.photographerId}/${this.image}" alt="${this.description}" onclick="window.location.href='?showmedia/${this.photographerId}/${this.image}'; page.getIndexOfMedia(${this.id})">
+                <img class="media" src="ressources/Sample Photos/${this.photographerId}/${this.image}" alt="${this.description}" onclick="window.location.href='?showmedia/${this.photographerId}/${this.image}'; page.getIndexOfMedia(${this.id})" tabindex="0">
                 <figcaption>
                     <h2>${this.title}</h2>
                     <span class="likesNbr">${this.likes}</span>
-                    <i class="like-icon fas fa-heart" data-id="${this.id}" onclick="page.updateLike(this)"></i>
+                    <button class="like-icon fas fa-heart" data-id="${this.id}" onclick="page.updateLike(this)"></button>
                 </figcaption>
             </figure>`;
   }

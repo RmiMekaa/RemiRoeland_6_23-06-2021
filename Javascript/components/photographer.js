@@ -64,7 +64,7 @@ export class Photographer {
     tagList() {
       let list = "";
       for (let i = 0; i < this.tags.length; i++) {
-        list += `<li class="tag" onclick="page.filterByTag(this)">#${this.tags[i]}</li>`;
+        list += `<li class="tag" onclick="page.filterByTag(this)" tabindex="0">#${this.tags[i]}</li>`;
       }
       return list;
     }
