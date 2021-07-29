@@ -326,7 +326,10 @@ figcaption span {
   font-weight: bold;
 }
 figcaption .like-icon {
-  margin-left: 0.4rem;
+  font-size: 1rem;
+  border: none;
+  background-color: transparent;
+  color: #901c11;
   cursor: pointer;
 }
 figcaption .like-icon:active {
