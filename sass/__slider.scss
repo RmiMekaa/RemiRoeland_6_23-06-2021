@@ -1,4 +1,4 @@
-#carousel {
+#slider {
     position: relative;
     max-width: 75%;
     height: 80vh;
@@ -27,7 +27,7 @@
 }
 
 
-.carousel__next, .carousel__prev, .carousel__close {
+.slider__next, .slider__prev, .slider__close {
     position: absolute;
     width: 50px;
     height: 50px;
@@ -35,25 +35,25 @@
     cursor: pointer;
 }
 
-.carousel__next, .carousel__prev {
+.slider__next, .slider__prev {
    background: url(./ressources/Arrow.svg) center center no-repeat;
    background-size: contain;
 }
 
-.carousel__next {
+.slider__next {
     position: absolute;
     top: 50%;
     right: 0;
     transform: rotate(180deg);
 }
 
-.carousel__prev {
+.slider__prev {
     position: absolute;
     top: 50%;
     transform: translateX(-100%);
 }
 
-.carousel__close {
+.slider__close {
     background: url(./ressources/close-carousel.png) center center no-repeat;
     position: absolute;
     top: 65px;
