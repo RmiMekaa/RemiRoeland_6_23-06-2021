@@ -1,35 +1,12 @@
-
-/* CONSTRUIT LA PAGE DU PHOTOGRAPHE */
+/* PAGE DES PHOTOGRAPHES */
 
 import { Photographer } from "../components/photographer.js";
 import { Media } from "../components/media.js";
 
 export class PhotographerPage {
 
-  /* @type {String} */
-  city;
-  /* @type {String} */
-  country;
-  /* @type {Number} */
-  id;
-  /* @type {String} */
-  name;
-  /* @type {String} */
-  portrait;
-  /* @type {Number} */
-  price;
-  /* @type {String} */
-  tagline;
   /**
-   * @type {Array.<String>} la liste des tags à afficher
-   */
-  tags = [];
-
-  /**
-   * [constructor description]
-   *
-   * @param   {photographerPageData}  data  les éléments à insérer dans la page
-   *
+   * @param   {photographerPageData}  data  les données nécessaires à la page
    * @constructor
    */
   constructor(data) {
@@ -43,7 +20,7 @@ export class PhotographerPage {
   */
   html() {
     const photographer = new Photographer(this.data.photographer);
-    let html = this.createHeader() + '<main>' + photographer.html() + this.createSortBy() + this.createMedias() + this.createLikesCounter() + this.createForm() + '</main>';
+    let html = this.createHeader() + '<main>' + photographer.htmlForPhotographerPage() + this.createSortBy() + this.createMedias() + this.createLikesCounter() + this.createForm() + '</main>';
     return html;
   }
 
@@ -208,7 +185,7 @@ export class PhotographerPage {
     console.log(newArr);
   }
 
-  /*----- SortBy -----*/
+  /*----- Tri des médias -----*/
 
   sortBy(element) {
     switch(element.value){

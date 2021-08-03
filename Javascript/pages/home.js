@@ -1,8 +1,8 @@
-/* CONSTRUIT LA PAGE D'ACCUEIL */
+/* PAGE D'ACCUEIL */
 
-import { Profile } from "../components/profile.js";
+import { Photographer } from "../components/photographer.js";
 
-export class Home{
+export class Home {
 
   /**
    * [constructor description]
@@ -13,29 +13,19 @@ export class Home{
    */
   constructor(data) {
     this.data = data;
-    console.log(this.data);
   }
 
   /**
-  * génère le html de la page
-  *
-  * @return  {String}  le HTML de la page
+  * génère le html de la page d'accueil
+  * @return  {String}  HTML String
   */
   html() {
-    let html = '<main class="photographers">';
-    let profile;
-    for (let i = 0; i < this.data.length; i++) {
-      console.log(i);
-      profile = new Profile(this.data[i]);
-      html += profile.html();
-    }
-    return this.createHeader() + html + '</main>';
+    return this.createHeader() + this.createProfiles();
   }
 
   /**
    * Création du header
-   *
-   * @return  {String}  HTML
+   * @return  {String}  HTML String
    */
   createHeader() {
     return `<header class="header">
@@ -57,16 +47,30 @@ export class Home{
   }
 
   /**
+   * Création de la section des photographes
+   * @return  {String}  HTML String
+   */
+  createProfiles() {
+    let profile;
+    let html = '<main class="photographers">';
+    for (let i = 0; i < this.data.length; i++) {
+      profile = new Photographer(this.data[i]);
+      html += profile.htmlForHomePage();
+    }
+    return html + '</main>';
+  }
+
+  /**
    * Filtre les photographes par tags
    *
    * @param   {HTMLElement}  element  L'élément contenant le tag
    *
-   * @return  {Array}   Un nouveau tableau avec les objets contenant le tag de l'élément
+   * @return  {array}   Un nouveau tableau filtré
    */
   filterByTag(element){
     event.preventDefault;
     let tag = element.textContent.substring(1);
-    console.log(tag, this.data);
+    console.log(tag);
     let newArr = this.data.filter(function(photographer) {
      return photographer.tags.includes(tag);
     })

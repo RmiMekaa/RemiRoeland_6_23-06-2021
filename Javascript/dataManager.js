@@ -1,4 +1,4 @@
-/* RÉCUPÈRE LES DONNÉES */
+/* GESTION DES DONNÉES */
 
 export class DataManager {
 
@@ -32,8 +32,7 @@ export class DataManager {
 
   /**
    * permet d'obtenir la liste des photographes
-   *
-   * @return  {Array.<photographerFromJson>}  les photographes
+   * @return  {Array}  les photographes
    */
   getPhotographersList() {
     return this.data.photographers;
@@ -41,10 +40,8 @@ export class DataManager {
 
   /**
    * permet d'obtenir les informations necessaires pour une page d'un photographe
-   *
-   * @param   {Number}                photographerId  l'identifiant du photographe
-   *
-   * @return  {photographerPageData}                    [return description]
+   * @param   {Number}  photographerId  l'identifiant du photographe
+   * @return  {Object}  Les données propres au photographe
    */
   getPhotographer(photographerId) {
 
@@ -64,14 +61,13 @@ export class DataManager {
       if (this.data.media[i].photographerId === photographerId) {
         answer.media.push(this.data.media[i]);
       }
-      // Tri les médias par popularité
+      // Par défaut, trie les médias par popularité
       this.data.media.sort(function compare(a, b){
         if (a.likes > b.likes) {return -1;}
         if (a.likes < b.likes) {return 1;}
         return 0;
       })  
     }
-    console.log(answer);
     return answer;
   }
 }

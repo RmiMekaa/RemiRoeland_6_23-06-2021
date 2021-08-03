@@ -1,7 +1,7 @@
-/* CONTRÔLE QUELLE PAGE DOIT ÊTRE AFFICHÉE VIA L'URL */
+/* CONTRÔLE QUELLE PAGE DOIT ÊTRE AFFICHÉE */
+
 import { PhotographerPage } from "./pages/photographerPage.js";
 import { Home } from "./pages/home.js";
-import { Page404 } from "./pages/page404.js";
 import { DataManager } from "./dataManager.js";
 import { ShowMedia } from "./pages/showMedia.js";
 
@@ -44,8 +44,7 @@ export class PageManager {
 
 
   /**
-   * [showPage description]
-   *
+   * Détermine la page à afficher
    * @param   {String}  pageToShow  [pageToShow description]
    * @param   {String}  [data]   les informations sur la page à afficher
    *
@@ -64,14 +63,15 @@ export class PageManager {
         let actualMedia = 0;
         this.page = new ShowMedia(photographerId, this.dataManager.getPhotographer(photographerId).media, actualMedia);
         break;
-      default:
-        this.page = new Page404();
-        break;
     }
     this.domTarget.innerHTML = this.page.html();
     window.page = this.page;
   }
 
+  /**
+   * Actualise la page
+   * @return  {void}
+   */
   forceUpdate(){
     this.domTarget.innerHTML = this.page.html();
   }

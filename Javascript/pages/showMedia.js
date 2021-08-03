@@ -1,3 +1,5 @@
+/* SLIDER POUR LES MÉDIAS */
+
 import { Media } from "../components/media.js";
 import { PhotographerPage } from "./photographerPage.js";
 
@@ -10,35 +12,39 @@ export class ShowMedia {
     this.currentItem = actualMedia;    
   }
 
+  /**
+   * Génère le HTML du slider
+   * @return  {String}  HTML String
+   */
   html() {
-    let html = this.createSlider();
+    let html = '<div id="slider" class="slider">';
+    html += this.createMedias() + this.createNavigation() + '<div>'
+
     return html;
   }
 
   /**
-   * Génère le HTML de la page
-   *
-   * @return  {String}  HTML
+   * Génère le HTML des médias
+   * @return  {String}  HTML String
    */
-  createSlider() {
+  createMedias() {
     this.media = {};
-    let html = '<div id="carousel" class="carousel"><div id="medias">';
+    let html = '<div id="medias">';
     for (let i = 0; i < this.medias.length; i++) {
       this.media["media" + this.medias[i].id] = new Media(this.medias[i]);
       html += this.media["media" + this.medias[i].id].html();
     }
-    console.log(this.media);
-
-    return html += '</div>' + this.createNavigation() + '</div>';
+    return html += '</div>';
   }
 
   /**
-   * @return  {String}  Le HTML des éléments de navigation
+   * Génère le HTML des éléments de navigation
+   * @return  {String}  HTML String
    */
   createNavigation() {
-    return `<button class="carousel__next" onclick="page.next()"></button>
-            <button class="carousel__prev" onclick="page.prev()"></button>
-            <button class="carousel__close" onclick="window.history.go(-1); return false;"></button>
+    return `<button class="slider__next" onclick="page.next()"></button>
+            <button class="slider__prev" onclick="page.prev()"></button>
+            <button class="slider__close" onclick="window.history.go(-1); return false;"></button>
             `;
   }
 
@@ -75,6 +81,13 @@ export class ShowMedia {
     items[this.currentItem].classList.add('active');
     console.log(this.currentItem);
   }
+
+  //next() {
+  //  this.currentItem++
+  //  let i = this.currentItem;
+  //  this.medias[i].active = true;
+  //  delete this.medias[i-1].active;
+  //}
 
 }
 
