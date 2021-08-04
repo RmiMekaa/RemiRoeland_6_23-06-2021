@@ -1,4 +1,8 @@
 @charset "UTF-8";
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   box-sizing: border-box;
   width: 100%;
@@ -62,23 +66,6 @@ html {
   white-space: nowrap;
   font-size: 1.5rem;
   width: fit-content;
-}
-
-.tag {
-  font-size: 12px;
-  line-height: 12px;
-  height: fit-content;
-  margin-right: 0.5rem;
-  color: #901c11;
-  border: 0.5px solid #bababa;
-  border-radius: 2rem;
-  padding: 0.2rem 0.6rem;
-}
-.tag:hover {
-  color: white;
-  border-color: #901c11;
-  background-color: #901c11;
-  cursor: pointer;
 }
 
 @media screen and (max-width: 500px) {
@@ -173,6 +160,21 @@ html {
 }
 .screen-reader {
   display: none;
+}
+
+#elevator {
+  display: none;
+  padding: 0.3em 1em;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: #DB8876;
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto;
 }
 
 .profile__header {
@@ -567,6 +569,24 @@ figcaption .like-icon:active {
   position: absolute;
   top: 65px;
   right: 0;
+}
+
+.tag {
+  font-size: 12px;
+  line-height: 12px;
+  height: fit-content;
+  margin-right: 0.5rem;
+  color: #901c11;
+  border: 0.5px solid #bababa;
+  border-radius: 2rem;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+}
+
+.tag.active, .tag:hover {
+  color: white;
+  border-color: #901c11;
+  background-color: #901c11;
 }
 
 /*# sourceMappingURL=style.css.map */

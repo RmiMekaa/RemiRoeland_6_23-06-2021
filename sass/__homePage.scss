@@ -70,3 +70,18 @@
 .screen-reader {
     display: none;
 }
+
+#elevator {
+    display: none;
+    padding: 0.3em 1em;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    background-color: #DB8876;
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0 auto;
+}

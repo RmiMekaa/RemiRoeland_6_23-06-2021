@@ -1,0 +1,17 @@
+.tag {
+    font-size: 12px;
+    line-height: 12px;
+    height: fit-content;
+    margin-right: 0.5rem;
+    color: $primary-color;
+    border: 0.5px solid darken($light-grey, 25%);
+    border-radius: 2rem;
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+}
+
+.tag.active, .tag:hover {
+    color: white;
+    border-color: $primary-color;
+    background-color: $primary-color;
+}
