@@ -50,6 +50,7 @@
     border-radius: 0.25rem;
     color: white;
     width: fit-content;
+    cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
@@ -95,23 +96,23 @@
 /*----------------------------------------------------------Select---------------------------------------------------------*/
 
 select {
-    outline: none;
-    cursor: pointer;
-    color: white;
-    background-color: $primary-color;
-    padding: 0.5rem;
-    margin-left: 0.5rem;
-    & option {
-        display: block;
-        border-bottom: 1px solid white;
-    }
+   outline: none;
+   cursor: pointer;
+   color: white;
+   background-color: $primary-color;
+   padding: 0.5rem;
+   margin-left: 0.5rem;
+   & option {
+       display: block;
+       border-bottom: 1px solid white;
+   }
+}
+
+.sort-by {
+   margin-top: 1.5rem;
 }
 
 /*-------------------------------------------Gallery---------------------------------------------------*/
-
-.sort-by {
-    margin-top: 1.5rem;
-}
 
 .gallery {
     margin-top: 3rem;
