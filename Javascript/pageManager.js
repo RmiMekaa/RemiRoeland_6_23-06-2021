@@ -29,8 +29,8 @@ export class PageManager {
   constructor(domTarget, url) {
     this.domTarget = domTarget;
     this.dataManager = new DataManager(url);
-    this.photographerPage = new PhotographerPage();
-    this.showMedias = new ShowMedia();
+    // this.photographerPage = new PhotographerPage();
+    // this.showMedias = new ShowMedia();
     this.init();
   }
 
@@ -55,16 +55,19 @@ export class PageManager {
     switch (pageToShow) {
       case "home":
         this.page = new Home(this.dataManager.getPhotographersList());
+        this.domTarget.innerHTML = this.page.html();
+        this.page.elevatorEventListener();
         break;
       case "photographer":
         this.page = new PhotographerPage(this.dataManager.getPhotographer(photographerId));
+        this.domTarget.innerHTML = this.page.html();
         break;
       case "showmedia":
-        let actualMedia = 0;
+        let actualMedia = document.location.href.substring(document.location.href.lastIndexOf('/') + 1); // Récupère le nom du fichier dans l'URL
         this.page = new ShowMedia(photographerId, this.dataManager.getPhotographer(photographerId).media, actualMedia);
+        this.domTarget.innerHTML = this.page.html();
         break;
     }
-    this.domTarget.innerHTML = this.page.html();
     window.page = this.page;
   }
 

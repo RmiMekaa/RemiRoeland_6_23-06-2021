@@ -13,6 +13,7 @@ export class Home {
    */
   constructor(data) {
     this.data = data;
+    this.tagsFilters = [];
   }
 
   /**
@@ -20,7 +21,7 @@ export class Home {
   * @return  {String}  HTML String
   */
   html() {
-    return this.createHeader() + this.createProfiles();
+    return this.createHeader() + this.createProfiles() + this.createElevator();
   }
 
   /**
@@ -28,18 +29,18 @@ export class Home {
    * @return  {String}  HTML String
    */
   createHeader() {
-    return `<header class="header">
+    return `<header class="header" id="header">
               <a href="index.html"><img class="header__logo" src="ressources/logo.png" alt="FishEye Home page"></a>
               <nav class="header__nav">
                   <ul>
-                      <li class="tag" onclick="page.filterByTag(this)">#portrait</li>
-                      <li class="tag" onclick="page.filterByTag(this)">#art</li>
-                      <li class="tag" onclick="page.filterByTag(this)">#fashion</li>
-                      <li class="tag" onclick="page.filterByTag(this)">#architecture</li>
-                      <li class="tag" onclick="page.filterByTag(this)">#travel</li>
-                      <li class="tag" onclick="page.filterByTag(this)">#sport</li>
-                      <li class="tag" onclick="page.filterByTag(this)">#animals</li>
-                      <li class="tag" onclick="page.filterByTag(this)">#events</li>
+                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#portrait</li>
+                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#art</li>
+                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#fashion</li>
+                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#architecture</li>
+                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#travel</li>
+                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#sport</li>
+                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#animals</li>
+                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#events</li>
                   </ul>
               </nav>
               <h1 class="header__heading">Nos photographes</h1>
@@ -53,11 +54,33 @@ export class Home {
   createProfiles() {
     let profile;
     let html = '<main class="photographers">';
-    for (let i = 0; i < this.data.length; i++) {
+    const list = this.filteredPhotographers()
+    for (let i = 0; i < list.length; i++) {
       profile = new Photographer(this.data[i]);
       html += profile.htmlForHomePage();
     }
     return html + '</main>';
+  }
+
+  /**
+   * Création du bouton "Passer au contenu"
+   * @return  {String}  HTML String
+   */
+  createElevator() {
+    return `<a href="#header" id="elevator" tabindex="0">Passer au contenu</a>
+    `;
+  }
+
+  /**
+   * Ajoute un eventListenner pour faire apparaître l'ascenseur au scroll
+   * @return  {void}
+   */
+  elevatorEventListener() {
+    let elevator = document.getElementById('elevator');
+    window.addEventListener("scroll", function(){
+      if(window.scrollY > 0) elevator.style.display = "block";
+      else elevator.style.display = "none";
+    })
   }
 
   /**
@@ -67,16 +90,27 @@ export class Home {
    *
    * @return  {array}   Un nouveau tableau filtré
    */
-  filterByTag(element){
+  filterByTag(element) {
+    element.classList.add('active');
     event.preventDefault;
     let tag = element.textContent.substring(1);
     console.log(tag);
-    let newArr = this.data.filter(function(photographer) {
-     return photographer.tags.includes(tag);
-    })
-    console.log(newArr);
+    const index = this.tagsFilters.indexOf(tag)
+    if ( index === -1) this.tagsFilters.push(tag);
+    else this.tagsFilters.splice(index, 1);
+    window.pageManager.forceUpdate();
   }
-  
+
+  filteredPhotographers(){
+    if (this.tagsFilters.length===0) return this.data;
+    let newArrFinal = [];
+    this.tagsFilters.forEach(tag =>{
+      const newArr = this.data.filter(function (photographer) {
+        return photographer.tags.includes(tag);
+      })
+      newArrFinal = newArrFinal.concat(newArr);
+    });
+    console.log("newArrFinal", newArrFinal);
+    return newArrFinal;
+  }
 }
-
-

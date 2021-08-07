@@ -11,6 +11,7 @@ export class PhotographerPage {
    */
   constructor(data) {
     this.data = data;
+    console.log(data);
   }
 
   /**
@@ -56,7 +57,7 @@ export class PhotographerPage {
   createSortBy() {
     return `<div class="sort-by">
               <label for="sort-by">Trier par</label>
-              <select name="sort-by" id="sort-by" onchange="page.sortBy(this)">
+              <select name="sort-by" id="sort-by" tabindex="0" onchange="page.sortBy(this)">
                   <option value="popularity" id="opt1">Popularité</option>
                   <option value="date" id="opt2">Date</option>
                   <option value="name" id="opt3">Titre</option>
@@ -87,13 +88,13 @@ export class PhotographerPage {
               <label for="firstname">Prénom</label>
               <input type="text" name="firstname" aria-label="Champ du prénom">
               <label for="lastname">Nom</label>
-              <input type="text" name="lastname">
+              <input type="text" name="lastname" aria-label="Champ du nom">
               <label for="email">Email</label>
-              <input type="mail" name="email">
+              <input type="mail" name="email" aria-label="Champ de l'e-mail">
               <label for="messagee">Votre message</label>
-              <textarea name="message"></textarea>
+              <textarea name="message" aria-label="Champ du message"></textarea>
               <button class="submit-btn" type="submit">Envoyer</button>
-              <button id="modalClose" onclick="page.closeForm()"><img src="ressources/close-icon.png"></button>
+              <button id="modalClose" onclick="page.closeForm()" role="button" aria-label="Fermer le formulaire"><img src="ressources/close-icon.png"></button>
             </form>`;
   }
 
