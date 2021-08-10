@@ -11,7 +11,7 @@ export class PhotographerPage {
    */
   constructor(data) {
     this.data = data;
-    console.log(data);
+    this.activeTags = [];
   }
 
   /**
@@ -20,13 +20,14 @@ export class PhotographerPage {
   * @return  {String}  le HTML de la page
   */
   html() {
-    const photographer = new Photographer(this.data.photographer);
-    let html = this.createHeader() + '<main>' + photographer.htmlForPhotographerPage() + this.createSortBy() + this.createMedias() + this.createLikesCounter() + this.createForm() + '</main>';
+    let html = this.createHeader() + '<main>' + this.createPhotographerResume() + this.createSortBy() + this.createMedias() + this.createLikesCounter() + this.createForm() + '</main>';
     return html;
   }
 
   /**
-  * Modifie le header
+  * Retourne le html du header
+  *   
+  * @return  {String}  HTML String
   */
   createHeader() {
     return `<header class="header">
@@ -35,24 +36,36 @@ export class PhotographerPage {
   }
 
   /**
-  * génère le html de la section médias
+  * Retourne le html du profil
+  *   
+  * @return  {String}  HTML String
+  */
+
+  createPhotographerResume() {
+    const photographer = new Photographer(this.data.photographer);
+    return photographer.htmlForPhotographerPage()
+  }
+
+  /**
+  * Retourne le html de la section médias
   *
-  * @return  {String}  le HTML de la section
+  * @return  {String}  HTML String
   */
   createMedias() {
-    this.media = {};
+    let media;
+    let medias = this.filteredMedias();
     let html = '<div class="gallery">';
-    for (let i = 0; i < this.data.media.length; i++) {
-      this.media["media" + this.data.media[i]] = new Media(this.data.media[i]);
-      html += this.media["media" + this.data.media[i]].html();  
+    for (let i = 0; i < medias.length; i++) {
+      media = new Media(medias[i]);
+      html += media.html();  
     }
     return html += '</div>';
   }
 
   /**
-   * Génère le HTML du bouton pour filtrer les images
+   * Retourne le HTML du bouton pour filtrer les images
    *
-   * @return  {String}  le HTML du bouton pour filtrer
+   * @return  {String}  HTML String
    */
   createSortBy() {
     return `<div class="sort-by">
@@ -66,9 +79,9 @@ export class PhotographerPage {
   }
 
   /**
-  * génère le html du compteur de likes
+  * Retourne le html du compteur de likes
   *
-  * @return  {String}  le HTML du compteur
+  * @return  {String}  HTML String
   */
   createLikesCounter() {
     return `<aside class="total-likes">
@@ -78,9 +91,9 @@ export class PhotographerPage {
   }
 
   /**
-  * génère le html du formulaire de contact
+  * Retourne le html du formulaire de contact
   *
-  * @return  {String}  le HTML du formulaire
+  * @return  {String}  HTML String
   */
   createForm() {
     return `<form id="contactForm">
@@ -117,7 +130,7 @@ export class PhotographerPage {
           el.likes++;
           el.liked = true;
         }
-        window.pageManager.forceUpdate();
+        window.pageManager.updateHtml();
         return;
       }
     }
@@ -136,7 +149,6 @@ export class PhotographerPage {
       return total;
   }
   
-
   /*----- FORMULAIRE -----*/
 
   /**
@@ -161,33 +173,59 @@ export class PhotographerPage {
   */
   closeForm() {
     event.preventDefault();
+    let contactForm = document.getElementById("contactForm");
     contactForm.style.display = "none";
     //Suppression du background ↓
     let element = document.getElementsByClassName("modal-bg");
     document.body.removeChild(element[0]);  
   }
 
-  /*----- FILTRER CONTENU -----*/
+  /*----- Tri des médias par tags -----*/
 
   /**
-   * Filtre les médias par tags
+   * Filtre les médiass par tags
    *
    * @param   {HTMLElement}  element  L'élément contenant le tag
    *
-   * @return  {Array}  Un nouveau tableau avec les objets contenant le tag
+   * @return  {array}   Un nouveau tableau filtré
    */
-  filterByTag(element){
+  filterByTag(element) {
     event.preventDefault;
     let tag = element.textContent.substring(1);
     console.log(tag);
-    let newArr = this.data.media.filter(function(media) {
-     return media.tags == tag;
-    })
-    console.log(newArr);
+    const index = this.activeTags.indexOf(tag)
+    if ( index === -1) {
+      this.activeTags.push(tag);
+    }
+    else this.activeTags.splice(index, 1);
+    window.pageManager.updateHtml();
   }
 
+  filteredMedias(){
+    if (this.activeTags.length === 0) return this.data.media;
+    let newArrFinal = [];
+    this.activeTags.forEach(tag =>{
+      const newArr = this.data.media.filter(function (media) {
+        return media.tags.includes(tag);
+      })
+      newArrFinal = newArrFinal.concat(newArr);
+    });
+    // Suppression des doublons dans le tableau
+    let mySet = new Set(newArrFinal);
+    newArrFinal = [...mySet];
+   
+    return newArrFinal;
+  }
+  
   /*----- Tri des médias -----*/
 
+  /**
+   * Tri les médias
+   *
+   * @param   {HTMLElement}  element  L'élément select dont on va récupérer la valeur
+   *
+   * @return  {void}   Trie le tableau
+   */
   sortBy(element) {
     switch(element.value){
       case "popularity" : this.sortByPopularity(); break;
@@ -195,9 +233,14 @@ export class PhotographerPage {
       case "name"       : this.sortByName();       break;
       default           : return;
     }
-    window.pageManager.forceUpdate();
+    window.pageManager.updateHtml();
   }
 
+  /**
+   * Tri les médias par popularité (nombre de likes)
+   *
+   * @return  {void}  trie le tableau
+   */
   sortByPopularity() {
     this.data.media.sort(function compare(a, b){
       if (a.likes > b.likes) {return -1;}
@@ -206,38 +249,30 @@ export class PhotographerPage {
     })
   }
 
+  /**
+   * Tri les médias par date (du plus récent au plus ancien)
+   *
+   * @return  {void}  trie le tableau
+   */
   sortByDate() {
     this.data.media.sort(function compare(a, b){
-      if (a.id < b.id) {return -1;}
-      if (a.id > b.id) {return 1;}
+      if (a.id > b.id) {return -1;}
+      if (a.id < b.id) {return 1;}
       return 0;
     })
   }
 
+  /**
+   * Tri les médias par ordre alphabétique
+   *
+   * @return  {void}  trie le tableau
+   */
   sortByName() {
     this.data.media.sort(function compare(a, b){
       if (a.title < b.title) {return -1;}
       if (a.title > b.title) {return 1;}
       return 0;
     })
-  }
-
-  /**
-   * Récupère l'index du media cliqué
-   *
-   * @param   {number}  id  l'identifiant du media
-   *
-   * @return  {number}      l'index du media
-   */
-  getIndexOfMedia(id) {
-    let index;
-    for(var i = 0; i < this.data.media.length; i ++) {
-      if(this.data.media[i]["id"] === id) {
-          index = i;
-      }
-    }
-    console.log(index);
-  return index; 
   }
 
 }
