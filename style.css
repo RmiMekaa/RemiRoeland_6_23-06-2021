@@ -11,6 +11,10 @@ body {
   padding: 0 4rem;
 }
 
+ul {
+  padding: 0;
+}
+
 main {
   width: 100%;
 }
@@ -144,18 +148,22 @@ html {
   list-style: none;
   margin-top: 1rem;
   display: flex;
+  padding: 0;
+  justify-content: center;
+  flex-wrap: wrap;
+  row-gap: 0.5rem;
 }
 
 @media screen and (max-width: 1000px) {
   .photographers {
     margin-top: 4rem;
-    grid-template-columns: repeat(2, 320px);
+    grid-template-columns: repeat(2, 50%);
     justify-content: space-evenly;
   }
 }
 @media screen and (max-width: 600px) {
   .photographers {
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
   }
 }
 .screen-reader {
@@ -197,8 +205,10 @@ html {
   font-size: 0.8rem;
 }
 .profile__header .photographer__tags {
+  padding: 0;
   display: flex;
   flex-wrap: wrap;
+  justify-content: left;
   row-gap: 0.5rem;
 }
 .profile__header .photographer__pp {
@@ -301,6 +311,7 @@ select option {
 .gallery figure {
   height: 400px;
   width: 100%;
+  min-width: 0;
   margin: 0;
   font-size: 0;
 }
@@ -323,6 +334,9 @@ figcaption {
 figcaption h2 {
   font-weight: 400;
   flex-grow: 2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 figcaption span {
   font-family: "DM sans";

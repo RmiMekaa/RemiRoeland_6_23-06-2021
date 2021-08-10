@@ -17,8 +17,10 @@
         font-size: 0.8rem;
     }
     & .photographer__tags {
+        padding: 0;
         display: flex;
         flex-wrap: wrap;
+        justify-content: left;
         row-gap: 0.5rem;
     }
     & .photographer__pp {
@@ -124,6 +126,7 @@ select {
     & figure {
         height: 400px;
         width: 100%;
+        min-width: 0;
         margin: 0;
         font-size: 0;
         & img, video {
@@ -146,6 +149,9 @@ figcaption {
     & h2 {
         font-weight: 400;
         flex-grow: 2;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     & span {
         font-family: "DM sans";
