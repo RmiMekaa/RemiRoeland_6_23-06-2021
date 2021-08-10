@@ -44,19 +44,18 @@ export class DataManager {
    * @return  {Object}  Les données propres au photographe
    */
   getPhotographer(photographerId) {
-
     const answer = {
       photographer:null,
       media: []
     };
-
+    // Récupère l'objet contenant les données du photographe
     for (let i = 0; i < this.data.photographers.length; i++) {
       if (this.data.photographers[i].id === photographerId) {
         answer.photographer = this.data.photographers[i];
         break;
       }
     }
-
+    // Récupère les médias du photographe
     for (let i = 0; i < this.data.media.length; i++) {
       if (this.data.media[i].photographerId === photographerId) {
         answer.media.push(this.data.media[i]);

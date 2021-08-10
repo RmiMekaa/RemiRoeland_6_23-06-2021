@@ -99,7 +99,8 @@ export class HomePage {
       this.activeTags.push(tag);
     }
     else this.activeTags.splice(index, 1);
-    window.pageManager.updateHomePage();
+    window.pageManager.updateHtml();
+    this.setActiveTagsStyle();
   }
 
   /**

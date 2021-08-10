@@ -69,11 +69,5 @@ export class PageManager {
   updateHtml(){
     document.body.innerHTML = this.page.html();
   }
-
-  updateHomePage(){
-    document.body.innerHTML = this.page.html();
-    this.page.setActiveTagsStyle();
-  }
-
-
+  
 }

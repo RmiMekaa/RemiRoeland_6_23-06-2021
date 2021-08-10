@@ -49,9 +49,6 @@ export class Slider {
             `;
   }
 
-
-
-
   /*----- FONCTIONNALITÉS POUR LA NAVIGATION -----*/
   
   get nextMedia() {
@@ -66,22 +63,6 @@ export class Slider {
     if (this.medias[prevMediaId].hasOwnProperty('image')) return this.photographerId+"/"+ this.medias[prevMediaId].image;
     else return this.photographerId+"/"+ this.medias[prevMediaId].video;
   }
-
-  //prev() {
-  //  const items = document.querySelectorAll("#medias .item");
-  //  const nbSlide = items.length;
-//
-  //  items[this.currentItem].classList.remove('active');
-//
-  //  if (this.currentItem > 0) {
-  //    this.currentItem--;
-  //  } else {
-  //    this.currentItem = nbSlide -1;
-  //  }
-//
-  //  items[this.currentItem].classList.add('active');
-  //  console.log(this.currentItem);
-  //}
 
 }
 
