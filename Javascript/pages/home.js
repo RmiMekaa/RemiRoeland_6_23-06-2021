@@ -2,7 +2,7 @@
 
 import { Photographer } from "../components/photographer.js";
 
-export class Home {
+export class HomePage {
 
   /**
    * [constructor description]
@@ -13,7 +13,7 @@ export class Home {
    */
   constructor(data) {
     this.data = data;
-    this.tagsFilters = [];
+    this.activeTags = [];
   }
 
   /**
@@ -54,9 +54,9 @@ export class Home {
   createProfiles() {
     let profile;
     let html = '<main class="photographers">';
-    const list = this.filteredPhotographers()
+    const list = this.filteredPhotographers();
     for (let i = 0; i < list.length; i++) {
-      profile = new Photographer(this.data[i]);
+      profile = new Photographer(list[i]);
       html += profile.htmlForHomePage();
     }
     return html + '</main>';
@@ -91,26 +91,56 @@ export class Home {
    * @return  {array}   Un nouveau tableau filtré
    */
   filterByTag(element) {
-    element.classList.add('active');
     event.preventDefault;
     let tag = element.textContent.substring(1);
     console.log(tag);
-    const index = this.tagsFilters.indexOf(tag)
-    if ( index === -1) this.tagsFilters.push(tag);
-    else this.tagsFilters.splice(index, 1);
-    window.pageManager.forceUpdate();
+    const index = this.activeTags.indexOf(tag)
+    if ( index === -1) {
+      this.activeTags.push(tag);
+    }
+    else this.activeTags.splice(index, 1);
+    window.pageManager.updateHomePage();
   }
 
+  /**
+   * Créé un tableau filtré contenant les photographes à afficher sur la page
+   *
+   * @return  {array}
+   */
   filteredPhotographers(){
-    if (this.tagsFilters.length===0) return this.data;
+    if (this.activeTags.length === 0) return this.data;
     let newArrFinal = [];
-    this.tagsFilters.forEach(tag =>{
+    this.activeTags.forEach(tag =>{
       const newArr = this.data.filter(function (photographer) {
         return photographer.tags.includes(tag);
       })
       newArrFinal = newArrFinal.concat(newArr);
     });
+    // Suppression des doublons dans le tableau
+    let mySet = new Set(newArrFinal);
+    newArrFinal = [...mySet];
     console.log("newArrFinal", newArrFinal);
+
     return newArrFinal;
   }
+
+  /**
+   * Ajoute la classe 'active' aux tags sélectionnés
+   *
+   * @return  {void} 
+   */
+  setActiveTagsStyle(){
+    //Pour chaque élément avec la classe 'tag'
+    let tags = document.getElementsByClassName('tag');
+    console.log("activeTags : " + this.activeTags);
+    for (let i = 0; i < tags.length; i++) {
+      //Si textContent du tag contient une des chaine du tableau activeTags
+      if (this.activeTags.some(v =>tags[i].textContent.includes(v))) {
+        console.log("l'élément contient '" + tags[i].textContent + "'");
+        //J'ajoute la classe active à l'élément
+        tags[i].classList.add('active');
+      }
+    }
+  }
+
 }
