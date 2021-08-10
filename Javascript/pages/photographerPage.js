@@ -20,7 +20,7 @@ export class PhotographerPage {
   * @return  {String}  le HTML de la page
   */
   html() {
-    let html = this.createHeader() + '<main>' + this.createPhotographerResume() + this.createSortBy() + this.createMedias() + this.createLikesCounter() + this.createForm() + '</main>';
+    let html = this.createHeader() + '<main>' + this.createPhotographerResume() + this.createSortBy() + '<div class="gallery" id="gallery">' + this.createMedias() + '</div>' + this.createLikesCounter() + this.createForm() + '</main>';
     return html;
   }
 
@@ -40,7 +40,6 @@ export class PhotographerPage {
   *   
   * @return  {String}  HTML String
   */
-
   createPhotographerResume() {
     const photographer = new Photographer(this.data.photographer);
     return photographer.htmlForPhotographerPage()
@@ -54,28 +53,31 @@ export class PhotographerPage {
   createMedias() {
     let media;
     let medias = this.filteredMedias();
-    let html = '<div class="gallery">';
+    let html = '';
     for (let i = 0; i < medias.length; i++) {
       media = new Media(medias[i]);
       html += media.html();  
     }
-    return html += '</div>';
+    return html;
   }
 
   /**
-   * Retourne le HTML du bouton pour filtrer les images
-   *
-   * @return  {String}  HTML String
-   */
-  createSortBy() {
-    return `<div class="sort-by">
-              <label for="sort-by">Trier par</label>
-              <select name="sort-by" id="sort-by" tabindex="0" onchange="page.sortBy(this)">
-                  <option value="popularity" id="opt1">Popularité</option>
-                  <option value="date" id="opt2">Date</option>
-                  <option value="name" id="opt3">Titre</option>
-              </select>
-            </div>`;
+  * Retourne le html du dropdown
+  *
+  * @return  {String}  HTML String
+  */
+  createSortBy(){
+    return `
+    <span class="select-label">Trier par</span>
+    <div class="select" tabindex="1">
+      <input class="sortBy-input" name="option" type="radio" id="popularity" onclick="page.sortBy(this)" checked>
+      <label for="popularity" class="select__option">Popularité</label>
+      <input class="sortBy-input" name="option" type="radio" id="date" onclick="page.sortBy(this)">
+      <label for="date" class="select__option">Date</label>
+      <input class="sortBy-input" name="option" type="radio" id="name" onclick="page.sortBy(this)">
+      <label for="name" class="select__option">Nom</label>
+    </div>
+    `;
   }
 
   /**
@@ -199,6 +201,7 @@ export class PhotographerPage {
     }
     else this.activeTags.splice(index, 1);
     window.pageManager.updateHtml();
+    this.setActiveTagsStyle();
   }
 
   filteredMedias(){
@@ -216,6 +219,26 @@ export class PhotographerPage {
    
     return newArrFinal;
   }
+
+  /**
+   * Ajoute la classe 'active' aux tags sélectionnés
+   *
+   * @return  {void} 
+  */
+  setActiveTagsStyle(){
+    //Pour chaque élément avec la classe 'tag'
+    let tags = document.getElementsByClassName('tag');
+    console.log("activeTags : " + this.activeTags);
+    for (let i = 0; i < tags.length; i++) {
+      //Si textContent du tag contient une des chaine du tableau activeTags
+      if (this.activeTags.some(v =>tags[i].textContent.includes(v))) {
+        console.log("l'élément contient '" + tags[i].textContent + "'");
+        //J'ajoute la classe active à l'élément
+        tags[i].classList.add('active');
+      }
+    }
+  }
+  
   
   /*----- Tri des médias -----*/
 
@@ -227,13 +250,14 @@ export class PhotographerPage {
    * @return  {void}   Trie le tableau
    */
   sortBy(element) {
-    switch(element.value){
+    switch(element.id){
       case "popularity" : this.sortByPopularity(); break;
       case "date"       : this.sortByDate();       break;
       case "name"       : this.sortByName();       break;
       default           : return;
     }
-    window.pageManager.updateHtml();
+    let gallery = document.getElementById('gallery');
+    gallery.innerHTML = this.createMedias();
   }
 
   /**
