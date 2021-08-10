@@ -2,7 +2,7 @@
 
 import { Media } from "../components/media.js";
 
-export class ShowMedia {
+export class Slider {
 
   constructor(photographerId, medias, actualMedia) {
     this.photographerId = photographerId; // L'id du photographe

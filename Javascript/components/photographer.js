@@ -6,67 +6,67 @@ export class Photographer {
   * la représentation du profil dans le DOM
   * @type {HTMLElement}
   */
-   profile;
-   /**
-    * le nom du photographe
-    * @type {String}
-    */
-   name;
-   /**
-   * le numéro d'identifiant
-   * @type {Number}
-   */
-   id;
-   /**
-    * la ville du photographe
-    * @type {String}
-    */
-   city;
-   /**
-    * le pays du photographe
-    * @type {String}
-    */
-   country;
-   /**
-    * la liste des tags
-    * @type {Array}
-    */
-   tags;
-   /**
-   * la phrase de description
+  profile;
+  /**
+   * le nom du photographe
    * @type {String}
    */
-   tagline;
-   /**
-   * le tarif du photographe
-   * @type {Number}
+  name;
+  /**
+  * le numéro d'identifiant
+  * @type {Number}
+  */
+  id;
+  /**
+   * la ville du photographe
+   * @type {String}
    */
-   price;
-   /**
-   * la photo de profil du photographe
-   * @type {HTMLElement}
+  city;
+  /**
+   * le pays du photographe
+   * @type {String}
    */
-   portrait;
- 
-    /**
-     * [constructor description]
-     *
-     * @param   {photographerFromJson}  data  [data description]
-     *
-     * @constructor
-     */
-    constructor(data) {
-      for (const [key, value] of Object.entries(data)) {
-        this[key] = value;
-      }
-    }
+  country;
+  /**
+   * la liste des tags
+   * @type {Array}
+   */
+  tags;
+  /**
+  * la phrase de description
+  * @type {String}
+  */
+  tagline;
+  /**
+  * le tarif du photographe
+  * @type {Number}
+  */
+  price;
+  /**
+  * la photo de profil du photographe
+  * @type {HTMLElement}
+  */
+  portrait;
 
-    /**
-     * génère les profils pour la page d'accueil
-     * @return  {String}  HTML String
-     */
-    htmlForHomePage() {
-      return `
+  /**
+   * [constructor description]
+   *
+   * @param   {photographerFromJson}  data  [data description]
+   *
+   * @constructor
+   */
+  constructor(data) {
+    for (const [key, value] of Object.entries(data)) {
+      this[key] = value;
+    }
+  }
+
+  /**
+   * génère les profils pour la page d'accueil
+   * @return  {String}  HTML String
+   */
+  htmlForHomePage() {
+    return `
           <article class="photographer">
           <a class="photographer__thumb" href="?photographer/${this.id}" aria-label:"${this.name}">
               <img class="photographer__pp" src="ressources/Sample Photos/Photographers ID Photos/thumbs/${this.portrait}" alt="${this.name}">
@@ -80,14 +80,14 @@ export class Photographer {
           </ul>
           </article>
           `;
-    }
-  
-    /**
-     * génère les profils pour les pages des photographes
-     * @return  {String}  HTML String
-     */
-    htmlForPhotographerPage() {
-      return `
+  }
+
+  /**
+   * génère les profils pour les pages des photographes
+   * @return  {String}  HTML String
+   */
+  htmlForPhotographerPage() {
+    return `
       <div class="profile__header">
         <section class="profile__info">
             <h1 class="photographer__name">${this.name}</h1>
@@ -101,17 +101,17 @@ export class Photographer {
         <img class="photographer__pp" src="ressources/Sample Photos/Photographers ID Photos/thumbs/${this.portrait}" alt="photo du photographe">
       </div>
       `;
-    }
-    
-    /**
-     * Génère la liste des tags pour les photographes
-     * @return  {string}  HTML String
-     */
-    tagList() {
-      let list = "";
-      for (let i = 0; i < this.tags.length; i++) {
-        list += `<li class="tag" onclick="page.filterByTag(this)" tabindex="0">#${this.tags[i]}</li>`;
-      }
-      return list;
-    }
   }
+
+  /**
+   * Génère la liste des tags pour les photographes
+   * @return  {string}  HTML String
+   */
+  tagList() {
+    let list = "";
+    for (let i = 0; i < this.tags.length; i++) {
+      list += `<li class="tag" onclick="page.filterByTag(this)" tabindex="0">#${this.tags[i]}</li>`;
+    }
+    return list;
+  }
+}

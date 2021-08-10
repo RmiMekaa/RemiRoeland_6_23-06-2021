@@ -1,20 +1,13 @@
-/* CONTRÔLE QUELLE PAGE DOIT ÊTRE AFFICHÉE */
-
 import { PhotographerPage } from "./pages/photographerPage.js";
-import { Home } from "./pages/home.js";
+import { HomePage } from "./pages/home.js";
 import { DataManager } from "./dataManager.js";
-import { ShowMedia } from "./pages/showMedia.js";
+import { Slider } from "./pages/showMedia.js";
 
 export class PageManager {
 
   /**
-   * le noeud DOM où l'on va insérer la page
-   * @type {HTMLElement}
-   */
-  domTarget;
-  /**
    * la page actuelle
-   * @type { Home | Page404 | PhotographerPage | ShowMedia }
+   * @type { Home | PhotographerPage | ShowMedia }
    */
   page;
 
@@ -26,57 +19,61 @@ export class PageManager {
    *
    * @constructor
    */
-  constructor(domTarget, url) {
-    this.domTarget = domTarget;
-    this.dataManager = new DataManager(url);
-    // this.photographerPage = new PhotographerPage();
-    // this.showMedias = new ShowMedia();
+  constructor(dataSrc) {
+    this.dataManager = new DataManager(dataSrc);
     this.init();
   }
 
+  /**
+   * [init description]
+   *
+   * @return  {[type]}  [return description]
+   */
   async init() {
     await this.dataManager.getData();
-    let page = window.location.search.slice(1).split("/");
 
-    if(page[0] ===  "index.html" || page[0] === "") page[0] = "home";
-    this.showPage(page[0], page[1]);
+    let page = window.location.search.slice(1).split("/");
+    if(page[0] === "") page[0] = "homepage";
+    this.generateHTML(page[0], page[1]);
   } 
 
-
   /**
-   * Détermine la page à afficher
-   * @param   {String}  pageToShow  [pageToShow description]
-   * @param   {String}  [data]   les informations sur la page à afficher
+   * Génère le html de la page souhaitée en fonction des informations contenues dans l'url
+   * @param   {String}  urlStart  La première partie de l'url (index.html || photographer || showmedia)
+   * @param   {String}  [id]        l'id d'un photographe
    *
-   * @return  {void}                afficher la page dans le domTarget
+   * @return  {void}                Créé le HTML dans l'élément body
    */
-  showPage(pageToShow, data) {
-    let photographerId = parseInt(data);
-    switch (pageToShow) {
-      case "home":
-        this.page = new Home(this.dataManager.getPhotographersList());
-        this.domTarget.innerHTML = this.page.html();
-        this.page.elevatorEventListener();
+  generateHTML(urlStart, id) {
+    let photographerId = parseInt(id);
+    switch (urlStart) {
+      case "homepage":
+        this.page = new HomePage(this.dataManager.getPhotographersList());
         break;
       case "photographer":
         this.page = new PhotographerPage(this.dataManager.getPhotographer(photographerId));
-        this.domTarget.innerHTML = this.page.html();
         break;
       case "showmedia":
         let actualMedia = document.location.href.substring(document.location.href.lastIndexOf('/') + 1); // Récupère le nom du fichier dans l'URL
-        this.page = new ShowMedia(photographerId, this.dataManager.getPhotographer(photographerId).media, actualMedia);
-        this.domTarget.innerHTML = this.page.html();
+        this.page = new Slider(photographerId, this.dataManager.getPhotographer(photographerId).media, actualMedia);
         break;
     }
+    document.body.innerHTML = this.page.html();
     window.page = this.page;
   }
 
   /**
-   * Actualise la page
+   * Actualise le contenu de la page
    * @return  {void}
    */
-  forceUpdate(){
-    this.domTarget.innerHTML = this.page.html();
+  updateHtml(){
+    document.body.innerHTML = this.page.html();
   }
+
+  updateHomePage(){
+    document.body.innerHTML = this.page.html();
+    this.page.setActiveTagsStyle();
+  }
+
 
 }
