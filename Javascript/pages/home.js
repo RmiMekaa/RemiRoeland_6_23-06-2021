@@ -33,14 +33,14 @@ export class HomePage {
               <a href="index.html"><img class="header__logo" src="ressources/logo.png" alt="FishEye Home page"></a>
               <nav class="header__nav">
                   <ul>
-                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#portrait</li>
-                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#art</li>
-                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#fashion</li>
-                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#architecture</li>
-                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#travel</li>
-                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#sport</li>
-                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#animals</li>
-                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#events</li>
+                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#<span>portrait</span></li>
+                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#<span>art</span></li>
+                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#<span>fashion</span></li>
+                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#<span>architecture</span></li>
+                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#<span>travel</span></li>
+                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#<span>sport</span></li>
+                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#<span>animals</span></li>
+                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#<span>events</span></li>
                   </ul>
               </nav>
               <h1 class="header__heading">Nos photographes</h1>
