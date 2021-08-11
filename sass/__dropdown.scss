@@ -16,13 +16,12 @@
     font-size: 18px;
     font-weight: 700;
     &__option {
-        border-radius: 0.25rem;
         padding:0 30px 0 20px;
         min-height:54px;
         display:flex;
         align-items:center;
         background: $primary-color;
-        border-top:white solid 1px;
+        border-top:white solid 2px;
         position:absolute;
         top:0;
         width: 100%;
