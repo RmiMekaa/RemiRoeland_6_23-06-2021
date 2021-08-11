@@ -615,7 +615,7 @@ figcaption .like-icon:active {
   display: flex;
   align-items: center;
   background: #901c11;
-  border-top: white solid 2px;
+  border-top: white solid 1.5px;
   position: absolute;
   top: 0;
   width: 100%;
