@@ -34,7 +34,6 @@ export class PhotographerPage {
               <a href="index.html"><img class="header__logo" src="ressources/logo.png" alt="FishEye Home page"></a>
             </header>`;
   }
-
   /**
   * Retourne le html du profil
   *   
@@ -44,7 +43,6 @@ export class PhotographerPage {
     const photographer = new Photographer(this.data.photographer);
     return photographer.htmlForPhotographerPage()
   }
-
   /**
   * Retourne le html de la section médias
   *
@@ -60,7 +58,6 @@ export class PhotographerPage {
     }
     return html;
   }
-
   /**
   * Retourne le html du dropdown
   *
@@ -79,7 +76,6 @@ export class PhotographerPage {
     </div>
     `;
   }
-
   /**
   * Retourne le html du compteur de likes
   *
@@ -91,7 +87,6 @@ export class PhotographerPage {
                 <span class="price">${this.data.photographer.price}€ / jour</span>
             </aside>`;
   }
-
   /**
   * Retourne le html du formulaire de contact
   *
@@ -137,7 +132,6 @@ export class PhotographerPage {
       }
     }
   }
-
   /**
    * Calcule le total des likes
    *
@@ -168,7 +162,6 @@ export class PhotographerPage {
     modalBg.style.position = "fixed";
     document.body.insertBefore(modalBg, document.body.firstChild);
   }
-  
   /**
   * Ferme le formulaire
   * @return  {Void} 
@@ -185,16 +178,15 @@ export class PhotographerPage {
   /*----- Tri des médias par tags -----*/
 
   /**
-   * Filtre les médiass par tags
+   * Ajoute les tags dans le tableau activeTags et modifie leur apparence
    *
    * @param   {HTMLElement}  element  L'élément contenant le tag
    *
-   * @return  {array}   Un nouveau tableau filtré
+   * @return  {void}
    */
   filterByTag(element) {
     event.preventDefault;
     let tag = element.textContent.substring(1);
-    console.log(tag);
     const index = this.activeTags.indexOf(tag)
     if ( index === -1) {
       this.activeTags.push(tag);
@@ -203,7 +195,11 @@ export class PhotographerPage {
     window.pageManager.updateHtml();
     this.setActiveTagsStyle();
   }
-
+  /**
+   * retourne un tableau avec les médias contenant au moins un des tags selectionné
+   *
+   * @return  {array}  le tableau filtré avec les tags
+   */
   filteredMedias(){
     if (this.activeTags.length === 0) return this.data.media;
     let newArrFinal = [];
@@ -219,7 +215,6 @@ export class PhotographerPage {
    
     return newArrFinal;
   }
-
   /**
    * Ajoute la classe 'active' aux tags sélectionnés
    *
@@ -238,7 +233,6 @@ export class PhotographerPage {
       }
     }
   }
-  
   
   /*----- Tri des médias -----*/
 
@@ -259,7 +253,6 @@ export class PhotographerPage {
     let gallery = document.getElementById('gallery');
     gallery.innerHTML = this.createMedias();
   }
-
   /**
    * Tri les médias par popularité (nombre de likes)
    *
@@ -272,7 +265,6 @@ export class PhotographerPage {
       return 0;
     })
   }
-
   /**
    * Tri les médias par date (du plus récent au plus ancien)
    *
@@ -285,7 +277,6 @@ export class PhotographerPage {
       return 0;
     })
   }
-
   /**
    * Tri les médias par ordre alphabétique
    *

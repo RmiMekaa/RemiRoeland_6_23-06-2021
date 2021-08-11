@@ -24,12 +24,12 @@ export class Media {
   /**
    * [constructor description]
    *
-   * @param   {mediaFromJson}  data  [data description]
+   * @param   {Object}  media  Un objet media
    *
    * @constructor
    */
-  constructor(data) {
-    for (const [key, value] of Object.entries(data)) {
+  constructor(media) {
+    for (const [key, value] of Object.entries(media)) {
       this[key] = value;
     }
   }
@@ -76,7 +76,7 @@ export class Media {
                 <figcaption>
                     <h2>${this.title}</h2>
                     <span class="likesNbr">${this.likes}</span>
-                    <button class="like-icon fas fa-heart" data-id="${this.id}" onclick="page.updateLike(this)" aria-label="bouton j'aime"></button>
+                    <button aria-label="bouton j'aime" class="like-icon fas fa-heart" data-id="${this.id}" onclick="page.updateLike(this)"></button>
                 </figcaption>
             </figure>`;
   }
@@ -106,6 +106,5 @@ export class Media {
                 </figcaption>
             </figure>`;
   }
-
 
 }
