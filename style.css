@@ -230,7 +230,7 @@ html {
 }
 
 .button {
-  font-size: 20px;
+  font-size: 1rem;
   font-weight: 700;
   position: fixed;
   height: fit-content;
@@ -266,6 +266,7 @@ html {
     align-self: flex-start;
     width: 170px;
     height: 170px;
+    min-width: 170px;
   }
   .profile__header .photographer__tags {
     list-style: none;
@@ -604,14 +605,15 @@ figcaption .like-icon:active {
   flex-direction: column;
   position: relative;
   width: 170px;
-  height: 54px;
+  height: 50px;
   color: white;
   font-size: 18px;
   font-weight: 700;
+  cursor: pointer;
 }
 .select__option {
   padding: 0 30px 0 20px;
-  min-height: 54px;
+  min-height: 50px;
   display: flex;
   align-items: center;
   background: #901c11;
@@ -626,6 +628,7 @@ figcaption .like-icon:active {
   box-sizing: border-box;
   overflow: hidden;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .select:focus .select__option {
@@ -665,6 +668,24 @@ figcaption .like-icon:active {
   width: 40px;
   content: "";
   background: #901c11;
+}
+
+@media screen and (max-width: 475px) {
+  .select-label {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    margin-top: 2rem;
+  }
+
+  .select {
+    font-size: 1rem;
+    width: 140px;
+    height: 40px;
+  }
+  .select__option {
+    min-height: 40px;
+    padding-left: 1rem;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
