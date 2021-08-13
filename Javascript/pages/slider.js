@@ -6,7 +6,7 @@ export class Slider {
 
   constructor(photographerId, medias, actualMedia) {
     this.photographerId = photographerId; // L'id du photographe
-    this.medias = medias; // Un tableau contenant des objets (les médias)
+    this.medias = medias; // Un tableau contenant les médias
     this.actualMedia = actualMedia;
     this.currentItem = this.medias.findIndex(i => (i.image || i.video) === this.actualMedia);
     this.keyboardControls();
@@ -41,9 +41,9 @@ export class Slider {
    * @return  {String}  HTML String
    */
   createNavigation() {
-    return `<a id="slider__next" href="?showmedia/${this.nextMedia}"><button class="slider__next"></button></a>
-            <a id="slider__prev" href="?showmedia/${this.prevMedia}"><button class="slider__prev"></button></a>
-            <a id="slider__close" href="?photographer/${this.photographerId}"><button class="slider__close"; return false;"></button></a>
+    return `<a id="slider__next" class="slider__next" href="?showmedia/${this.nextMedia}"></a>
+            <a id="slider__prev" class="slider__prev" href="?showmedia/${this.prevMedia}"></a>
+            <a id="slider__close" class="slider__close" href="?photographer/${this.photographerId}"></a>
             `;
   }
 

@@ -1,7 +1,7 @@
 import { PhotographerPage } from "./pages/photographerPage.js";
 import { HomePage } from "./pages/home.js";
 import { DataManager } from "./dataManager.js";
-import { Slider } from "./pages/showMedia.js";
+import { Slider } from "./pages/slider.js";
 
 export class PageManager {
 
@@ -21,6 +21,7 @@ export class PageManager {
    */
   constructor(dataSrc) {
     this.dataManager = new DataManager(dataSrc);
+    window.dataManager = this.dataManager;
     this.init();
   }
 

@@ -2,6 +2,7 @@
 
 import { Photographer } from "../components/photographer.js";
 import { Media } from "../components/media.js";
+import { DataManager } from "../dataManager.js";
 
 export class PhotographerPage {
 
@@ -50,7 +51,7 @@ export class PhotographerPage {
   */
   createMedias() {
     let media;
-    let medias = this.filteredMedias();
+    let medias = window.dataManager.filteredItems(this.data.media, this.activeTags);
     let html = '';
     for (let i = 0; i < medias.length; i++) {
       media = new Media(medias[i]);
@@ -175,7 +176,7 @@ export class PhotographerPage {
     document.body.removeChild(element[0]);  
   }
 
-  /*----- Tri des médias par tags -----*/
+  /*----- Tags -----*/
 
   /**
    * Ajoute les tags dans le tableau activeTags et modifie leur apparence
@@ -184,7 +185,7 @@ export class PhotographerPage {
    *
    * @return  {void}
    */
-  filterByTag(element) {
+  selectTags(element) {
     event.preventDefault;
     let tag = element.textContent.substring(1);
     const index = this.activeTags.indexOf(tag)
@@ -196,26 +197,6 @@ export class PhotographerPage {
     this.setActiveTagsStyle();
   }
   /**
-   * retourne un tableau avec les médias contenant au moins un des tags selectionné
-   *
-   * @return  {array}  le tableau filtré avec les tags
-   */
-  filteredMedias(){
-    if (this.activeTags.length === 0) return this.data.media;
-    let newArrFinal = [];
-    this.activeTags.forEach(tag =>{
-      const newArr = this.data.media.filter(function (media) {
-        return media.tags.includes(tag);
-      })
-      newArrFinal = newArrFinal.concat(newArr);
-    });
-    // Suppression des doublons dans le tableau
-    let mySet = new Set(newArrFinal);
-    newArrFinal = [...mySet];
-   
-    return newArrFinal;
-  }
-  /**
    * Ajoute la classe 'active' aux tags sélectionnés
    *
    * @return  {void} 
@@ -223,11 +204,9 @@ export class PhotographerPage {
   setActiveTagsStyle(){
     //Pour chaque élément avec la classe 'tag'
     let tags = document.getElementsByClassName('tag');
-    console.log("activeTags : " + this.activeTags);
     for (let i = 0; i < tags.length; i++) {
-      //Si textContent du tag contient une des chaine du tableau activeTags
-      if (this.activeTags.some(v =>tags[i].textContent.includes(v))) {
-        console.log("l'élément contient '" + tags[i].textContent + "'");
+      //Si textContent de l'élément contient une des chaine du tableau activeTags
+      if (this.activeTags.some(tag =>tags[i].textContent.includes(tag))) {
         //J'ajoute la classe active à l'élément
         tags[i].classList.add('active');
       }

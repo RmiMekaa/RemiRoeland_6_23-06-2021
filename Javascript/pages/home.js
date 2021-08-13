@@ -33,20 +33,19 @@ export class HomePage {
               <a href="index.html"><img class="header__logo" src="ressources/logo.png" alt="FishEye Home page"></a>
               <nav class="header__nav">
                   <ul>
-                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#<span>portrait</span></li>
-                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#<span>art</span></li>
-                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#<span>fashion</span></li>
-                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#<span>architecture</span></li>
-                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#<span>travel</span></li>
-                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#<span>sport</span></li>
-                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#<span>animals</span></li>
-                      <li class="tag" tabindex="0" onclick="page.filterByTag(this)">#<span>events</span></li>
+                      <li class="tag" tabindex="0" onclick="page.selectTags(this)">#<span>portrait</span></li>
+                      <li class="tag" tabindex="0" onclick="page.selectTags(this)">#<span>art</span></li>
+                      <li class="tag" tabindex="0" onclick="page.selectTags(this)">#<span>fashion</span></li>
+                      <li class="tag" tabindex="0" onclick="page.selectTags(this)">#<span>architecture</span></li>
+                      <li class="tag" tabindex="0" onclick="page.selectTags(this)">#<span>travel</span></li>
+                      <li class="tag" tabindex="0" onclick="page.selectTags(this)">#<span>sport</span></li>
+                      <li class="tag" tabindex="0" onclick="page.selectTags(this)">#<span>animals</span></li>
+                      <li class="tag" tabindex="0" onclick="page.selectTags(this)">#<span>events</span></li>
                   </ul>
               </nav>
               <h1 class="header__heading">Nos photographes</h1>
             </header>`;
   }
-
   /**
    * Création de la section des photographes
    * @return  {String}  HTML String
@@ -54,13 +53,15 @@ export class HomePage {
   createProfiles() {
     let profile;
     let html = '<main class="photographers">';
-    const list = this.filteredPhotographers();
+    const list = window.dataManager.filteredItems(this.data, this.activeTags);
     for (let i = 0; i < list.length; i++) {
       profile = new Photographer(list[i]);
       html += profile.htmlForHomePage();
     }
     return html + '</main>';
   }
+
+  /*----- Acsenseur -----*/
 
   /**
    * Création du bouton "Passer au contenu"
@@ -70,7 +71,6 @@ export class HomePage {
     return `<a href="#header" id="elevator" tabindex="0">Passer au contenu</a>
     `;
   }
-
   /**
    * Ajoute un eventListenner pour faire apparaître l'ascenseur au scroll
    * @return  {void}
@@ -83,6 +83,8 @@ export class HomePage {
     })
   }
 
+  /*----- Tags -----*/
+
   /**
    * Filtre les photographes par tags
    *
@@ -90,7 +92,7 @@ export class HomePage {
    *
    * @return  {array}   Un nouveau tableau filtré
    */
-  filterByTag(element) {
+  selectTags(element) {
     event.preventDefault;
     let tag = element.textContent.substring(1);
     console.log(tag);
@@ -102,29 +104,6 @@ export class HomePage {
     window.pageManager.updateHtml();
     this.setActiveTagsStyle();
   }
-
-  /**
-   * Créé un tableau filtré contenant les photographes à afficher sur la page
-   *
-   * @return  {array}
-   */
-  filteredPhotographers(){
-    if (this.activeTags.length === 0) return this.data;
-    let newArrFinal = [];
-    this.activeTags.forEach(tag =>{
-      const newArr = this.data.filter(function (photographer) {
-        return photographer.tags.includes(tag);
-      })
-      newArrFinal = newArrFinal.concat(newArr);
-    });
-    // Suppression des doublons dans le tableau
-    let mySet = new Set(newArrFinal);
-    newArrFinal = [...mySet];
-    console.log("newArrFinal", newArrFinal);
-
-    return newArrFinal;
-  }
-
   /**
    * Ajoute la classe 'active' aux tags sélectionnés
    *
@@ -133,11 +112,9 @@ export class HomePage {
   setActiveTagsStyle(){
     //Pour chaque élément avec la classe 'tag'
     let tags = document.getElementsByClassName('tag');
-    console.log("activeTags : " + this.activeTags);
     for (let i = 0; i < tags.length; i++) {
       //Si textContent du tag contient une des chaine du tableau activeTags
-      if (this.activeTags.some(v =>tags[i].textContent.includes(v))) {
-        console.log("l'élément contient '" + tags[i].textContent + "'");
+      if (this.activeTags.some(tag =>tags[i].textContent.includes(tag))) {
         //J'ajoute la classe active à l'élément
         tags[i].classList.add('active');
       }

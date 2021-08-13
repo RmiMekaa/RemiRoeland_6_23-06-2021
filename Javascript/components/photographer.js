@@ -110,7 +110,7 @@ export class Photographer {
   tagList() {
     let list = "";
     for (let i = 0; i < this.tags.length; i++) {
-      list += `<li class="tag" onclick="page.filterByTag(this)" tabindex="0">#<span>${this.tags[i]}</span></li>`;
+      list += `<li class="tag" onclick="page.selectTags(this)" tabindex="0">#<span>${this.tags[i]}</span></li>`;
     }
     return list;
   }
