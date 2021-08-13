@@ -1,4 +1,4 @@
-/* GÉNÈRE LES PROFILS DES PHOTOGRAPHES */
+/* PROFILS DES PHOTOGRAPHES */
 
 export class Photographer {
 

@@ -77,9 +77,9 @@ export class HomePage {
    */
   elevatorEventListener() {
     let elevator = document.getElementById('elevator');
-    window.addEventListener("scroll", function(){
-      if(window.scrollY > 0) elevator.style.display = "block";
-      else elevator.style.display = "none";
+    window.addEventListener('scroll', function(){
+      if(window.scrollY > 0) elevator.style.display = 'block';
+      else elevator.style.display = 'none';
     })
   }
 
