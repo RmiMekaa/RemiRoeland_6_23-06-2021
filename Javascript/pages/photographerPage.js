@@ -2,7 +2,6 @@
 
 import { Photographer } from "../components/photographer.js";
 import { Media } from "../components/media.js";
-import { DataManager } from "../dataManager.js";
 
 export class PhotographerPage {
 
@@ -13,7 +12,6 @@ export class PhotographerPage {
   constructor(data) {
     this.data = data;
     this.activeTags = [];
-    this.focusList = {};
   }
 
   /**
@@ -138,13 +136,13 @@ export class PhotographerPage {
  */
   openForm() {
     event.preventDefault();
-    let contactForm = document.getElementById("contactForm");
-    contactForm.style.display = "flex";
+    let contactForm = document.getElementById('contactForm');
+    contactForm.style.display = 'flex';
     //Création du background ↓
-    let background = document.createElement("div");
-    background.classList.add("modal-bg");
+    let background = document.createElement('div');
+    background.classList.add('modal-bg');
     background.setAttribute('id', 'modal-bg');
-    background.style.position = "fixed";
+    background.style.position = 'fixed';
     document.body.insertBefore(background, document.body.firstChild);
     this.trapFocus();
   }
@@ -154,10 +152,10 @@ export class PhotographerPage {
   */
   closeForm() {
     event.preventDefault();
-    let contactForm = document.getElementById("contactForm");
-    contactForm.style.display = "none";
+    let contactForm = document.getElementById('contactForm');
+    contactForm.style.display = 'none';
     //Suppression du background ↓
-    let background = document.getElementById("modal-bg");
+    let background = document.getElementById('modal-bg');
     background.remove();  
   }
   /**
@@ -274,8 +272,8 @@ export class PhotographerPage {
    */
   sortByDate() {
     this.data.media.sort(function compare(a, b){
-      if (a.id > b.id) {return -1;}
-      if (a.id < b.id) {return 1;}
+      if (a.date > b.date) {return -1;}
+      if (a.date < b.date) {return 1;}
       return 0;
     })
   }
