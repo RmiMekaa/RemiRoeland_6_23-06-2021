@@ -35,14 +35,14 @@
     &__next {
         background: url(./ressources/slider-arrow.png) center center no-repeat;
         background-size: contain;
-        top: 40%;
+        top: 43%;
         right: 0.3rem;
     }
     &__prev {
         background: url(./ressources/slider-arrow.png) center center no-repeat;
         background-size: contain;
         transform: rotate(180deg);
-        top: 40%;
+        top: 43%;
         left: 0.3rem;
     } 
 }

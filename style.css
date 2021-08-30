@@ -548,14 +548,14 @@ figcaption .like-icon:active {
 .slider-nav__next {
   background: url(./ressources/slider-arrow.png) center center no-repeat;
   background-size: contain;
-  top: 40%;
+  top: 43%;
   right: 0.3rem;
 }
 .slider-nav__prev {
   background: url(./ressources/slider-arrow.png) center center no-repeat;
   background-size: contain;
   transform: rotate(180deg);
-  top: 40%;
+  top: 43%;
   left: 0.3rem;
 }
 
