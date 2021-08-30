@@ -1,69 +1,93 @@
-#slider {
-    position: relative;
-    max-width: 75%;
-    height: 80vh;
-    margin: 0 auto;
-    padding: 50px;
-}
-
-#medias {
-    height: 80vh;
-}
-#medias .item {
-    max-width: 100%;
-    height: 100%;
-    // display: none;
-    text-align: center;
+.slider {
+    position: absolute;
+    left: 0;
+    width: 100vw;
+    height: auto;
+    & #medias {
+        width: 100%;
+    }
+    & .item {
+        margin: 0;
+    }
     & .media {
         width: 100%;
-        height: fit-content;
-        max-height: 100%;
-        margin: 0 auto;
+        height: 100%;
         object-fit: contain;
+        position: relative;
     }
+    & figcaption {
+        padding-left: 0.5rem;
+    }   
 }
 
-#medias .item.active{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-
-.slider__next, .slider__prev, .slider__close {
+.slider-nav {
+    height: 30px;
+    width: 30px;
     position: absolute;
-    width: 50px;
-    height: 50px;
-    border: none;
-    cursor: pointer;
-}
-
-.slider__next, .slider__prev {
-   background: url(./ressources/Arrow.svg) center center no-repeat;
-   background-size: contain;
-}
-
-.slider__next {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: rotate(180deg);
-}
-
-.slider__prev {
-    position: absolute;
-    top: 50%;
-    transform: translateX(-100%);
-}
-
-.slider__close {
-    background: url(./ressources/close-carousel.png) center center no-repeat;
-    position: absolute;
-    top: 65px;
-    right: 0;
+    &__close {
+        background: url(./ressources/close-icon.png) center center no-repeat;
+        background-size: contain;
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+    &__next {
+        background: url(./ressources/slider-arrow.png) center center no-repeat;
+        background-size: contain;
+        top: 40%;
+        right: 0.3rem;
+    }
+    &__prev {
+        background: url(./ressources/slider-arrow.png) center center no-repeat;
+        background-size: contain;
+        transform: rotate(180deg);
+        top: 40%;
+        left: 0.3rem;
+    } 
 }
 
 
+@media screen and (min-width: 768px) {
+    .slider {
+        position: relative;
+        max-width: 75%;
+        height: 80vh;
+        margin: 0 auto;
+        padding: 50px;
+        & .media {
+            max-height: 600px;
+            height: 100%;
+        }
+        & figcaption {
+            text-align: center;
+        }
+    }
 
+    .slider-nav {
+        height: 50px;
+        width: 50px;
+        &__close {
+            background: url(./ressources/close-carousel.png) center center no-repeat;
+            background-size: contain;
+            top: 50px;
+            height: 40px;
+            width: 40px;
+            right: -0.5rem;
+        }
+        &__next {
+            transform: rotate(180deg);
+            right: -0.5rem;
+        }
+        &__prev {
+            transform: inherit;
+            left: -0.5rem;
+        }   
+    }
+    
+    .slider-nav__prev, .slider-nav__next {
+        background: url(./ressources/Arrow.svg) center center no-repeat;
+        background-size: contain;
+    }
+
+}
 
 
