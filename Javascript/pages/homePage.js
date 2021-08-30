@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* PAGE D'ACCUEIL */
 
 import { Photographer } from "../components/photographer.js";
@@ -61,7 +62,7 @@ export class HomePage {
     return html + '</main>';
   }
 
-  /*----- Acsenseur -----*/
+  /*----- Ascenseur -----*/
 
   /**
    * Création du bouton "Passer au contenu"
@@ -86,11 +87,10 @@ export class HomePage {
   /*----- Tags -----*/
 
   /**
-   * Filtre les photographes par tags
+   * Ajoute le tag à la liste des filtres et raffraichi la page avec le contenu filtré
    *
    * @param   {HTMLElement}  element  L'élément contenant le tag
    *
-   * @return  {array}   Un nouveau tableau filtré
    */
   selectTags(element) {
     event.preventDefault;
