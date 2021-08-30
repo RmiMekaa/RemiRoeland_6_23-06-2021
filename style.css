@@ -511,13 +511,15 @@ figcaption .like-icon:active {
 }
 
 .slider {
+  display: flex;
   position: absolute;
   left: 0;
   width: 100vw;
-  height: auto;
+  height: fit-content;
+  justify-content: center;
 }
 .slider #medias {
-  width: 100%;
+  width: fit-content;
 }
 .slider .item {
   margin: 0;
@@ -561,7 +563,7 @@ figcaption .like-icon:active {
   .slider {
     position: relative;
     max-width: 75%;
-    height: 80vh;
+    height: fit-content;
     margin: 0 auto;
     padding: 50px;
   }
@@ -570,7 +572,7 @@ figcaption .like-icon:active {
     height: 100%;
   }
   .slider figcaption {
-    text-align: center;
+    padding-left: 0;
   }
 
   .slider-nav {

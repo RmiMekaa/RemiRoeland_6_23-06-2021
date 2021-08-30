@@ -1,10 +1,12 @@
 .slider {
+    display: flex;
     position: absolute;
     left: 0;
     width: 100vw;
-    height: auto;
+    height: fit-content;
+    justify-content: center;
     & #medias {
-        width: 100%;
+        width: fit-content;
     }
     & .item {
         margin: 0;
@@ -50,7 +52,7 @@
     .slider {
         position: relative;
         max-width: 75%;
-        height: 80vh;
+        height: fit-content;
         margin: 0 auto;
         padding: 50px;
         & .media {
@@ -58,7 +60,7 @@
             height: 100%;
         }
         & figcaption {
-            text-align: center;
+            padding-left: 0;
         }
     }
 
