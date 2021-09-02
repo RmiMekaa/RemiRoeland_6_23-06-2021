@@ -22,6 +22,7 @@
    * @property {Array.<String>} tags
    * @property {String}         title
    * @property {String}         description
+   * @property {boolean}        liked
    * /
 
   /**

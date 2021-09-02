@@ -79,6 +79,7 @@
 #elevator {
     display: none;
     padding: 0.3em 1em;
+    border: none;
     border-radius: 5px;
     text-align: center;
     font-size: 18px;
@@ -89,4 +90,5 @@
     left: 50%;
     transform: translateX(-50%);
     margin: 0 auto;
+    cursor: pointer;
 }

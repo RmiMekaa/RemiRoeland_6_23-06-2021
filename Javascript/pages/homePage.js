@@ -1,4 +1,3 @@
-// @ts-nocheck
 /* PAGE D'ACCUEIL */
 
 import { Photographer } from "../components/photographer.js";
@@ -12,7 +11,8 @@ export class HomePage {
    *
    * @constructor
    */
-  constructor(data) {
+  constructor(data, dataManager) {
+    this.dataManager = dataManager;
     this.data = data;
     this.activeTags = [];
   }
@@ -54,7 +54,7 @@ export class HomePage {
   createProfiles() {
     let profile;
     let html = '<main class="photographers">';
-    const list = window.dataManager.filteredItems(this.data, this.activeTags);
+    const list = this.dataManager.filteredItems(this.data, this.activeTags);
     for (let i = 0; i < list.length; i++) {
       profile = new Photographer(list[i]);
       html += profile.htmlForHomePage();
@@ -69,7 +69,7 @@ export class HomePage {
    * @return  {String}  HTML String
    */
   createElevator() {
-    return `<a href="#header" id="elevator" tabindex="0">Passer au contenu</a>
+    return `<button onclick="window.scrollTo(0, 0)" id="elevator" tabindex="0">Passer au contenu</button>
     `;
   }
   /**
@@ -101,7 +101,7 @@ export class HomePage {
       this.activeTags.push(tag);
     }
     else this.activeTags.splice(index, 1);
-    window.pageManager.updateHtml();
+    globalThis.pageManager.updateHtml();
     this.setActiveTagsStyle();
   }
   /**

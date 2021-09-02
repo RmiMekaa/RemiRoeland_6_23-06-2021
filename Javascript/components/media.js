@@ -87,8 +87,8 @@ export class Media {
    * @return  {String}  HTML String
    */
   sliderMedia() {
-    if (this.video) return `<video title="${this.description}" class="media" controls><source src="ressources/Sample Photos/${this.photographerId}/${this.video}" type=video/mp4></video>`;
-    else return `<img class="media" src="ressources/Sample Photos/${this.photographerId}/${this.image}" alt="${this.description}">`
+    if (this.video) return `<video title="${this.description}" class="media" controls><source src="ressources/Sample Photos/${this.photographerId}/${this.video}" tabindex="0" type=video/mp4></video>`;
+    else return `<img class="media" src="ressources/Sample Photos/${this.photographerId}/${this.image}" alt="${this.description}" tabindex="0">`
   }
 
 }

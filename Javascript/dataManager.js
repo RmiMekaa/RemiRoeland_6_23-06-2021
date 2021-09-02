@@ -6,26 +6,16 @@ export class DataManager {
    * @type {dataFromJson} les données en provenance du json
    */
   data;
-  src;
 
-  /**
-   * [constructor description]
-   *
-   * @param   {String}  source  l'url du serveur
-   *
-   * @constructor
-   */
-  constructor(source) {
-    this.src = source;
+  constructor(dataSource) {
+    this.dataSource = dataSource;
   }
-
   /**
    * recupère les données 
-   *
    * @return  {Promise} 
    */
   async getData() {
-    const response = await fetch(this.src + "/data.json");
+    const response = await fetch(this.dataSource);
     this.data = await response.json();
     return true;
   }
@@ -39,11 +29,11 @@ export class DataManager {
   }
 
   /**
-   * permet d'obtenir les informations necessaires pour une page d'un photographe
+   * Permet d'obtenir les données d'un photographe en particulier
    * @param   {Number}  photographerId  l'identifiant du photographe
    * @return  {Object}  Les données propres au photographe
    */
-  getPhotographer(photographerId) {
+  getPhotographerData(photographerId) {
     const answer = {
       photographer:null,
       media: []
@@ -93,4 +83,4 @@ export class DataManager {
    
     return newArrFinal;
   }
-}
+} 

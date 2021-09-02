@@ -30,10 +30,8 @@ export class Slider {
   createMedias() {
     this.media = {};
     let html = '<div id="medias">';
-    // for (let i = 0; i < this.medias.length; i++) {
       const media = new Media(this.medias[this.currentItem]);
       html += media.html();
-    // }
     return html + '</div>';
   }
   /**
@@ -41,9 +39,9 @@ export class Slider {
    * @return  {String}  HTML String
    */
   createNavigation() {
-    return `<a id="slider__next" class="slider__next" href="?showmedia/${this.nextMedia}"></a>
-            <a id="slider__prev" class="slider__prev" href="?showmedia/${this.prevMedia}"></a>
-            <a id="slider__close" class="slider__close" href="?photographer/${this.photographerId}"></a>
+    return `<a aria-label="média suivant" id="slider__next" class="slider-nav slider-nav__next" href="?showmedia/${this.nextMedia}"></a>
+            <a aria-label="média précédent" id="slider__prev" class="slider-nav slider-nav__prev" href="?showmedia/${this.prevMedia}"></a>
+            <a aria-label="fermer" id="slider__close" class="slider-nav slider-nav__close" href="?photographer/${this.photographerId}"></a>
             `;
   }
 

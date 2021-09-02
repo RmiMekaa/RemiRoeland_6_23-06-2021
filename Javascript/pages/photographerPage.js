@@ -9,8 +9,11 @@ export class PhotographerPage {
    * @param   {photographerPageData}  data  les données nécessaires à la page
    * @constructor
    */
-  constructor(data) {
-    this.data = data;
+  constructor(data, dataManager, pageManager) {
+    this.pageManager = pageManager;
+    this.dataManager = dataManager;
+    this.photographer = data.photographer;
+    this.medias = data.media;
     this.activeTags = [];
   }
 
@@ -40,7 +43,7 @@ export class PhotographerPage {
   * @return  {String}  HTML String
   */
   createPhotographerResume() {
-    const photographer = new Photographer(this.data.photographer);
+    const photographer = new Photographer(this.photographer);
     return photographer.htmlForPhotographerPage()
   }
   /**
@@ -50,7 +53,7 @@ export class PhotographerPage {
   */
   createMedias() {
     let media;
-    let medias = window.dataManager.filteredItems(this.data.media, this.activeTags);
+    let medias = this.dataManager.filteredItems(this.medias, this.activeTags);
     let html = '';
     for (let i = 0; i < medias.length; i++) {
       media = new Media(medias[i]);
@@ -69,7 +72,7 @@ export class PhotographerPage {
   createLikesCounter() {
     return `<aside class="total-likes">
                 <span id="totalLikesNbr" class="totalLikesNbr" tabindex="0">${this.getTotal()}</span>
-                <span class="price">${this.data.photographer.price}€ / jour</span>
+                <span class="price">${this.photographer.price}€ / jour</span>
             </aside>`;
   }
   /**
@@ -78,9 +81,9 @@ export class PhotographerPage {
    */
   updateLike(element) {
     const idMedia = parseInt(element.dataset.id);
-    for( let i = this.data.media.length-1; i>=0; i--){
-      if (this.data.media[i].id === idMedia){
-        const el = this.data.media[i];
+    for( let i = this.medias.length-1; i>=0; i--){
+      if (this.medias[i].id === idMedia){
+        const el = this.medias[i];
         if (el.liked) {
           el.likes--;
           delete el.liked;
@@ -89,7 +92,7 @@ export class PhotographerPage {
           el.likes++;
           el.liked = true;
         }
-        window.pageManager.updateHtml();
+        globalThis.pageManager.updateHtml();
         return;
       }
     }
@@ -101,7 +104,7 @@ export class PhotographerPage {
    */
    getTotal(){
       let total = 0;
-      this.data.media.forEach(element => {
+      this.medias.forEach(element => {
         total += element.likes;
       });
       return total;
@@ -116,7 +119,7 @@ export class PhotographerPage {
   */
   createForm() {
     return `<form id="contactForm">
-              <h1>Contactez-moi </br><span>${this.data.photographer.name}</span></h1>
+              <h1>Contactez-moi </br><span>${this.photographer.name}</span></h1>
               <label for="firstname">Prénom</label>
               <input type="text" name="firstname" aria-label="Champ du prénom" id="firstname">
               <label for="lastname">Nom</label>
@@ -163,7 +166,7 @@ export class PhotographerPage {
    *
    * @return  {void} 
    */
-   trapFocus(){
+  trapFocus(){
     let firstname = document.getElementById('firstname');
     let close = document.getElementById('modalClose');
 
@@ -196,8 +199,9 @@ export class PhotographerPage {
       this.activeTags.push(tag);
     }
     else this.activeTags.splice(index, 1);
-    window.pageManager.updateHtml();
+    globalThis.pageManager.updateHtml();
     this.setActiveTagsStyle();
+    console.log(this.activeTags);
   }
   /**
    * Ajoute la classe 'active' aux tags sélectionnés
@@ -225,13 +229,13 @@ export class PhotographerPage {
   */
   createSortBy(){
     return `
-    <span class="select-label">Trier par</span>
+    <span class="select-label" tabindex="0">Trier par</span>
     <div class="select" tabindex="1">
-      <input class="sortBy-input" name="option" type="radio" id="popularity" onclick="page.sortBy(this)" checked>
+      <input class="sortBy-input" name="option" type="radio" id="popularity" onclick="page.sortBy(this)" aria-label="trier par popularité" checked>
       <label for="popularity" class="select__option">Popularité</label>
-      <input class="sortBy-input" name="option" type="radio" id="date" onclick="page.sortBy(this)">
+      <input class="sortBy-input" name="option" type="radio" id="date" onclick="page.sortBy(this)" aria-label="trier par date">
       <label for="date" class="select__option">Date</label>
-      <input class="sortBy-input" name="option" type="radio" id="name" onclick="page.sortBy(this)">
+      <input class="sortBy-input" name="option" type="radio" id="name" onclick="page.sortBy(this)" aria-label="trier par nom">
       <label for="name" class="select__option">Nom</label>
     </div>
     `;
@@ -259,7 +263,7 @@ export class PhotographerPage {
    * @return  {void}  trie le tableau
    */
   sortByPopularity() {
-    this.data.media.sort(function compare(a, b){
+    this.medias.sort(function compare(a, b){
       if (a.likes > b.likes) {return -1;}
       if (a.likes < b.likes) {return 1;}
       return 0;
@@ -271,7 +275,7 @@ export class PhotographerPage {
    * @return  {void}  trie le tableau
    */
   sortByDate() {
-    this.data.media.sort(function compare(a, b){
+    this.medias.sort(function compare(a, b){
       if (a.date > b.date) {return -1;}
       if (a.date < b.date) {return 1;}
       return 0;
@@ -283,7 +287,7 @@ export class PhotographerPage {
    * @return  {void}  trie le tableau
    */
   sortByName() {
-    this.data.media.sort(function compare(a, b){
+    this.medias.sort(function compare(a, b){
       if (a.title < b.title) {return -1;}
       if (a.title > b.title) {return 1;}
       return 0;

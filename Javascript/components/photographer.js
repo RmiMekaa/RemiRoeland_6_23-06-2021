@@ -72,9 +72,9 @@ export class Photographer {
               <img class="photographer__pp" src="ressources/Sample Photos/Photographers ID Photos/thumbs/${this.portrait}" alt="${this.name}">
               <h2 class="photographer__name">${this.name}</h2>
           </a>
-          <h3 class="photographer__location">${this.city}, ${this.country}</h3>
-          <span class="photographer__description">${this.tagline}</span>
-          <span class="photographer__price">${this.price}€ / jour </span>
+          <h3 class="photographer__location" tabindex="0">${this.city}, ${this.country}</h3>
+          <span class="photographer__description" tabindex="0">${this.tagline}</span>
+          <span class="photographer__price" tabindex="0">${this.price}€ / jour </span>
           <ul class="photographer__tags">
               ${this.tagList()}
           </ul>
@@ -90,9 +90,9 @@ export class Photographer {
     return `
       <div class="profile__header">
         <section class="profile__info">
-            <h1 class="photographer__name">${this.name}</h1>
-            <span class="photographer__location">${this.city}, ${this.country}</span>
-            <span class="photographer__description">${this.tagline}</span>
+            <h1 class="photographer__name" tabindex="0">${this.name}</h1>
+            <span class="photographer__location" tabindex="0">${this.city}, ${this.country}</span>
+            <span class="photographer__description" tabindex="0">${this.tagline}</span>
             <ul class="photographer__tags"> 
             ${this.tagList()}              
             </ul>
