@@ -1,6 +1,8 @@
 /* PROFILS DES PHOTOGRAPHES */
 
-export class Photographer {
+import { ContactForm } from "./contactForm.js";
+
+export class Profile {
 
   /**
   * la représentation du profil dans le DOM
@@ -51,23 +53,30 @@ export class Photographer {
   /**
    * [constructor description]
    *
-   * @param   {photographerFromJson}  data  [data description]
+   * @param   {photographerFromJson}  data  Les données du photographe
+   *
+   * @param   {( "photographerPage" | "homePage")}  page  la page à utiliser
    *
    * @constructor
    */
-  constructor(data) {
+  constructor(data, page, domTarget) {
     for (const [key, value] of Object.entries(data)) {
       this[key] = value;
     }
+    this.DOM = document.createElement("article");
+    this.DOM.innerHTML = this[page];
+    domTarget.appendChild(this.DOM);
+
+    if (page == 'photographerPage') new ContactForm(this.name, this.DOM);
   }
 
   /**
    * génère les profils pour la page d'accueil
    * @return  {String}  HTML String
    */
-  htmlForHomePage() {
+  get homePage() {
+    this.DOM.className = "photographer";
     return `
-          <article class="photographer">
           <a class="photographer__thumb" href="?photographer/${this.id}" aria-label:"${this.name}">
               <img class="photographer__pp" src="ressources/Sample Photos/Photographers ID Photos/thumbs/${this.portrait}" alt="${this.name}">
               <h2 class="photographer__name">${this.name}</h2>
@@ -76,41 +85,37 @@ export class Photographer {
           <span class="photographer__description" tabindex="0">${this.tagline}</span>
           <span class="photographer__price" tabindex="0">${this.price}€ / jour </span>
           <ul class="photographer__tags">
-              ${this.tagList()}
+              ${this.tagList}
           </ul>
-          </article>
           `;
   }
-
   /**
    * génère les profils pour les pages des photographes
    * @return  {String}  HTML String
    */
-  htmlForPhotographerPage() {
+  get photographerPage() {
+    this.DOM.className = "profile__header";
     return `
-      <div class="profile__header">
         <section class="profile__info">
             <h1 class="photographer__name" tabindex="0">${this.name}</h1>
             <span class="photographer__location" tabindex="0">${this.city}, ${this.country}</span>
             <span class="photographer__description" tabindex="0">${this.tagline}</span>
             <ul class="photographer__tags"> 
-            ${this.tagList()}              
+            ${this.tagList}              
             </ul>
-            <button class="button" id="contact-btn" onclick="page.openForm()" role="button" aria-label="Accédez au formulaire de contact">Contactez-moi</button>
+            <button class="button" id="contact-btn" role="button" aria-label="Accédez au formulaire de contact">Contactez-moi</button>
         </section>
         <img class="photographer__pp" src="ressources/Sample Photos/Photographers ID Photos/thumbs/${this.portrait}" alt="photo du photographe">
-      </div>
       `;
   }
-
   /**
    * Génère la liste des tags pour les photographes
    * @return  {string}  HTML String
    */
-  tagList() {
+  get tagList() {
     let list = "";
     for (let i = 0; i < this.tags.length; i++) {
-      list += `<li class="tag" onclick="page.selectTags(this)" tabindex="0">#<span>${this.tags[i]}</span></li>`;
+      list += `<li class="tag" onclick="page.tagsOnClick(this)" tabindex="0">#<span>${this.tags[i]}</span></li>`;
     }
     return list;
   }
