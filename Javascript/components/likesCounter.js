@@ -5,10 +5,14 @@ export class LikesCounter {
     this.medias = medias;
     this.DOM = document.createElement('aside');
     this.DOM.className = 'total-likes';
-    this.DOM.innerHTML = this.html;
     domTarget.appendChild(this.DOM);
+    this.render();
   }
 
+  render() {
+    this.DOM.innerHTML = this.html;
+  }
+  
   /**
    *  Retourne le HTML du compteur de likes
    *

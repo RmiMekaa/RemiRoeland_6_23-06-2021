@@ -28,9 +28,10 @@ export class Media {
    *
    * @constructor
    */
-  constructor(media, page, domTarget) {
+  constructor(media, page, likesCounter, domTarget) {
     this.page = page;
     this.media = media;
+    this.likesCounter = likesCounter;
     for (const [key, value] of Object.entries(media)) {
       this[key] = value;
     }
@@ -75,6 +76,7 @@ export class Media {
   }
 
   like(media) {
+    const likesCounter = this.likesCounter;
     const likes = this.DOM.querySelector('.likesNbr');
     const button = this.DOM.querySelector('button');
     button.addEventListener('click', function() {
@@ -86,8 +88,8 @@ export class Media {
         button.classList.add('liked');
       }
       likes.innerHTML = media.likes;
+      likesCounter.render();
     })
-    // TO DO: actualiser le compteur global de likes
   }
 
 

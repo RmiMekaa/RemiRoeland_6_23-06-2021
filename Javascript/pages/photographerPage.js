@@ -22,8 +22,8 @@ export class PhotographerPage {
     let main = document.createElement('main');
     document.body.appendChild(main);
     this.profile = new Profile(this.photographer, "photographerPage", main);
-    this.gallery = new Gallery(this.medias, main);
     this.likesCounter = new LikesCounter(this.photographer, this.medias, main);
+    this.gallery = new Gallery(this.medias, main, this.likesCounter);
   }
 
   /*----- Tags -----*/

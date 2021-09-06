@@ -3,7 +3,8 @@ import { SortBy } from "./sortBy.js";
 
 export class Gallery {
 
-  constructor(medias, domTarget) {
+  constructor(medias, domTarget, likesCounter) {
+    this.likesCounter = likesCounter
     this.domTarget = domTarget;
     this.medias = medias;
 
@@ -37,7 +38,7 @@ export class Gallery {
       mediasContainer.innerHTML = "";
     }
     for (let i = 0; i < medias.length; i++) {
-      new Media(medias[i], 'photographerPage', mediasContainer);
+      new Media(medias[i], 'photographerPage', this.likesCounter, mediasContainer);
     }
   }
 
