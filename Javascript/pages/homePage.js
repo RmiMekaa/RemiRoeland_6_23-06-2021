@@ -8,7 +8,7 @@ export class HomePage {
 
   /**
    *
-   * @param   {Array.<photographerFromJson>}  photographers  les éléments à insérer dans la page
+   * @param   {Array}  photographers  les éléments à insérer dans la page
    *
    * @constructor
    */

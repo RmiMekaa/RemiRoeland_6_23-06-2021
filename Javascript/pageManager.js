@@ -28,7 +28,7 @@ export class PageManager {
 
   /**
    * Génère le html de la page souhaitée en fonction des informations contenues dans l'url
-   * @param   {String}  urlStart  La première partie de l'url (index.html || photographer || showmedia)
+   * @param   {String}  url  La première partie de l'url (index.html || photographer || showmedia)
    * @param   {String}  [id]        l'id d'un photographe
    *
    * @return  {void}                Créé le HTML dans l'élément body
