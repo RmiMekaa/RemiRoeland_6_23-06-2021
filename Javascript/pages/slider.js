@@ -9,18 +9,15 @@ export class Slider {
     this.medias = medias; // Un tableau contenant les médias
     this.actualMedia = actualMedia;
     this.currentItem = this.medias.findIndex(i => (i.image || i.video) === this.actualMedia);
+    
+    this.DOM = document.createElement('section');
+    this.DOM.className = 'slider';
+    this.DOM.setAttribute('id', 'slider');
+    document.body.appendChild(this.DOM);
+
+    this.createMedias();
+    this.createNavigation();
     this.keyboardControls();
-  }
-
-  /**
-   * Génère le HTML du slider
-   * @return  {String}  HTML String
-   */
-  html() {
-    let html = '<div id="slider" class="slider">';
-    html += this.createMedias() + this.createNavigation() + '<div>';
-
-    return html;
   }
 
   /**
@@ -28,21 +25,23 @@ export class Slider {
    * @return  {String}  HTML String
    */
   createMedias() {
-    this.media = {};
-    let html = '<div id="medias">';
-      const media = new Media(this.medias[this.currentItem]);
-      html += media.html();
-    return html + '</div>';
+    const mediasContainer = document.createElement('div');
+    mediasContainer.setAttribute('id', 'medias');
+    this.DOM.appendChild(mediasContainer);
+    new Media(this.medias[this.currentItem], 'slider', mediasContainer);
   }
   /**
    * Génère le HTML des éléments de navigation
    * @return  {String}  HTML String
    */
   createNavigation() {
-    return `<a aria-label="média suivant" id="slider__next" class="slider-nav slider-nav__next" href="?showmedia/${this.nextMedia}"></a>
+    const nav = document.createElement('nav');
+    nav.innerHTML =  `<a aria-label="média suivant" id="slider__next" class="slider-nav slider-nav__next" href="?showmedia/${this.nextMedia}"></a>
             <a aria-label="média précédent" id="slider__prev" class="slider-nav slider-nav__prev" href="?showmedia/${this.prevMedia}"></a>
             <a aria-label="fermer" id="slider__close" class="slider-nav slider-nav__close" href="?photographer/${this.photographerId}"></a>
             `;
+    this.DOM.appendChild(nav);
+
   }
 
   /*----- FONCTIONNALITÉS POUR LA NAVIGATION -----*/
@@ -84,7 +83,6 @@ export class Slider {
         prev.click();
       }
       if (e.keyCode === 27) {
-        console.log('escape');
         let close = document.getElementById('slider__close');
         close.click();
       }

@@ -22,26 +22,94 @@ export class Media {
   description;
 
   /**
-   * [constructor description]
-   *
+   * Créé un nouvel objet média
    * @param   {Object}  media  Un objet media
+   * @param   {HTMLElement} domTarget
    *
    * @constructor
    */
-  constructor(media) {
+  constructor(media, page, domTarget) {
+    this.page = page;
+    this.media = media;
     for (const [key, value] of Object.entries(media)) {
       this[key] = value;
     }
+    this.DOM = document.createElement('figure');
+    this.DOM.className = 'item';
+    domTarget.appendChild(this.DOM);   
+
+    switch(page) {
+      case 'photographerPage': this.DOM.innerHTML = this.photographerPageRender();
+                               this.like(media);
+                               break;
+      case 'slider'          : this.DOM.innerHTML = this.sliderRender();
+    }
   }
+
+  photographerPageRender() {
+    return `${this.mediaHTML(this.page)}
+            <figcaption>
+                <h2>${this.title}</h2>
+                <span class="likesNbr">${this.likes}</span>
+                <button aria-label="bouton j'aime" class="like-icon fas fa-heart" data-id="${this.id}" onclick=""></button>
+            </figcaption>`;
+  }
+
+  sliderRender() {
+    return `${this.mediaHTML(this.page)}
+    <figcaption>
+        <h2>${this.title}</h2>
+    </figcaption>`;
+  }
+
+  mediaHTML(page) {
+    switch (page) {
+      case 'photographerPage':
+        if (this.media.image) return `<img class="media" src="ressources/Sample Photos/${this.photographerId}/Thumbnails/${this.image}" alt="${this.description}" onclick="window.location.href='?showmedia/${this.photographerId}/${this.image}'; page.getIndexOfMedia(${this.id})" tabindex="0"></img>`;
+        else return `<video controls class="media" title="${this.description}" onclick="window.location.href='?showmedia/${this.photographerId}/${this.video}'" tabindex="0"><source src="ressources/Sample Photos/${this.photographerId}/${this.video}" type=video/mp4></video>`;
+        break;    
+      case 'slider': 
+        if (this.media.image) return `<img class="media" src="ressources/Sample Photos/${this.photographerId}/${this.image}" alt="${this.description}" onclick="window.location.href='?showmedia/${this.photographerId}/${this.image}'; page.getIndexOfMedia(${this.id})" tabindex="0"></img>`;
+        else return `<video controls class="media" title="${this.description}" onclick="window.location.href='?showmedia/${this.photographerId}/${this.video}'" tabindex="0"><source src="ressources/Sample Photos/${this.photographerId}/${this.video}" type=video/mp4></video>`;
+    }
+  }
+
+  like(media) {
+    const likes = this.DOM.querySelector('.likesNbr');
+    const button = this.DOM.querySelector('button');
+    button.addEventListener('click', function() {
+      if (button.classList.contains('liked')) {
+        media.likes --;
+        button.classList.remove('liked');
+      } else {
+        media.likes ++;
+        button.classList.add('liked');
+      }
+      likes.innerHTML = media.likes;
+    })
+    // TO DO: actualiser le compteur global de likes
+  }
+
+
+
+
+
+
+
+
+
+
+
 
   /**
    * Génère les médias sous différentes structure en fonction de l'url
    *
-   * @return  {string}  HTML String
+   * @return  {void}  HTML String
    */
-  html() {
-    if (window.location.href.indexOf("showmedia") == -1) return this.htmlForThumbnail();
-    else return this.htmlForSlider();
+  ffdrender() {
+
+    if (window.location.href.indexOf("showmedia") == -1) this.DOM.innerHTML= this.htmlForThumbnail();
+    else this.DOM.innerHTML= this.htmlForSlider();
   }
 
   /**
@@ -50,15 +118,20 @@ export class Media {
    * @return  {String}  HTML String
    */
   htmlForThumbnail() {
-    return `<figure class="item">
-              ${this.thumbnailMedia()}
+    return `${this.thumbnailMedia()}
               <figcaption>
                   <h2>${this.title}</h2>
                   <span class="likesNbr">${this.likes}</span>
                   <button aria-label="bouton j'aime" class="like-icon fas fa-heart" data-id="${this.id}" onclick="page.updateLike(this)"></button>
-              </figcaption>
-            </figure>`;
+              </figcaption>`;
   }
+
+  //this.DOM.innnerHTML= `
+  //  <img src="">
+  //  <h2>dfkljglkfjgkldfj</h2>
+  //`;
+  //new Like(qte, this.DOM)
+
   /**
    * Retourne le html pour le slider
    * @return  {string}  HTML String

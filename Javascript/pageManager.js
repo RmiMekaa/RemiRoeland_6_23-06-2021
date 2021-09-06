@@ -35,6 +35,7 @@ export class PageManager {
    */
   generateHTML(url, id) {
     let photographerId = parseInt(id);
+    document.body.innerText = "";
     switch (url) {
       case "homepage":
         this.page = new HomePage(this.dataManager.getPhotographersList(), this.dataManager);
@@ -47,16 +48,7 @@ export class PageManager {
         this.page = new Slider(photographerId, this.dataManager.getPhotographerData(photographerId).media, actualMedia);
         break;
     }
-    document.body.innerHTML = this.page.html();
     globalThis.page = this.page;
-  }
-
-  /**
-   * Actualise le contenu de la page
-   * @return  {void}
-   */
-  updateHtml(){
-    document.body.innerHTML = this.page.html();
   }
   
 }
