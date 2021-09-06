@@ -23,17 +23,17 @@ export class PageManager {
 
     let page = window.location.search.slice(1).split("/");
     if(page[0] === "") page[0] = "homepage";
-    this.generateHTML(page[0], page[1]);
+    this.displayPage(page[0], page[1]);
   } 
 
   /**
-   * Génère le html de la page souhaitée en fonction des informations contenues dans l'url
+   * Affiche la page en fonction de l'url
    * @param   {String}  url  La première partie de l'url (index.html || photographer || showmedia)
    * @param   {String}  [id]        l'id d'un photographe
    *
    * @return  {void}                Créé le HTML dans l'élément body
    */
-  generateHTML(url, id) {
+  displayPage(url, id) {
     let photographerId = parseInt(id);
     document.body.innerText = "";
     switch (url) {
@@ -48,7 +48,7 @@ export class PageManager {
         this.page = new Slider(photographerId, this.dataManager.getPhotographerData(photographerId).media, actualMedia);
         break;
     }
-    globalThis.page = this.page;
+    window.page = this.page;
   }
   
 }

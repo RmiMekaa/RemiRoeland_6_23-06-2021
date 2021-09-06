@@ -31,7 +31,7 @@ export class Media {
    *
    * @constructor
    */
-  constructor(media, page, likesCounter, domTarget) {
+  constructor(media, page, domTarget, likesCounter) {
     this.page = page;
     this.media = media;
     this.likesCounter = likesCounter;

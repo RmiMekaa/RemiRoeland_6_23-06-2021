@@ -47,7 +47,7 @@ export class Gallery {
       mediasContainer.innerHTML = "";
     }
     for (let i = 0; i < medias.length; i++) {
-      new Media(medias[i], 'photographerPage', this.likesCounter, mediasContainer);
+      new Media(medias[i], 'photographerPage', mediasContainer, this.likesCounter);
     }
   }
 
