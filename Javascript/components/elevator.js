@@ -1,5 +1,12 @@
 export class Elevator {
 
+  /**
+   * Créé un nouvel objet ascenseur
+   *
+   * @param   {Object}  domTarget  Le noeud où insérer l'ascenseur
+   *
+   * @constructor
+   */
   constructor(domTarget) {
     this.DOM = document.createElement('button');
     this.DOM.setAttribute('id', 'elevator');

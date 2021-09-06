@@ -1,5 +1,13 @@
 export class ContactForm {
 
+  /**
+   * Créé un nouvel objet formulaire de contact
+   *
+   * @param   {String}  name       Le nom du photographe
+   * @param   {Object}  domTarget  Le noeud où insérer le formulaire
+   *
+   * @constructor
+   */
   constructor(name, domTarget) {
     this.name = name;
     this.DOM = document.createElement('form');

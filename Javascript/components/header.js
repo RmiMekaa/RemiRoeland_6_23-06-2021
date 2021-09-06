@@ -1,7 +1,7 @@
 export class Header{
 
   /**
-   * Créé une nouvelle instance pour le header
+   * Créé une nouvel objet header
    *
    * @param   {( "photographerPage" | "homePage")}  page  la page de référence pour l'affichage du header
    *
@@ -15,10 +15,20 @@ export class Header{
     document.body.appendChild(this.DOM);
   }
 
+  /**
+   * Retourne le html du header pour la page des photographes
+   *
+   * @return  {String}  HTML String
+   */
   get photographerPage(){
     return '<a href="index.html"><img class="header__logo" src="ressources/logo.png" alt="FishEye Home page"></a>';
   }
 
+  /**
+   * Retourne le html du header pour la page 'accueil'
+   *
+   * @return  {String}  HTML String
+   */
   get homePage(){
     return `<a href="index.html"><img class="header__logo" src="ressources/logo.png" alt="FishEye Home page"></a>
             <nav class="header__nav">

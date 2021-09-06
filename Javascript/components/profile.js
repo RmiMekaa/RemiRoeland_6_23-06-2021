@@ -51,11 +51,10 @@ export class Profile {
   portrait;
 
   /**
-   * [constructor description]
+   * Créé un nouvel objet profil 
    *
-   * @param   {photographerFromJson}  data  Les données du photographe
-   *
-   * @param   {( "photographerPage" | "homePage")}  page  la page à utiliser
+   * @param   {Object}  data  Les données du photographe
+   * @param   {( "photographerPage" | "homePage")}  page  la page où insérer le profil
    *
    * @constructor
    */

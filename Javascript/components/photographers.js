@@ -3,9 +3,12 @@ import { Profile } from "./profile.js";
 export class Photographers {
 
   /**
-   * Créé un nouvelle instance pour la galerie de photographes de la page d'accueil
+   * Créé un nouvel objet galerie de photographes pour la page d'accueil
+   * 
    * @param   {Array}  photographers  Les photographes
    * @param   {HTMLElement}  domTarget  Le noeud où insérer le profil
+   * 
+   * @constructor
    */
   constructor(photographers, domTarget) {
     this.photographers = photographers;
@@ -16,9 +19,13 @@ export class Photographers {
     this.render(this.photographers);
   }
 
+  /**
+   * Créé les profils et les insère dans le DOM
+   *
+   * @param   {Array}  array  Un tableau de photographes
+   */
   render(array) {
     if (this.DOM.childNodes.length > 0) this.DOM.innerText = '';
-    //const list = this.dataManager.filteredItems(this.data, this.activeTags);
     for (let i = 0; i < array.length; i++) {
       new Profile(array[i], 'homePage', this.DOM);
     }

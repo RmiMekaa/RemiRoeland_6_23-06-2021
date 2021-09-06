@@ -1,9 +1,13 @@
 export class SortBy {
 
   /**
+   * Créé un nouvel objet bouton de tri
+   * 
    * @param   {Array}  medias  Un tableau de médias à trier
    * @param   {HTMLElement}  domTarget  Le noeud où insérer l'instance
    * @param   {Object}  gallery  Une référence à la classe gallery
+   * 
+   * @constructor
    */
   constructor(medias, domTarget, gallery){
     this.gallery = gallery;
@@ -16,6 +20,11 @@ export class SortBy {
     this.addListener();
   }
 
+  /**
+   * Retourne le html du bouton de tri
+   *
+   * @return  {String}  HTML String
+   */
   get html(){
     return `<span class="select-label" tabindex="0">Trier par</span>
             <div class="select" tabindex="1">
@@ -50,7 +59,7 @@ export class SortBy {
    *
    * @return  {void}   Trie le tableau
    */
-   sortBy(element) {
+  sortBy(element) {
     console.log(element.id);
     switch (element.id) {
       case "popularity": this.sortByPopularity(); break;
