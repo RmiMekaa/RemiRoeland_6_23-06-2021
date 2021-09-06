@@ -1,6 +1,16 @@
 export class LikesCounter {
 
+  /**
+   * Créé un nouvel objet compteur de likes
+   *
+   * @param   {Object}  photographer  Les données du photographe
+   * @param   {Array}   medias        Un tableau contenant les médias
+   * @param   {Object}  domTarget     Le noeud où insérer le compteur
+   *
+   * @constructor
+   */
   constructor(photographer, medias, domTarget){
+    console.log(medias);
     this.photographer = photographer;
     this.medias = medias;
     this.DOM = document.createElement('aside');
@@ -9,10 +19,13 @@ export class LikesCounter {
     this.render();
   }
 
+  /**
+   * Génère le html du compteur
+   */
   render() {
     this.DOM.innerHTML = this.html;
   }
-  
+
   /**
    *  Retourne le HTML du compteur de likes
    *
@@ -35,29 +48,5 @@ export class LikesCounter {
     });
     return total;
   }
-
-  // /**
-  //  * Incrémente ou décrémente le compteur de like du média
-  //  * @param   {HTMLElement}  element  l'icône like du média
-  //  */
-  //  updateTotal(element) {
-  //   const idMedia = parseInt(element.dataset.id);
-  //   for (let i = this.medias.length - 1; i >= 0; i--) {
-  //     if (this.medias[i].id === idMedia) {
-  //       const el = this.medias[i];
-  //       if (el.liked) {
-  //         el.likes--;
-  //         delete el.liked;
-  //       }
-  //       else {
-  //         el.likes++;
-  //         el.liked = true;
-  //       }
-  //       globalThis.pageManager.updateHtml();
-  //       return;
-  //     }
-  //   }
-  // }
   
-
 }

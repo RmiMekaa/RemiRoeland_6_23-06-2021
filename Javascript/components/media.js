@@ -23,8 +23,11 @@ export class Media {
 
   /**
    * Créé un nouvel objet média
+   * 
    * @param   {Object}  media  Un objet media
-   * @param   {HTMLElement} domTarget
+   * @param   {String}  page  La page où insérer le média
+   * @param   {Object} likesCounter Une référence au compteur de likes
+   * @param   {Object} domTarget Le noeud où insérer le média
    *
    * @constructor
    */

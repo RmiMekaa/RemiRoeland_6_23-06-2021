@@ -7,6 +7,15 @@ import { LikesCounter } from "../components/likesCounter.js";
 
 export class PhotographerPage {
 
+  /**
+   * Créé la page du photographe
+   *
+   * @param   {Object}  data         Les données du photographe
+   * @param   {Object}  dataManager  Une référence au dataManager
+   * @param   {Object}  pageManager  Une référence au pageManager
+   *
+   * @constructor
+   */
   constructor(data, dataManager, pageManager) {
     this.pageManager = pageManager;
     this.dataManager = dataManager;
@@ -17,6 +26,9 @@ export class PhotographerPage {
     this.render();
   }
 
+  /**
+   * Créé les différents éléments de la page
+   */
   render() {
     this.header = new Header("photographerPage");
     let main = document.createElement('main');

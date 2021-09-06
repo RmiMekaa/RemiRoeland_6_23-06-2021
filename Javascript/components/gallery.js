@@ -3,6 +3,15 @@ import { SortBy } from "./sortBy.js";
 
 export class Gallery {
 
+  /**
+   * Créé un nouvel objet gallery
+   * 
+   * @param   {array}   medias        Les médias à afficher dans la galerie
+   * @param   {Object}  domTarget     Le noeud où insérer la galerie
+   * @param   {Object}  likesCounter  Une référence au compteur de likes
+   * 
+   * @constructor
+   */
   constructor(medias, domTarget, likesCounter) {
     this.likesCounter = likesCounter
     this.domTarget = domTarget;
