@@ -10,7 +10,7 @@
     cursor: pointer;
 }
 
-.tag.active, .tag:hover {
+.tag.active {
     color: white;
     border-color: $primary-color;
     background-color: $primary-color;
