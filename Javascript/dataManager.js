@@ -9,6 +9,7 @@ export class DataManager {
 
   constructor(dataSource) {
     this.dataSource = dataSource;
+    this.activeTags = [];
   }
   /**
    * recupère les données 

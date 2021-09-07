@@ -15,7 +15,6 @@ export class HomePage {
   constructor(photographers, dataManager) {
     this.dataManager = dataManager;
     this.photographers = photographers;
-    this.activeTags = [];
     
     this.render();
   }
@@ -38,9 +37,9 @@ export class HomePage {
   tagsOnClick(element) {
     let filter = element.textContent.substring(1);
     this.addFilter(filter);
-    this.setStyle(element);
-    const newArr = this.dataManager.filteredItems(this.photographers, this.activeTags);
-    this.profiles.render(newArr);
+    const newArr = this.dataManager.filteredItems(this.photographers, this.dataManager.activeTags);
+    this.profiles.displayPhotographers(newArr);
+    this.setStyle();
   }
 
   /**
@@ -49,23 +48,21 @@ export class HomePage {
    * @return  {void}  
    */
   addFilter(filter) {
-    const index = this.activeTags.indexOf(filter)
+    const index = this.dataManager.activeTags.indexOf(filter)
     if (index === -1) {
-      this.activeTags.push(filter);
+      this.dataManager.activeTags.push(filter);
     }
     else {
-      this.activeTags.splice(index, 1);
+      this.dataManager.activeTags.splice(index, 1);
     }
   }
 
-  /**
-   * Ajoute la classe CSS à l'élément
-   * @param   {HTMLElement}  element  le tag
-   * @return  {void} 
-   */
-  setStyle(element) {
-  if (element.classList.contains('active')) element.classList.remove('active');
-  else element.classList.add('active')
+  setStyle() {
+    let tags = document.querySelectorAll('.tag');
+    tags.forEach(tag => {
+      if (this.dataManager.activeTags.indexOf(tag.textContent.substring(1)) > -1) tag.classList.add('active');
+      else tag.classList.remove('active');
+    })
   }
 
 }

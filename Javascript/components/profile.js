@@ -114,8 +114,9 @@ export class Profile {
   get tagList() {
     let list = "";
     for (let i = 0; i < this.tags.length; i++) {
-      list += `<li class="tag" onclick="page.tagsOnClick(this)" tabindex="0">#<span>${this.tags[i]}</span></li>`;
+      list += `<li class="tag" onclick="page.tagsOnClick(this)" tabindex="0"><span aria-hidden="true">#</span>${this.tags[i]}</li>`;
     }
     return list;
   }
+  
 }

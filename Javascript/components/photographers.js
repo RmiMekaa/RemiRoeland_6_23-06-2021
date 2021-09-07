@@ -16,7 +16,7 @@ export class Photographers {
     this.DOM.className = 'photographers';
     domTarget.appendChild(this.DOM);
 
-    this.render(this.photographers);
+    this.displayPhotographers(this.photographers);
   }
 
   /**
@@ -24,7 +24,7 @@ export class Photographers {
    *
    * @param   {Array}  array  Un tableau de photographes
    */
-  render(array) {
+  displayPhotographers(array) {
     if (this.DOM.childNodes.length > 0) this.DOM.innerText = '';
     for (let i = 0; i < array.length; i++) {
       new Profile(array[i], 'homePage', this.DOM);

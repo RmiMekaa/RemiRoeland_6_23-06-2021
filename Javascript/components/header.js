@@ -33,14 +33,14 @@ export class Header{
     return `<a href="index.html"><img class="header__logo" src="ressources/logo.png" alt="FishEye Home page"></a>
             <nav class="header__nav">
                 <ul>
-                    <li class="tag" tabindex="0" onclick="page.tagsOnClick(this)">#<span>portrait</span></li>
-                    <li class="tag" tabindex="0" onclick="page.tagsOnClick(this)">#<span>art</span></li>
-                    <li class="tag" tabindex="0" onclick="page.tagsOnClick(this)">#<span>fashion</span></li>
-                    <li class="tag" tabindex="0" onclick="page.tagsOnClick(this)">#<span>architecture</span></li>
-                    <li class="tag" tabindex="0" onclick="page.tagsOnClick(this)">#<span>travel</span></li>
-                    <li class="tag" tabindex="0" onclick="page.tagsOnClick(this)">#<span>sport</span></li>
-                    <li class="tag" tabindex="0" onclick="page.tagsOnClick(this)">#<span>animals</span></li>
-                    <li class="tag" tabindex="0" onclick="page.tagsOnClick(this)">#<span>events</span></li>
+                    <li class="tag" tabindex="0" onclick="page.tagsOnClick(this)"><span aria-hidden="true">#</span>portrait</li>
+                    <li class="tag" tabindex="0" onclick="page.tagsOnClick(this)"><span aria-hidden="true">#</span>art</li>
+                    <li class="tag" tabindex="0" onclick="page.tagsOnClick(this)"><span aria-hidden="true">#</span>fashion</li>
+                    <li class="tag" tabindex="0" onclick="page.tagsOnClick(this)"><span aria-hidden="true">#</span>architecture</li>
+                    <li class="tag" tabindex="0" onclick="page.tagsOnClick(this)"><span aria-hidden="true">#</span>travel</li>
+                    <li class="tag" tabindex="0" onclick="page.tagsOnClick(this)"><span aria-hidden="true">#</span>sport</li>
+                    <li class="tag" tabindex="0" onclick="page.tagsOnClick(this)"><span aria-hidden="true">#</span>animals</li>
+                    <li class="tag" tabindex="0" onclick="page.tagsOnClick(this)"><span aria-hidden="true">#</span>events</li>
                 </ul>
             </nav>
             <h1 class="header__heading">Nos photographes</h1>`;
