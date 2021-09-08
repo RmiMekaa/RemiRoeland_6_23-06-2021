@@ -13,8 +13,8 @@ export class HomePage {
    * @constructor
    */
   constructor(photographers, dataManager) {
-    this.dataManager = dataManager;
     this.photographers = photographers;
+    this.dataManager = dataManager;
     
     this.render();
   }
@@ -57,6 +57,11 @@ export class HomePage {
     }
   }
 
+  /**
+   * Applique le style CSS sur les tags actifs
+   *
+   * @return  {void}  [return description]
+   */
   setStyle() {
     let tags = document.querySelectorAll('.tag');
     tags.forEach(tag => {
