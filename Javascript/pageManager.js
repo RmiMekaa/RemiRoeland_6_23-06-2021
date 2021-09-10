@@ -16,7 +16,7 @@ export class PageManager {
   }
 
   /**
-   * Appelle la fonction getData() de la classe dataManager puis génère la page
+   * Récupère les données du json et affiche la page
    */
   async init() {
     await this.dataManager.getData();
