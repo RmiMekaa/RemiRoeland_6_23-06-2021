@@ -52,11 +52,11 @@ export class Media {
 
   photographerPageRender() {
     return `${this.mediaHTML(this.page)}
-            <figcaption>
-                <h2>${this.title}</h2>
-                <span class="likesNbr">${this.likes}</span>
-                <button aria-label="bouton j'aime" class="like-icon fas fa-heart" data-id="${this.id}" onclick=""></button>
-            </figcaption>`;
+            <div class="item__details">
+                <h2 tabindex="0" aria-label="titre : ${this.title}">${this.title}</h2>
+                <span tabindex="0" class="likesNbr"><span class="sr-only">nombre de likes :</span>${this.likes}</span>
+                <button tabindex="0" aria-label="ajouter un like" class="like-icon fas fa-heart" data-id="${this.id}"></button>
+            </div>`;
   }
 
   sliderRender() {

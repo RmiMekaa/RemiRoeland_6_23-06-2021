@@ -76,13 +76,13 @@ export class Profile {
   get homePage() {
     this.DOM.className = "photographer";
     return `
-          <a class="photographer__thumb" href="?photographer/${this.id}" aria-label="${this.name}">
-              <img class="photographer__pp" src="ressources/Sample Photos/Photographers ID Photos/thumbs/${this.portrait}" alt="${this.name}">
-              <h2 class="photographer__name">${this.name}</h2>
+          <a class="photographer__thumb" href="?photographer/${this.id}" aria-label="Artiste ${this.name}">
+              <img class="photographer__pp" src="ressources/Sample Photos/Photographers ID Photos/thumbs/${this.portrait}" alt="photo de ${this.name}">
+              <h2 class="photographer__name" aria-hidden="true">${this.name}</h2>
           </a>
-          <h3 class="photographer__location" tabindex="0">${this.city}, ${this.country}</h3>
-          <span class="photographer__description" tabindex="0">${this.tagline}</span>
-          <span class="photographer__price" tabindex="0">${this.price}€ / jour </span>
+          <h3 class="photographer__location" tabindex="0" aria-label="habite à ${this.city}, ${this.country}">${this.city}, ${this.country}</h3>
+          <span class="photographer__description" tabindex="0"><span class="sr-only">citation :</span>${this.tagline}</span>
+          <span class="photographer__price" tabindex="0"><span class="sr-only">tarif :</span>${this.price}€<span class="sr-only">par</span><span aria-hidden="true">/</span>jour</span>
           <ul class="photographer__tags">
               ${this.tagList}
           </ul>
@@ -97,14 +97,14 @@ export class Profile {
     return `
         <section class="profile__info">
             <h1 class="photographer__name" tabindex="0">${this.name}</h1>
-            <span class="photographer__location" tabindex="0">${this.city}, ${this.country}</span>
-            <span class="photographer__description" tabindex="0">${this.tagline}</span>
+            <h3 class="photographer__location" tabindex="0" aria-label="habite à ${this.city}, ${this.country}">${this.city}, ${this.country}</h3>
+            <span class="photographer__description" tabindex="0"><span class="sr-only">citation :</span>${this.tagline}</span>
             <ul class="photographer__tags"> 
             ${this.tagList}              
             </ul>
             <button class="button" id="contact-btn" role="button" aria-label="Accédez au formulaire de contact">Contactez-moi</button>
         </section>
-        <img class="photographer__pp" src="ressources/Sample Photos/Photographers ID Photos/thumbs/${this.portrait}" alt="photo du photographe">
+        <img class="photographer__pp" src="ressources/Sample Photos/Photographers ID Photos/thumbs/${this.portrait}" alt="photo de ${this.name}">
       `;
   }
   /**
@@ -114,7 +114,7 @@ export class Profile {
   get tagList() {
     let list = "";
     for (let i = 0; i < this.tags.length; i++) {
-      list += `<li class="tag" onclick="page.tagsOnClick(this)" tabindex="0"><span aria-hidden="true">#</span>${this.tags[i]}</li>`;
+      list += `<li class="tag" onclick="page.tagsOnClick(this)" tabindex="0"><span class="sr-only">tag</span><span aria-hidden="true">#</span>${this.tags[i]}</li>`;
     }
     return list;
   }

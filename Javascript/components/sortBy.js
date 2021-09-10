@@ -26,7 +26,7 @@ export class SortBy {
    * @return  {String}  HTML String
    */
   get html(){
-    return `<span class="select-label" tabindex="0">Trier par</span>
+    return `<span class="select-label" tabindex="0"><span aria-hidden="true">Trier par</span><span class="sr-only">appuyez sur tab puis utiliser les flèches directionnelles pour trier les médias </span></span>
             <div class="select" tabindex="1">
               <input class="sortBy-option" name="option" type="radio" id="popularity" aria-label="trier par popularité" checked>
               <label for="popularity" class="select__option">Popularité</label>

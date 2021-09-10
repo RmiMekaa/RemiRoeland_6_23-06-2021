@@ -17,7 +17,7 @@ export class TagFeatures {
    * @return  {void}
    */
    tagsOnClick(element) {
-    this.addFilter(element.textContent.substring(1));
+    this.addFilter(element.textContent.substring(4)); // substring pour supprimer "tag#" et ne garder que le nom du tag
     this.displayResults();
     this.setStyle();
   }
@@ -63,7 +63,7 @@ export class TagFeatures {
   setStyle() {
     let tags = document.querySelectorAll('.tag');
     tags.forEach(tag => {
-      if (this.dataManager.activeTags.indexOf(tag.textContent.substring(1)) > -1) tag.classList.add('active');
+      if (this.dataManager.activeTags.indexOf(tag.textContent.substring(4)) > -1) tag.classList.add('active');
       else tag.classList.remove('active');
     })
   }

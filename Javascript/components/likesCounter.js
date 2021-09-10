@@ -10,7 +10,6 @@ export class LikesCounter {
    * @constructor
    */
   constructor(photographer, medias, domTarget){
-    console.log(medias);
     this.photographer = photographer;
     this.medias = medias;
     this.DOM = document.createElement('aside');
@@ -32,8 +31,8 @@ export class LikesCounter {
    * @return  {String}  HTML String
    */
   get html() {
-    return `<span id="totalLikesNbr" class="totalLikesNbr" tabindex="0">${this.total}</span>
-            <span class="price">${this.photographer.price}€ / jour</span>`;
+    return `<span id="totalLikesNbr" class="totalLikesNbr" tabindex="0"><span class="sr-only">total de likes</span>${this.total}</span>
+            <span class="price" tabindex="0"><span class="sr-only">tarif :</span>${this.photographer.price}€<span class="sr-only">par</span><span aria-hidden="true">/</span>jour</span>`;
   }
 
   /**
