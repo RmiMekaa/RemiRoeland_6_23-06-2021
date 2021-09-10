@@ -28,6 +28,18 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 @media screen and (max-width: 768px) {
   body {
     padding: 0 1.5rem;
@@ -292,18 +304,15 @@ html {
   margin-top: 2.5rem;
   margin-bottom: 10rem;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
 }
-.medias figure {
+.medias .item {
   height: 400px;
   width: 100%;
   min-width: 0;
   margin: 0;
   font-size: 0;
 }
-.medias figure img, .medias figure video {
+.medias .item img, .medias .item video {
   cursor: pointer;
   border-radius: 0.5rem;
   object-fit: cover;
@@ -311,7 +320,7 @@ html {
   height: 90%;
 }
 
-figcaption {
+.item__details {
   color: #901c11;
   display: flex;
   align-items: center;
@@ -319,25 +328,25 @@ figcaption {
   height: 10%;
   font-size: 1rem;
 }
-figcaption h2 {
+.item__details h2 {
   font-weight: 400;
   flex-grow: 2;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-figcaption span {
+.item__details span {
   font-family: "DM sans";
   font-weight: bold;
 }
-figcaption .like-icon {
+.item__details .like-icon {
   font-size: 1rem;
   border: none;
   background-color: transparent;
   color: #901c11;
   cursor: pointer;
 }
-figcaption .like-icon:active {
+.item__details .like-icon:active {
   transform: scale(1.2);
 }
 
@@ -347,7 +356,7 @@ figcaption .like-icon:active {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
   }
-  .medias figure {
+  .medias .item {
     height: 40vw;
   }
 }
@@ -355,7 +364,7 @@ figcaption .like-icon:active {
   .medias {
     grid-template-columns: 1fr 1fr 1fr;
   }
-  .medias figure {
+  .medias .item {
     height: 500px;
   }
 }
