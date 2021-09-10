@@ -76,7 +76,7 @@ export class Profile {
   get homePage() {
     this.DOM.className = "photographer";
     return `
-          <a class="photographer__thumb" href="?photographer/${this.id}" aria-label:"${this.name}">
+          <a class="photographer__thumb" href="?photographer/${this.id}" aria-label="${this.name}">
               <img class="photographer__pp" src="ressources/Sample Photos/Photographers ID Photos/thumbs/${this.portrait}" alt="${this.name}">
               <h2 class="photographer__name">${this.name}</h2>
           </a>
