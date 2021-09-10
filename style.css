@@ -585,6 +585,12 @@ html {
     height: 100%;
   }
   .slider figcaption {
+    padding: 0;
+  }
+  .slider figcaption h2 {
+    color: #901c11;
+    font-size: 1.5rem;
+    font-weight: 400;
     padding-left: 0;
   }
 
