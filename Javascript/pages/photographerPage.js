@@ -4,8 +4,9 @@ import { Header } from "../components/header.js";
 import { Profile } from "../components/profile.js";
 import { Gallery } from "../components/gallery.js";
 import { LikesCounter } from "../components/likesCounter.js";
+import { TagFeatures } from "../tagsFeatures.js";
 
-export class PhotographerPage {
+export class PhotographerPage extends TagFeatures {
 
   /**
    * Créé la page du photographe
@@ -17,6 +18,7 @@ export class PhotographerPage {
    * @constructor
    */
   constructor(data, dataManager, pageManager) {
+    super('photographerPage');
     this.pageManager = pageManager;
     this.dataManager = dataManager;
     this.photographer = data.photographer;
@@ -35,46 +37,6 @@ export class PhotographerPage {
     this.profile = new Profile(this.photographer, "photographerPage", main);
     this.likesCounter = new LikesCounter(this.photographer, this.medias, main);
     this.gallery = new Gallery(this.medias, main, this.likesCounter);
-  }
-
-  /*----- Tags -----*/
-
-  /**
-   * Actions au clic sur un tag
-   * @param   {HTMLElement}  element  La cible du clic
-   * @return  {void}
-   */
-  tagsOnClick(element) {
-    let filter = element.textContent.substring(1);
-    this.addFilter(filter);
-    this.setStyle(element);
-    const newArr = this.dataManager.filteredItems(this.medias, this.dataManager.activeTags)
-    this.gallery.displayMedias(newArr);
-  }
-
-  /**
-   * Ajoute une chaîne de caractères au tableau des filtres
-   * @param   {String}  filter  la chaine de caractère à ajouter
-   * @return  {void}  
-   */
-  addFilter(filter) {
-    const index = this.dataManager.activeTags.indexOf(filter)
-    if (index === -1) {
-      this.dataManager.activeTags.push(filter);
-    }
-    else {
-      this.dataManager.activeTags.splice(index, 1);
-    }
-  }
-
-  /**
-   * Ajoute la classe CSS à l'élément
-   * @param   {HTMLElement}  element  le tag
-   * @return  {void} 
-   */
-  setStyle(element) {
-  if (element.classList.contains('active')) element.classList.remove('active');
-  else element.classList.add('active')
   }
 
 }
