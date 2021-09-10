@@ -301,6 +301,9 @@ html {
 }
 /*-------------------------------------------Gallery---------------------------------------------------*/
 .medias {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
   margin-top: 2.5rem;
   margin-bottom: 10rem;
   width: 100%;
@@ -352,9 +355,8 @@ html {
 
 @media screen and (min-width: 768px) {
   .medias {
-    display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    column-gap: 2rem;
   }
   .medias .item {
     height: 40vw;
