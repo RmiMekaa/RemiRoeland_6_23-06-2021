@@ -96,7 +96,7 @@ export class Profile {
     this.DOM.className = "profile__header";
     return `
         <section class="profile__info">
-            <h1 class="photographer__name" tabindex="0">${this.name}</h1>
+            <h2 class="photographer__name" tabindex="0">${this.name}</h2>
             <h3 class="photographer__location" tabindex="0" aria-label="habite à ${this.city}, ${this.country}">${this.city}, ${this.country}</h3>
             <span class="photographer__description" tabindex="0"><span class="sr-only">citation :</span>${this.tagline}</span>
             <ul class="photographer__tags"> 
@@ -114,7 +114,7 @@ export class Profile {
   get tagList() {
     let list = "";
     for (let i = 0; i < this.tags.length; i++) {
-      list += `<li class="tag" onclick="page.tagsOnClick(this)" tabindex="0"><span class="sr-only">tag</span><span aria-hidden="true">#</span>${this.tags[i]}</li>`;
+      list += `<li class="tag" onkeypress="page.enterHandler(event, this)" onclick="page.tagsOnClick(this)" tabindex="0"><span class="sr-only">tag</span><span aria-hidden="true">#</span>${this.tags[i]}</li>`;
     }
     return list;
   }
