@@ -23,17 +23,18 @@ export class PageManager {
 
     let page = window.location.search.slice(1).split("/");
     if(page[0] === "") page[0] = "homepage";
-    this.displayPage(page[0], page[1]);
+    this.displayPage(page[0], page[1], page[2]);
   } 
 
   /**
    * Affiche la page en fonction de l'url
-   * @param   {String}  url  La première partie de l'url (index.html || photographer || showmedia)
-   * @param   {String}  [id]        l'id d'un photographe
+   * @param   {String}  url     La première partie de l'url (index.html || photographer || showmedia)
+   * @param   {String}  [id]    L'id d'un photographe
+   * @param   {String}  media   Le nom du fichier media
    *
-   * @return  {void}                Créé le HTML dans l'élément body
+   * @return  {void}
    */
-  displayPage(url, id) {
+  displayPage(url, id, media) {
     let photographerId = parseInt(id);
     document.body.innerText = "";
     switch (url) {
@@ -44,8 +45,7 @@ export class PageManager {
         this.page = new PhotographerPage(this.dataManager.getPhotographerData(photographerId), this.dataManager);
         break;
       case "showmedia":
-        let actualMedia = document.location.href.substring(document.location.href.lastIndexOf('/') + 1); // Récupère le nom du fichier dans l'URL
-        this.page = new Slider(photographerId, this.dataManager.getPhotographerData(photographerId).media, actualMedia);
+        this.page = new Slider(photographerId, this.dataManager.getPhotographerData(photographerId).media, media);
         break;
     }
     window.page = this.page;
