@@ -68,4 +68,13 @@ export class TagFeatures {
     })
   }
 
+  /**
+   * Permet de déclencher le clic quand l'utilisateur presse la touche entrée
+   *
+   * @param   {Object}  e   La touche pressée par l'utilisateur
+   * @param   {HTMLElement}  element  l'élément où l'évènement a été détecté
+   */
+  enterHandler(e, element){
+    if (e.keyCode === 13) element.click();
+  }
 }
