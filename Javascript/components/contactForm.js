@@ -1,3 +1,4 @@
+
 export class ContactForm {
 
   /**
@@ -12,10 +13,21 @@ export class ContactForm {
     this.name = name;
     this.DOM = document.createElement('form');
     this.DOM.setAttribute('id', 'contactForm');
+
     this.DOM.innerHTML = this.html;
     domTarget.appendChild(this.DOM);
     this.openForm();
     this.closeForm();
+
+    this.firstname = document.getElementById('firstname');
+    this.lastname = document.getElementById('lastname');
+    this.email = document.getElementById('email');
+    this.message = document.getElementById('message');
+
+    this.formInputs = [this.firstname, this.lastname, this.email, this.message];
+
+    this.submitListenner();
+    this.formIsValid = false;
   }
 
   /**
@@ -25,14 +37,22 @@ export class ContactForm {
   */
    get html() {
     return `<h1>Contactez-moi </br><span>${this.name}</span></h1>
-            <label for="firstname">Prénom</label>
-            <input type="text" name="firstname" aria-label="Champ du prénom" id="firstname">
-            <label for="lastname">Nom</label>
-            <input type="text" name="lastname" aria-label="Champ du nom" id="lastname">
-            <label for="email">Email</label>
-            <input type="mail" name="email" aria-label="Champ de l'e-mail" id="email">
-            <label for="messagee">Votre message</label>
-            <textarea name="message" aria-label="Champ du message" id="message"></textarea>
+            <div class="formData">
+              <label for="firstname">Prénom</label>
+              <input type="text" name="firstname" aria-label="Champ du prénom" id="firstname" minlength="2" required>
+            </div>
+            <div class="formData">
+              <label for="lastname">Nom</label>
+              <input type="text" name="lastname" aria-label="Champ du nom" id="lastname" minlength="2" required>
+            </div>
+            <div class="formData">
+              <label for="email">Email</label>
+              <input type="email" name="email" aria-label="Champ de l'e-mail" id="email" required>
+            </div>
+            <div class="formData">
+              <label for="message">Votre message</label>
+              <textarea name="message" aria-label="Champ du message" id="message" minlength="5"></textarea>
+            </div>
             <button class="submit-btn" type="submit" id="submit">Envoyer</button>
             <button id="modalClose" role="button" aria-label="Fermer le formulaire"><img src="ressources/close-icon.png"></button>`;
   }
@@ -92,4 +112,45 @@ export class ContactForm {
       }  
     })
   }
+
+  submitListenner(){
+    this.DOM.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.submitHandle();
+      return false;
+    })
+  }
+  
+  submitHandle() {
+    this.formIsValid = true;
+    this.checkNameValidity(this.firstname);
+    this.checkNameValidity(this.lastname);
+
+    if (!this.formIsValid) return;
+    
+    this.consoleDisplay();
+    this.formInputs.forEach(input => input.value = '');
+  } 
+
+  consoleDisplay(){
+    console.log('prénom :', this.firstname.value);
+    console.log('nom :', this.lastname.value);
+    console.log('email :', this.email.value);
+    console.log('message :', this.message.value);
+  }
+
+  checkNameValidity(target) {
+    const nameReg = /^[a-zçéèêëàâîïôùû]+[-]?[a-zçéèêëàâîïôùû]+?$/i;
+    if (nameReg.test(target.value) == false) {
+      target.style.border = "3px black solid";
+      target.parentNode.setAttribute('data-error', 'Format incorrect');
+      this.formIsValid = false;  
+      return;
+    }
+    target.parentNode.removeAttribute('data-error');
+    target.style.border = "none"
+}
+
+
+
 }
