@@ -15,28 +15,32 @@
         font-weight: 400;
         margin-bottom: 1rem;
     }
-    & label {
-        font-size: 1.5rem;
-        margin-bottom: 0.25rem;
-    }
-    & input {
-        font-size: 1.5rem;
-        height: 3.25rem;
-        margin-bottom: 0.75rem;
-        border: none;
-        padding: 0 0.5rem;
-        border-radius: 0.25rem;
-        max-width: 100%;
-        outline: none;
-    }
-    & textarea {
-        border-radius: 0.25rem;
-        font-family: "DM sans";
-        font-size: 1.25rem;
-        height: 11.5rem;
-        outline: none;
-        padding: 0.5rem;
-        max-width: calc(100% - 1rem);
+    & .formData {
+        display: flex;
+        flex-direction: column;
+        & label {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        & input {
+            font-size: 1.5rem;
+            height: 3.25rem;
+            margin-bottom: 0.75rem;
+            border: none;
+            padding: 0 0.5rem;
+            border-radius: 0.25rem;
+            max-width: 100%;
+            outline: none;
+        }
+        & textarea {
+            border-radius: 0.25rem;
+            font-family: "DM sans";
+            font-size: 1.25rem;
+            height: 11.5rem;
+            outline: none;
+            padding: 0.5rem;
+            max-width: calc(100% - 1rem);
+        }
     }
     & .submit-btn {
         margin: 1rem auto;
@@ -49,6 +53,19 @@
         width: fit-content;
         cursor: pointer;
     }
+}
+
+.formData[data-error]::after {
+    content: attr(data-error);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: black;
+    display: block;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+    text-align: left;
+    line-height: 1rem;
+    opacity: 1;
 }
 
 #modalClose {
