@@ -113,6 +113,11 @@ export class ContactForm {
     })
   }
 
+  /**
+   * Place un écouteur sur la soumission du formulaire qui empêche le formulaire d'être soumis et appelle la fonction submitHandle
+   * 
+   * @return {void}
+   */
   submitListenner(){
     this.DOM.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -120,7 +125,11 @@ export class ContactForm {
       return false;
     })
   }
-  
+  /**
+   * Lance les vérifications et affiche les résultats dans la console si le formulaire est valide
+   *
+   * @return  {void} 
+   */
   submitHandle() {
     this.formIsValid = true;
     this.checkNameValidity(this.firstname);
@@ -130,15 +139,24 @@ export class ContactForm {
     
     this.consoleDisplay();
     this.formInputs.forEach(input => input.value = '');
-  } 
-
+  }
+  /**
+   * Affiche les éléments soumis dans le formulaire dans la console
+   *
+   */
   consoleDisplay(){
     console.log('prénom :', this.firstname.value);
     console.log('nom :', this.lastname.value);
     console.log('email :', this.email.value);
     console.log('message :', this.message.value);
   }
-
+  /**
+   * Vérifie la bonne saisie pour les champs prénom et nom et agit en conséquence
+   *
+   * @param   {Object}  target  L'élément à vérifier
+   *
+   * @return  {void}
+   */
   checkNameValidity(target) {
     const nameReg = /^[a-zçéèêëàâîïôùû]+[-]?[a-zçéèêëàâîïôùû]+?$/i;
     if (nameReg.test(target.value) == false) {
@@ -149,8 +167,6 @@ export class ContactForm {
     }
     target.parentNode.removeAttribute('data-error');
     target.style.border = "none"
-}
-
-
+  }
 
 }
