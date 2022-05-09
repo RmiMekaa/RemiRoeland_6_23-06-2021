@@ -18,10 +18,10 @@ export class Gallery {
     this.medias = medias;
 
     this.DOM = document.createElement('section')
-    this.DOM.className= 'gallery';
+    this.DOM.className = 'gallery';
     this.domTarget.appendChild(this.DOM);
 
-    new SortBy(this.medias, this.DOM, this);
+    this.sortBy = new SortBy(this.medias, this.DOM, this);
 
     const mediasContainer = document.createElement('div');
     mediasContainer.className = 'medias';
@@ -43,11 +43,11 @@ export class Gallery {
      */
     const mediasContainer = this.DOM.querySelector('.medias');
 
-    if(mediasContainer.childNodes.length > 0) {
+    if (mediasContainer.childNodes.length > 0) {
       mediasContainer.innerHTML = "";
     }
     for (let i = 0; i < medias.length; i++) {
-      new Media(medias[i], 'photographerPage', mediasContainer, this.likesCounter);
+      let media = new Media(medias[i], 'photographerPage', mediasContainer, this.likesCounter);
     }
   }
 
