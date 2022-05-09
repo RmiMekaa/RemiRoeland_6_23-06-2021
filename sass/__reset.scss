@@ -1,5 +1,7 @@
 html {
     scroll-behavior: smooth;
+    font-family: "DM sans", sans-serif;
+    font-weight: 400;
 }
 
 body {
@@ -23,7 +25,12 @@ a {
     color: inherit;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 0;
 }
 

@@ -1,6 +1,8 @@
 @charset "UTF-8";
 html {
   scroll-behavior: smooth;
+  font-family: "DM sans", sans-serif;
+  font-weight: 400;
 }
 
 body {
@@ -24,7 +26,12 @@ a {
   color: inherit;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
 }
 
@@ -45,11 +52,6 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 1.5rem;
   }
 }
-html {
-  font-family: "DM sans", sans-serif;
-  font-weight: 400;
-}
-
 .header {
   display: flex;
   row-gap: 1rem;
