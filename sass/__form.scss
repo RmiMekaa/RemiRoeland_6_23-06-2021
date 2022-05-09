@@ -10,18 +10,22 @@
     padding: 1rem;
     border-radius: 0.25rem;
     z-index: 2000;
+
     & h1 {
         font-size: 2rem;
         font-weight: 400;
         margin-bottom: 1rem;
     }
+
     & .formData {
         display: flex;
         flex-direction: column;
+
         & label {
             font-size: 1.5rem;
             margin-bottom: 0.25rem;
         }
+
         & input {
             font-size: 1.5rem;
             height: 3.25rem;
@@ -32,9 +36,10 @@
             max-width: 100%;
             outline: none;
         }
+
         & textarea {
             border-radius: 0.25rem;
-            font-family: "DM sans";
+            font-family: "DM sans", sans-serif;
             font-size: 1.25rem;
             height: 11.5rem;
             outline: none;
@@ -42,6 +47,7 @@
             max-width: calc(100% - 1rem);
         }
     }
+
     & .submit-btn {
         margin: 1rem auto;
         height: 2rem;
@@ -77,6 +83,7 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
+
     & img {
         width: 1rem;
         height: 1rem;
@@ -91,20 +98,25 @@
         transform: translate(-50%, -50%);
         width: 670px;
         height: fit-content;
+
         & h1 {
             font-size: 3rem;
         }
+
         & label {
             font-size: 1.75rem;
         }
+
         & input {
             font-size: 1.5rem;
             height: 3.25rem;
         }
+
         & textarea {
             font-size: 1.25rem;
             height: 9.5rem;
         }
+
         & .submit-btn {
             margin: 1rem 0;
             padding: 0 3rem;
@@ -122,6 +134,7 @@
         background-color: transparent;
         border: none;
         cursor: pointer;
+
         & img {
             width: 2rem;
             height: 2rem;

@@ -71,7 +71,6 @@ export class Media {
       case 'photographerPage':
         if (this.media.image) return `<img class="media" src="ressources/Sample Photos/${this.photographerId}/Thumbnails/${this.image}" alt="${this.description}" onclick="window.location.href='?showmedia/${this.photographerId}/${this.image}'; page.getIndexOfMedia(${this.id})" tabindex="0"></img>`;
         else return `<video controls class="media" title="${this.description}" onclick="window.location.href='?showmedia/${this.photographerId}/${this.video}'" tabindex="0"><source src="ressources/Sample Photos/${this.photographerId}/${this.video}" type=video/mp4></video>`;
-        break;
       case 'slider':
         if (this.media.image) return `<img class="media" src="ressources/Sample Photos/${this.photographerId}/${this.image}" alt="${this.description}" onclick="window.location.href='?showmedia/${this.photographerId}/${this.image}'; page.getIndexOfMedia(${this.id})" tabindex="0"></img>`;
         else return `<video controls class="media" title="${this.description}" onclick="window.location.href='?showmedia/${this.photographerId}/${this.video}'" tabindex="0"><source src="ressources/Sample Photos/${this.photographerId}/${this.video}" type=video/mp4></video>`;
