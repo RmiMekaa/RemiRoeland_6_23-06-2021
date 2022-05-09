@@ -12,10 +12,10 @@ export class Elevator {
     this.DOM.setAttribute('id', 'elevator');
     this.DOM.setAttribute('onclick', 'window.scrollTo(0, 0)');
     this.DOM.setAttribute('tabindex', '0');
-    this.DOM.innerText = 'Passer au contenu';
+    this.DOM.innerText = 'Retour aux tags';
     domTarget.appendChild(this.DOM);
 
-    this.scrollListener(); 
+    this.scrollListener();
   }
 
   /**
@@ -24,8 +24,8 @@ export class Elevator {
    */
   scrollListener() {
     let elevator = this.DOM;
-    window.addEventListener('scroll', function(){
-      if(window.scrollY > 0) elevator.style.display = 'block';
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 0) elevator.style.display = 'block';
       else elevator.style.display = 'none';
     })
   }
