@@ -46,8 +46,8 @@ export class Gallery {
     if (mediasContainer.childNodes.length > 0) {
       mediasContainer.innerHTML = "";
     }
-    for (let i = 0; i < medias.length; i++) {
-      let media = new Media(medias[i], 'photographerPage', mediasContainer, this.likesCounter);
+    for (let media of medias) {
+      new Media(media, 'photographerPage', mediasContainer, this.likesCounter);
     }
   }
 

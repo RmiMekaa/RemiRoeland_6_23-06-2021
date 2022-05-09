@@ -40,13 +40,13 @@ export class Media {
     }
     this.DOM = document.createElement('figure');
     this.DOM.className = 'item';
-    domTarget.appendChild(this.DOM);   
+    domTarget.appendChild(this.DOM);
 
-    switch(page) {
+    switch (page) {
       case 'photographerPage': this.DOM.innerHTML = this.photographerPageRender();
-                               this.like(media);
-                               break;
-      case 'slider'          : this.DOM.innerHTML = this.sliderRender();
+        this.like(media);
+        break;
+      case 'slider': this.DOM.innerHTML = this.sliderRender();
     }
   }
 
@@ -71,8 +71,8 @@ export class Media {
       case 'photographerPage':
         if (this.media.image) return `<img class="media" src="ressources/Sample Photos/${this.photographerId}/Thumbnails/${this.image}" alt="${this.description}" onclick="window.location.href='?showmedia/${this.photographerId}/${this.image}'; page.getIndexOfMedia(${this.id})" tabindex="0"></img>`;
         else return `<video controls class="media" title="${this.description}" onclick="window.location.href='?showmedia/${this.photographerId}/${this.video}'" tabindex="0"><source src="ressources/Sample Photos/${this.photographerId}/${this.video}" type=video/mp4></video>`;
-        break;    
-      case 'slider': 
+        break;
+      case 'slider':
         if (this.media.image) return `<img class="media" src="ressources/Sample Photos/${this.photographerId}/${this.image}" alt="${this.description}" onclick="window.location.href='?showmedia/${this.photographerId}/${this.image}'; page.getIndexOfMedia(${this.id})" tabindex="0"></img>`;
         else return `<video controls class="media" title="${this.description}" onclick="window.location.href='?showmedia/${this.photographerId}/${this.video}'" tabindex="0"><source src="ressources/Sample Photos/${this.photographerId}/${this.video}" type=video/mp4></video>`;
     }
@@ -82,29 +82,18 @@ export class Media {
     const likesCounter = this.likesCounter;
     const likes = this.DOM.querySelector('.likesNbr');
     const button = this.DOM.querySelector('button');
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function () {
       if (button.classList.contains('liked')) {
-        media.likes --;
+        media.likes--;
         button.classList.remove('liked');
       } else {
-        media.likes ++;
+        media.likes++;
         button.classList.add('liked');
       }
       likes.innerHTML = media.likes;
       likesCounter.render();
     })
   }
-
-
-
-
-
-
-
-
-
-
-
 
   /**
    * Génère les médias sous différentes structure en fonction de l'url
@@ -113,8 +102,8 @@ export class Media {
    */
   ffdrender() {
 
-    if (window.location.href.indexOf("showmedia") == -1) this.DOM.innerHTML= this.htmlForThumbnail();
-    else this.DOM.innerHTML= this.htmlForSlider();
+    if (window.location.href.indexOf("showmedia") == -1) this.DOM.innerHTML = this.htmlForThumbnail();
+    else this.DOM.innerHTML = this.htmlForSlider();
   }
 
   /**
@@ -131,12 +120,6 @@ export class Media {
               </figcaption>`;
   }
 
-  //this.DOM.innnerHTML= `
-  //  <img src="">
-  //  <h2>dfkljglkfjgkldfj</h2>
-  //`;
-  //new Like(qte, this.DOM)
-
   /**
    * Retourne le html pour le slider
    * @return  {string}  HTML String
@@ -149,7 +132,7 @@ export class Media {
               </figcaption>
             </figure>`;
   }
-  
+
   /**
    * Créé une balise img ou video en fonction du type du média avec les attributs nécessaires
    *

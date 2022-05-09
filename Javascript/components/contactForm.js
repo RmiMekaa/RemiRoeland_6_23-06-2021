@@ -84,8 +84,8 @@ export class ContactForm {
   closeForm() {
     let form = this.DOM;
     let closeButton = document.getElementById('modalClose');
-    closeButton.addEventListener('click', function () {
-      event.preventDefault();
+    closeButton.addEventListener('click', function (e) {
+      e.preventDefault();
       form.style.display = 'none';
       //Suppression du background ↓
       let background = document.getElementById('modal-bg');
@@ -107,7 +107,7 @@ export class ContactForm {
     })
 
     window.addEventListener('keyup', (e) => {
-      if (e.keyCode === 27) {
+      if (e.key === "Escape") {
         close.click();
       }
     })
@@ -159,7 +159,7 @@ export class ContactForm {
    */
   checkNameValidity(target) {
     const nameReg = /^[a-z ,.'-]+$/i;
-    if (nameReg.test(target.value) == false) {
+    if (!nameReg.test(target.value)) {
       target.style.border = "3px black solid";
       target.parentNode.setAttribute('data-error', 'Format incorrect');
       this.formIsValid = false;

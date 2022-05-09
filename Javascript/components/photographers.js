@@ -22,12 +22,12 @@ export class Photographers {
   /**
    * Créé les profils et les insère dans le DOM
    *
-   * @param   {Array}  array  Un tableau de photographes
+   * @param   {Array}  photographers  Un tableau de photographes
    */
-  displayPhotographers(array) {
+  displayPhotographers(photographers) {
     if (this.DOM.childNodes.length > 0) this.DOM.innerText = '';
-    for (let i = 0; i < array.length; i++) {
-      new Profile(array[i], 'homePage', this.DOM);
+    for (let photographer of photographers) {
+      new Profile(photographer, 'homePage', this.DOM);
     }
   }
 

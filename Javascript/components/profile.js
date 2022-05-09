@@ -113,10 +113,10 @@ export class Profile {
    */
   get tagList() {
     let list = "";
-    for (let i = 0; i < this.tags.length; i++) {
-      list += `<li class="tag" onkeypress="page.enterHandler(event, this)" onclick="page.tagsOnClick(this)" tabindex="0"><span class="sr-only">tag</span><span aria-hidden="true">#</span>${this.tags[i]}</li>`;
-    }
+    this.tags.forEach(tag => {
+      list += `<li class="tag" onkeypress="page.enterHandler(event, this)" onclick="page.tagsOnClick(this)" tabindex="0"><span class="sr-only">tag</span><span aria-hidden="true">#</span>${tag}</li>`;
+    })
     return list;
   }
-  
+
 }

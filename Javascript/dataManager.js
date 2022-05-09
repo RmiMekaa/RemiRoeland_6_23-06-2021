@@ -36,28 +36,27 @@ export class DataManager {
    */
   getPhotographerData(photographerId) {
     const answer = {
-      photographer:null,
+      photographer: null,
       media: []
     };
     // Récupère l'objet contenant les données du photographe
-    for (let i = 0; i < this.data.photographers.length; i++) {
-      if (this.data.photographers[i].id === photographerId) {
-        answer.photographer = this.data.photographers[i];
-        break;
+    this.data.photographers.forEach(photographer => {
+      if (photographer.id === photographerId) {
+        answer.photographer = photographer;
       }
-    }
+    })
     // Récupère les médias du photographe
-    for (let i = 0; i < this.data.media.length; i++) {
-      if (this.data.media[i].photographerId === photographerId) {
-        answer.media.push(this.data.media[i]);
+    for (let media of this.data.media) {
+      if (media.photographerId === photographerId) {
+        answer.media.push(media);
       }
     }
     // Par défaut, trie les médias par popularité
-    answer.media.sort(function compare(a, b){
-      if (a.likes > b.likes) {return -1;}
-      if (a.likes < b.likes) {return 1;}
+    answer.media.sort(function compare(a, b) {
+      if (a.likes > b.likes) { return -1; }
+      if (a.likes < b.likes) { return 1; }
       return 0;
-    })  
+    })
     return answer;
   }
 
@@ -69,10 +68,10 @@ export class DataManager {
    *
    * @return  {Array}  le tableau filtré avec les tags
    */
-  filteredItems(items, filters){
+  filteredItems(items, filters) {
     if (filters.length === 0) return items;
     let newArrFinal = [];
-    filters.forEach(filter =>{
+    filters.forEach(filter => {
       const newArr = items.filter(function (item) {
         return item.tags.includes(filter);
       })
@@ -81,7 +80,7 @@ export class DataManager {
     // Suppression des doublons dans le tableau
     let mySet = new Set(newArrFinal);
     newArrFinal = [...mySet];
-   
+
     return newArrFinal;
   }
 } 
