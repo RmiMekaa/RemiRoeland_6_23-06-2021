@@ -2,7 +2,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-family: "DM sans";
+  font-family: "DM sans", sans-serif;
   font-weight: 400;
 }
 
@@ -378,7 +378,6 @@ h6 {
 }
 
 .item__details span {
-  font-family: "DM sans";
   font-weight: bold;
 }
 
@@ -435,7 +434,7 @@ h6 {
 }
 
 .total-likes .totalLikesNbr::after {
-  font-family: "Font Awesome 5 Free";
+  font-family: "Font Awesome 5 Free", sans-serif;
   margin-left: 0.5rem;
   content: "";
 }
@@ -489,7 +488,6 @@ h6 {
 
 #contactForm .formData textarea {
   border-radius: 0.25rem;
-  font-family: "DM sans";
   font-size: 1.25rem;
   height: 11.5rem;
   outline: none;
