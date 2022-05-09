@@ -77,8 +77,10 @@ export class Profile {
     this.DOM.className = "photographer";
     return `
           <a class="photographer__thumb" href="?photographer/${this.id}" aria-label="Artiste ${this.name}">
-              <img class="photographer__pp" src="ressources/Sample Photos/Photographers ID Photos/thumbs/${this.portrait}" alt="photo de ${this.name}">
-              <h2 class="photographer__name" aria-hidden="true">${this.name}</h2>
+            <div class="photographer__pp">
+              <img src="ressources/Sample Photos/Photographers ID Photos/thumbs/${this.portrait}" alt="photo de ${this.name}">
+            </div>
+            <h2 class="photographer__name" aria-hidden="true">${this.name}</h2>
           </a>
           <h3 class="photographer__location" tabindex="0" aria-label="habite à ${this.city}, ${this.country}">${this.city}, ${this.country}</h3>
           <span class="photographer__description" tabindex="0"><span class="sr-only">citation :</span>${this.tagline}</span>
