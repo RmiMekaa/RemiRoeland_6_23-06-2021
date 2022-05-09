@@ -35,7 +35,7 @@ export class ContactForm {
   *
   * @return  {String}  HTML String
   */
-   get html() {
+  get html() {
     return `<h1>Contactez-moi </br><span>${this.name}</span></h1>
             <div class="formData">
               <label for="firstname">Prénom</label>
@@ -66,7 +66,7 @@ export class ContactForm {
     let that = this;
     let form = this.DOM;
     let button = document.getElementById('contact-btn');
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function () {
       form.style.display = 'flex';
       //Création du background ↓
       let background = document.createElement('div');
@@ -84,12 +84,12 @@ export class ContactForm {
   closeForm() {
     let form = this.DOM;
     let closeButton = document.getElementById('modalClose');
-    closeButton.addEventListener('click', function() {
-    event.preventDefault();
-    form.style.display = 'none';
-    //Suppression du background ↓
-    let background = document.getElementById('modal-bg');
-    background.remove();  
+    closeButton.addEventListener('click', function () {
+      event.preventDefault();
+      form.style.display = 'none';
+      //Suppression du background ↓
+      let background = document.getElementById('modal-bg');
+      background.remove();
     })
   }
   /**
@@ -97,19 +97,19 @@ export class ContactForm {
    *
    * @return  {void} 
    */
-  trapFocus(){
+  trapFocus() {
     let firstname = document.getElementById('firstname');
     let close = document.getElementById('modalClose');
 
     firstname.focus();
-    close.addEventListener('focusout', function() {
+    close.addEventListener('focusout', function () {
       firstname.focus();
     })
 
     window.addEventListener('keyup', (e) => {
       if (e.keyCode === 27) {
         close.click();
-      }  
+      }
     })
   }
 
@@ -118,7 +118,7 @@ export class ContactForm {
    * 
    * @return {void}
    */
-  submitListenner(){
+  submitListenner() {
     this.DOM.addEventListener('submit', (e) => {
       e.preventDefault();
       this.submitHandle();
@@ -136,7 +136,7 @@ export class ContactForm {
     this.checkNameValidity(this.lastname);
 
     if (!this.formIsValid) return;
-    
+
     this.consoleDisplay();
     this.formInputs.forEach(input => input.value = '');
   }
@@ -144,7 +144,7 @@ export class ContactForm {
    * Affiche les éléments soumis dans le formulaire dans la console
    *
    */
-  consoleDisplay(){
+  consoleDisplay() {
     console.log('prénom :', this.firstname.value);
     console.log('nom :', this.lastname.value);
     console.log('email :', this.email.value);
@@ -158,11 +158,11 @@ export class ContactForm {
    * @return  {void}
    */
   checkNameValidity(target) {
-    const nameReg = /^[a-zçéèêëàâîïôùû]+[-]?[a-zçéèêëàâîïôùû]+?$/i;
+    const nameReg = /^[a-z ,.'-]+$/i;
     if (nameReg.test(target.value) == false) {
       target.style.border = "3px black solid";
       target.parentNode.setAttribute('data-error', 'Format incorrect');
-      this.formIsValid = false;  
+      this.formIsValid = false;
       return;
     }
     target.parentNode.removeAttribute('data-error');
